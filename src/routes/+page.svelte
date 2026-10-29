@@ -6,6 +6,8 @@
 	import Annotation from '#lib/components/Annotation.svelte';
 	import Badge from '#lib/components/Badge.svelte';
 	import Card from '#lib/components/Card.svelte';
+	import Cover from '#lib/components/Cover.svelte';
+	import Dots from '#lib/components/Dots.svelte';
 	import Stat from '#lib/components/Stat.svelte';
 	import Strike from '#lib/components/Strike.svelte';
 	import Window from '#lib/components/Window.svelte';
@@ -83,6 +85,14 @@
 	<svg viewBox="0 0 56 56" aria-hidden="true">
 		<rect width="56" height="56" fill="currentColor" opacity=".12" />
 		<circle cx="28" cy="28" r="10" fill="currentColor" opacity=".3" />
+	</svg>
+{/snippet}
+
+{#snippet coverArt()}
+	<svg viewBox="0 0 760 760" aria-hidden="true">
+		<rect width="760" height="760" fill="currentColor" opacity=".08" />
+		<circle cx="380" cy="380" r="220" fill="currentColor" opacity=".18" />
+		<circle cx="380" cy="380" r="120" fill="currentColor" opacity=".3" />
 	</svg>
 {/snippet}
 
@@ -231,6 +241,23 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Cover</h3>
+					<p>Square art with a bg gap and a field hairline, so it reads as mounted.</p>
+					<div class="cover-demo">
+						<Cover>{@render coverArt()}</Cover>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Dots</h3>
+					<p>One dot per unit, revealed in a stagger. The number does the talking.</p>
+					<div class="dots-demo">
+						<Dots count={10} value={8} />
+						<span class="muted">8 of 10</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>ListRow</h3>
 					<p>A row with a thumbnail, two lines and an end slot. The current row takes the field surface.</p>
 					<div class="rows">
@@ -337,6 +364,9 @@
 				<Stat value={0} label="Runtime dependencies" />
 				<Stat value={4} label="Surfaces, no borders" />
 			</div>
+			<div class="dots-night reveal">
+				<Dots count={20} value={17} />
+			</div>
 			<div class="strike-wrap reveal">
 				<Strike items={drawbacks} />
 			</div>
@@ -438,6 +468,22 @@
 
 	.annotation-demo {
 		padding-left: clamp(80px, 9vw, 120px);
+	}
+
+	.cover-demo {
+		width: min(180px, 100%);
+		margin-top: 20px;
+	}
+
+	.dots-demo {
+		display: grid;
+		gap: 14px;
+		margin-top: 24px;
+	}
+
+	.dots-night {
+		max-width: 520px;
+		margin-top: clamp(40px, 5vw, 64px);
 	}
 
 	.rows {

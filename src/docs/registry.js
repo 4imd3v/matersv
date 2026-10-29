@@ -130,6 +130,23 @@ export const components = [
 </Card>`
 	},
 	{
+		slug: 'cover',
+		name: 'Cover',
+		lead: 'Square art mounted with the ring shadow: a bg gap and a field hairline, never a pasted image.',
+		props: [
+			{ name: 'src', type: 'string', default: '—', description: 'Image source. Omit it and pass a snippet for generated art.' },
+			{ name: 'alt', type: 'string', default: "''", description: 'Alt text; empty means decorative.' },
+			{ name: 'width', type: 'number', default: '760', description: 'Intrinsic width, so the layout never shifts.' },
+			{ name: 'height', type: 'number', default: '760', description: 'Intrinsic height.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Inline art instead of src.' }
+		],
+		code: `<script>
+	import { Cover } from 'matersv';
+</script>
+
+<Cover src="/art/cover.webp" alt="Album art" />`
+	},
+	{
 		slug: 'dialog',
 		name: 'Dialog',
 		lead: 'Native modal dialog. Top layer, backdrop, focus trap and Esc come from the platform.',
@@ -149,6 +166,22 @@ export const components = [
 	<p>This cannot be undone.</p>
 	<Button onclick={() => (open = false)}>Cancel</Button>
 </Dialog>`
+	},
+	{
+		slug: 'dots',
+		name: 'Dots',
+		lead: 'A dot meter where one dot is one unit. Decorative: the number beside it carries the meaning.',
+		props: [
+			{ name: 'count', type: 'number', default: '20', description: 'Total dots.' },
+			{ name: 'value', type: 'number', default: 'count', description: 'Accent dots, counted from the left.' },
+			{ name: 'class', type: 'string', default: '—', description: 'Passthrough class.' }
+		],
+		code: `<script>
+	import { Dots } from 'matersv';
+</script>
+
+<Dots count={20} value={17} />
+<p>17 of 20</p>`
 	},
 	{
 		slug: 'iconbutton',

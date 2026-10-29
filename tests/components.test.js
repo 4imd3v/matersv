@@ -7,6 +7,8 @@ import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
 import Annotation from '../src/lib/components/Annotation.svelte';
 import Card from '../src/lib/components/Card.svelte';
+import Cover from '../src/lib/components/Cover.svelte';
+import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
@@ -147,6 +149,28 @@ describe('Window', () => {
 		expect(screen.getByText('Home')).toBeTruthy();
 		expect(screen.getByText('Pane')).toBeTruthy();
 		expect(container.querySelector('.dots')?.getAttribute('aria-hidden')).toBe('true');
+	});
+});
+
+describe('Cover', () => {
+	it('renders a square image with intrinsic size', () => {
+		render(Cover, { props: { src: '/art.webp', alt: 'Album art' } });
+
+		const img = /** @type {HTMLImageElement} */ (screen.getByAltText('Album art'));
+		expect(img.getAttribute('src')).toBe('/art.webp');
+		expect(img.getAttribute('width')).toBe('760');
+		expect(img.getAttribute('height')).toBe('760');
+	});
+});
+
+describe('Dots', () => {
+	it('fills the first value dots and hides the row from assistive tech', () => {
+		const { container } = render(Dots, { props: { count: 5, value: 2 } });
+		const row = /** @type {HTMLElement} */ (container.querySelector('.dots'));
+
+		expect(row.getAttribute('aria-hidden')).toBe('true');
+		expect(row.querySelectorAll('i')).toHaveLength(5);
+		expect(row.querySelectorAll('i.on')).toHaveLength(2);
 	});
 });
 

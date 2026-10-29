@@ -6,7 +6,9 @@
 		Badge,
 		Button,
 		Card,
+		Cover,
 		Dialog,
+		Dots,
 		IconButton,
 		Input,
 		Kbd,
@@ -51,6 +53,14 @@
 	<svg viewBox="0 0 56 56" aria-hidden="true">
 		<rect width="56" height="56" fill="currentColor" opacity=".12" />
 		<circle cx="28" cy="28" r="10" fill="currentColor" opacity=".3" />
+	</svg>
+{/snippet}
+
+{#snippet coverArt()}
+	<svg viewBox="0 0 760 760" aria-hidden="true">
+		<rect width="760" height="760" fill="currentColor" opacity=".08" />
+		<circle cx="380" cy="380" r="220" fill="currentColor" opacity=".18" />
+		<circle cx="380" cy="380" r="120" fill="currentColor" opacity=".3" />
 	</svg>
 {/snippet}
 
@@ -154,6 +164,15 @@
 			<p>Real UI goes in the pane, never a screenshot.</p>
 		</Window>
 	</div>
+{:else if slug === 'cover'}
+	<div class="cover-demo">
+		<Cover>{@render coverArt()}</Cover>
+	</div>
+{:else if slug === 'dots'}
+	<div class="col">
+		<Dots count={12} value={9} />
+		<p class="muted">9 of 12, one dot per unit</p>
+	</div>
 {:else if slug === 'badge'}
 	<div class="row">
 		<Badge>New</Badge>
@@ -237,6 +256,10 @@
 	.wide-col {
 		width: 100%;
 		max-width: 620px;
+	}
+
+	.cover-demo {
+		width: min(220px, 100%);
 	}
 
 	.note {

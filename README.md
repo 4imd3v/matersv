@@ -64,6 +64,8 @@ import '#lib/matersv.css';
 | `AccordionItem` | `title`, `bind:open`, snippet children |
 | `Dialog` | `bind:open`, `title`, snippet children |
 | `Card` | `title`, `lead`, snippet children |
+| `Cover` | `src`, `alt`, `width`, `height`, or snippet children |
+| `Dots` | `count`, `value` (decorative, pair with a number) |
 | `SectionHeader` | `title`, `lead`, `id` |
 | `Annotation` | `arrow`, snippet children |
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |
