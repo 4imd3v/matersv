@@ -1,4 +1,13 @@
 <script>
+	/**
+	 * @typedef {object} AccordionItemProps
+	 * @property {string} title
+	 * @property {boolean} [open]
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {AccordionItemProps & Record<string, any>} */
 	let { title, open = $bindable(false), class: className = '', children, ...rest } = $props();
 </script>
 

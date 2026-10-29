@@ -1,8 +1,18 @@
 <script>
+	/**
+	 * @typedef {object} IconButtonProps
+	 * @property {string} label
+	 * @property {boolean} [pressed]
+	 * @property {'button' | 'submit' | 'reset'} [type]
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {IconButtonProps & Record<string, any>} */
 	let {
 		label,
 		pressed = undefined,
-		type = /** @type {'button' | 'submit' | 'reset'} */ ('button'),
+		type = 'button',
 		class: className = '',
 		children,
 		...rest

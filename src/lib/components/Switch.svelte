@@ -1,4 +1,13 @@
 <script>
+	/**
+	 * @typedef {object} SwitchProps
+	 * @property {boolean} [checked]
+	 * @property {string} label
+	 * @property {(checked: boolean) => void} [onchange]
+	 * @property {string} [class]
+	 */
+
+	/** @type {SwitchProps & Record<string, any>} */
 	let { checked = $bindable(false), label, onchange = undefined, class: className = '', ...rest } = $props();
 
 	function toggle() {

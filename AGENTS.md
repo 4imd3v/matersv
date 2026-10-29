@@ -90,6 +90,9 @@ Component API conventions:
 - Native attributes spread via `...rest`; do not swallow `onclick`, `aria-*`, etc.
 - Optional props need a default of `= undefined`, otherwise `svelte-check` marks
   them required. Required props keep no default.
+- Type every prop in a `@typedef` above `$props()` (see `Button.svelte`). The
+  published `.d.ts` is generated from it, so keep names, unions and defaults in
+  sync when the API changes.
 - Use `$bindable()` for two-way state (`bind:checked`, `bind:value`, `bind:open`).
 - Tiny SVG icons are inline with `stroke="currentColor"` or `fill="currentColor"`.
   No icon dependency.

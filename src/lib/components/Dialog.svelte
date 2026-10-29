@@ -1,5 +1,15 @@
 <script>
 	const uid = $props.id();
+
+	/**
+	 * @typedef {object} DialogProps
+	 * @property {boolean} [open]
+	 * @property {string} title
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {DialogProps} */
 	let { open = $bindable(false), title, class: className = '', children = undefined } = $props();
 
 	let dialog = $state(/** @type {HTMLDialogElement | null} */ (null));

@@ -1,6 +1,20 @@
 <script>
 	import ThemeToggle from './ThemeToggle.svelte';
 
+	/**
+	 * @typedef {object} NavItem
+	 * @property {string} href
+	 * @property {string} label
+	 */
+
+	/**
+	 * @typedef {object} CapsuleNavProps
+	 * @property {string} [brand]
+	 * @property {NavItem[]} [items]
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {CapsuleNavProps} */
 	let { brand = 'Mater', items = [], children = undefined } = $props();
 
 	let active = $state('');

@@ -1,5 +1,13 @@
 <script>
-	let { tone = /** @type {'field' | 'accent'} */ ('field'), class: className = '', children, ...rest } = $props();
+	/**
+	 * @typedef {object} BadgeProps
+	 * @property {'field' | 'accent'} [tone]
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {BadgeProps & Record<string, any>} */
+	let { tone = 'field', class: className = '', children, ...rest } = $props();
 </script>
 
 <span class="badge badge--{tone} {className}" {...rest}>{@render children()}</span>

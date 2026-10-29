@@ -1,5 +1,18 @@
 <script>
 	const uid = $props.id();
+
+	/**
+	 * @typedef {object} InputProps
+	 * @property {string} label
+	 * @property {string} [hint]
+	 * @property {string} [error]
+	 * @property {string} [value]
+	 * @property {string} [type]
+	 * @property {string} [id]
+	 * @property {string} [class]
+	 */
+
+	/** @type {InputProps & Record<string, any>} */
 	let {
 		label,
 		hint = undefined,

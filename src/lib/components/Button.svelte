@@ -1,4 +1,16 @@
 <script>
+	/**
+	 * @typedef {object} ButtonProps
+	 * @property {string} [href]
+	 * @property {'primary' | 'text'} [variant]
+	 * @property {'md' | 'lg'} [size]
+	 * @property {'button' | 'submit' | 'reset'} [type]
+	 * @property {boolean} [disabled]
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {ButtonProps & Record<string, any>} */
 	let {
 		href = undefined,
 		variant = /** @type {'primary' | 'text'} */ ('primary'),

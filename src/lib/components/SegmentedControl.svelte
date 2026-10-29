@@ -1,5 +1,22 @@
 <script>
 	const uid = $props.id();
+
+	/**
+	 * @typedef {object} SegmentItem
+	 * @property {any} value
+	 * @property {string} label
+	 */
+
+	/**
+	 * @typedef {object} SegmentedControlProps
+	 * @property {SegmentItem[]} [items]
+	 * @property {string} label
+	 * @property {string} [name]
+	 * @property {any} [value]
+	 * @property {string} [class]
+	 */
+
+	/** @type {SegmentedControlProps} */
 	let { items = [], label, name = uid, value = $bindable(), class: className = '' } = $props();
 </script>
 

@@ -1,4 +1,12 @@
 <script>
+	/**
+	 * @typedef {object} SectionHeaderProps
+	 * @property {string} title
+	 * @property {string} [lead]
+	 * @property {string} [id]
+	 */
+
+	/** @type {SectionHeaderProps} */
 	let { title, lead = undefined, id = undefined } = $props();
 </script>
 

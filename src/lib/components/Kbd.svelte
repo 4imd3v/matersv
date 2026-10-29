@@ -1,4 +1,11 @@
 <script>
+	/**
+	 * @typedef {object} KbdProps
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {KbdProps & Record<string, any>} */
 	let { class: className = '', children } = $props();
 </script>
 

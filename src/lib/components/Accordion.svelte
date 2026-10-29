@@ -1,4 +1,11 @@
 <script>
+	/**
+	 * @typedef {object} AccordionProps
+	 * @property {string} [class]
+	 * @property {import('svelte').Snippet} children
+	 */
+
+	/** @type {AccordionProps & Record<string, any>} */
 	let { class: className = '', children, ...rest } = $props();
 </script>
 
