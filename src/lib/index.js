@@ -9,14 +9,17 @@ export { default as Dialog } from './components/Dialog.svelte';
 export { default as IconButton } from './components/IconButton.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Kbd } from './components/Kbd.svelte';
+export { default as ListRow } from './components/ListRow.svelte';
 export { default as Progress } from './components/Progress.svelte';
 export { default as SectionHeader } from './components/SectionHeader.svelte';
 export { default as SegmentedControl } from './components/SegmentedControl.svelte';
 export { default as Select } from './components/Select.svelte';
 export { default as Stat } from './components/Stat.svelte';
+export { default as Strike } from './components/Strike.svelte';
 export { default as Switch } from './components/Switch.svelte';
 export { default as Textarea } from './components/Textarea.svelte';
 export { default as ThemeToggle } from './components/ThemeToggle.svelte';
+export { default as Window } from './components/Window.svelte';
 
 export { applyTheme, initTheme, theme } from './theme.svelte.js';
 export { hue, setHue } from './hue.svelte.js';

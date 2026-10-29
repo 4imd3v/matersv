@@ -209,6 +209,25 @@ export const components = [
 <Kbd>⌘</Kbd> <Kbd>K</Kbd> to search`
 	},
 	{
+		slug: 'listrow',
+		name: 'ListRow',
+		lead: 'A list row with an optional 56px thumbnail and end slot. Renders a link with href, and marks the current row.',
+		props: [
+			{ name: 'title', type: 'string', default: '—', description: 'Primary text.' },
+			{ name: 'meta', type: 'string', default: '—', description: 'Secondary line.' },
+			{ name: 'href', type: 'string', default: '—', description: 'Renders an anchor instead of a div.' },
+			{ name: 'current', type: 'boolean', default: 'false', description: 'Marks the row with aria-current and the field surface.' },
+			{ name: 'lead', type: 'Snippet', default: '—', description: 'Thumbnail, clipped to 56px.' },
+			{ name: 'trailing', type: 'Snippet', default: '—', description: '28px end slot, usually an icon.' }
+		],
+		code: `<script>
+	import { ListRow } from 'matersv';
+</script>
+
+<ListRow title="Drafts" meta="12 items" href="/drafts" current />
+<ListRow title="Archive" meta="Saved for later" href="/archive" />`
+	},
+	{
 		slug: 'progress',
 		name: 'Progress',
 		lead: 'Native progress element on the field surface, with a percentage and an accessible name.',
@@ -309,6 +328,19 @@ export const components = [
 <Stat value={98} suffix="%" label="Lighthouse, all four categories" />`
 	},
 	{
+		slug: 'strike',
+		name: 'Strike',
+		lead: 'Words the page leaves out. The line draws as the item scrolls in, and stays put with reduced motion.',
+		props: [
+			{ name: 'items', type: 'string[]', default: '—', description: 'One line per item.' }
+		],
+		code: `<script>
+	import { Strike } from 'matersv';
+</script>
+
+<Strike items={['Chromium inside', 'Ads', 'Telemetry']} />`
+	},
+	{
 		slug: 'switch',
 		name: 'Switch',
 		lead: 'Boolean toggle. The knob is a check icon; the slide is a padding swap.',
@@ -342,6 +374,22 @@ export const components = [
 </script>
 
 <Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
+	},
+	{
+		slug: 'window',
+		name: 'Window',
+		lead: 'App window frame: optional rail, inset pane and monochrome chrome dots, so the page keeps one hue.',
+		props: [
+			{ name: 'rail', type: 'Snippet', default: '—', description: 'Left rail content. Hidden below 1024px.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Pane content.' }
+		],
+		code: `<script>
+	import { Window } from 'matersv';
+</script>
+
+<Window>
+	<p>Real UI goes in the pane, never a screenshot.</p>
+</Window>`
 	},
 	{
 		slug: 'themetoggle',

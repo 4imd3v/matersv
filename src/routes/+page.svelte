@@ -7,11 +7,14 @@
 	import Badge from '#lib/components/Badge.svelte';
 	import Card from '#lib/components/Card.svelte';
 	import Stat from '#lib/components/Stat.svelte';
+	import Strike from '#lib/components/Strike.svelte';
+	import Window from '#lib/components/Window.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
+	import ListRow from '#lib/components/ListRow.svelte';
 	import Progress from '#lib/components/Progress.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
@@ -24,6 +27,8 @@
 		{ href: '#night', label: 'Night' },
 		{ href: '/components', label: 'Docs' }
 	];
+
+	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
 
 	const plans = [
 		{ value: 'solo', label: 'Solo' },
@@ -73,6 +78,25 @@
 <CapsuleNav brand="Mater" items={nav}>
 	<Button href="#components">Browse</Button>
 </CapsuleNav>
+
+{#snippet cover()}
+	<svg viewBox="0 0 56 56" aria-hidden="true">
+		<rect width="56" height="56" fill="currentColor" opacity=".12" />
+		<circle cx="28" cy="28" r="10" fill="currentColor" opacity=".3" />
+	</svg>
+{/snippet}
+
+{#snippet chevron()}
+	<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+		<path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+	</svg>
+{/snippet}
+
+{#snippet windowRail()}
+	<span>Home</span>
+	<span>Search</span>
+	<span>Stats</span>
+{/snippet}
 
 <main>
 	<section id="top" class="section section--field hero">
@@ -207,6 +231,40 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>ListRow</h3>
+					<p>A row with a thumbnail, two lines and an end slot. The current row takes the field surface.</p>
+					<div class="rows">
+						<ListRow title="Drafts" meta="12 items" href="#components" current lead={cover} />
+						<ListRow
+							title="Archive"
+							meta="Saved for later"
+							href="/components/listrow"
+							lead={cover}
+							trailing={chevron}
+						/>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Strike</h3>
+					<p>The line draws as the item scrolls in. With reduced motion it is simply already there.</p>
+					<div class="strike-demo">
+						<Strike items={drawbacks.slice(0, 2)} />
+					</div>
+				</article>
+
+				<article class="card reveal wide">
+					<h3>Window</h3>
+					<p>Frame, rail and pane. The chrome dots stay monochrome so the page keeps one hue.</p>
+					<div class="window-demo">
+						<Window rail={windowRail}>
+							<h3>Product tour</h3>
+							<p>The mockup is real UI, never a screenshot.</p>
+						</Window>
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>Badge</h3>
 					<p>Small state and version labels. No borders, no uppercase.</p>
 					<div class="row">
@@ -279,11 +337,9 @@
 				<Stat value={0} label="Runtime dependencies" />
 				<Stat value={4} label="Surfaces, no borders" />
 			</div>
-			<ul class="strike">
-				{#each ['Chromium inside', 'Ads', 'Telemetry'] as item}
-					<li class="reveal"><span>{item}</span></li>
-				{/each}
-			</ul>
+			<div class="strike-wrap reveal">
+				<Strike items={drawbacks} />
+			</div>
 		</div>
 	</section>
 </main>
@@ -384,29 +440,23 @@
 		padding-left: clamp(80px, 9vw, 120px);
 	}
 
-	.strike {
+	.rows {
 		display: grid;
-		gap: 10px;
+		gap: 2px;
+		margin-top: 20px;
+	}
+
+	.strike-demo,
+	.window-demo {
+		margin-top: 24px;
+	}
+
+	.wide {
+		grid-column: 1 / -1;
+	}
+
+	.strike-wrap {
 		margin-top: clamp(40px, 5vw, 64px);
-	}
-
-	.strike span {
-		position: relative;
-		font-size: var(--text-h3);
-		font-weight: 600;
-		letter-spacing: -0.03em;
-		color: var(--color-night-muted);
-	}
-
-	.strike span::after {
-		content: '';
-		position: absolute;
-		left: -0.04em;
-		right: -0.04em;
-		top: 54%;
-		height: 0.085em;
-		border-radius: 99px;
-		background: var(--color-night-accent);
 	}
 
 	.footer {

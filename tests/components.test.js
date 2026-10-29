@@ -7,10 +7,13 @@ import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
 import Annotation from '../src/lib/components/Annotation.svelte';
 import Card from '../src/lib/components/Card.svelte';
+import ListRow from '../src/lib/components/ListRow.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
+import Strike from '../src/lib/components/Strike.svelte';
+import Window from '../src/lib/components/Window.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
@@ -106,6 +109,44 @@ describe('Card', () => {
 		expect(screen.getByRole('heading', { level: 3, name: 'Surface' })).toBeTruthy();
 		expect(screen.getByText('Flat colour.')).toBeTruthy();
 		expect(screen.getByText('Body copy')).toBeTruthy();
+	});
+});
+
+describe('ListRow', () => {
+	it('renders a current link with its meta line', () => {
+		render(ListRow, { props: { title: 'Drafts', meta: '12 items', href: '/drafts', current: true } });
+
+		const link = screen.getByRole('link', { name: /Drafts/ });
+		expect(link.getAttribute('href')).toBe('/drafts');
+		expect(link.getAttribute('aria-current')).toBe('true');
+		expect(screen.getByText('12 items')).toBeTruthy();
+	});
+
+	it('stays a plain row without href', () => {
+		render(ListRow, { props: { title: 'Archive' } });
+
+		expect(screen.queryByRole('link')).toBeNull();
+		expect(screen.getByText('Archive')).toBeTruthy();
+	});
+});
+
+describe('Strike', () => {
+	it('renders one list item per word', () => {
+		render(Strike, { props: { items: ['Ads', 'Telemetry'] } });
+
+		expect(screen.getAllByRole('listitem')).toHaveLength(2);
+		expect(screen.getByText('Telemetry')).toBeTruthy();
+	});
+});
+
+describe('Window', () => {
+	it('renders the rail and the pane, with decorative dots', () => {
+		const rail = createRawSnippet(() => ({ render: () => '<span>Home</span>' }));
+		const { container } = render(Window, { props: { rail, children: text('Pane') } });
+
+		expect(screen.getByText('Home')).toBeTruthy();
+		expect(screen.getByText('Pane')).toBeTruthy();
+		expect(container.querySelector('.dots')?.getAttribute('aria-hidden')).toBe('true');
 	});
 });
 

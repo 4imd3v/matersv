@@ -56,7 +56,9 @@ import '#lib/matersv.css';
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
+| `Strike` | `items: string[]` |
 | `Kbd` | snippet children |
+| `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |
 | `Progress` | `label`, `value`, `max`, `id` |
 | `Accordion` | snippet children (a list of `AccordionItem`) |
 | `AccordionItem` | `title`, `bind:open`, snippet children |
@@ -66,6 +68,7 @@ import '#lib/matersv.css';
 | `Annotation` | `arrow`, snippet children |
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |
 | `ThemeToggle` | — |
+| `Window` | `rail` snippet, snippet children |
 
 Also exported: `theme`, `applyTheme`, `initTheme`, `hue`, `setHue`.
 

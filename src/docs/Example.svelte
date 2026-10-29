@@ -10,13 +10,16 @@
 		IconButton,
 		Input,
 		Kbd,
+		ListRow,
 		Progress,
 		SectionHeader,
 		SegmentedControl,
 		Select,
 		Stat,
+		Strike,
 		Switch,
 		Textarea,
+		Window,
 		ThemeToggle
 	} from '#lib/index.js';
 
@@ -27,6 +30,8 @@
 	let lyrics = $state(true);
 	let density = $state('comfortable');
 	let note = $state('');
+
+	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
 	let plan = $state('team');
 	let dialogOpen = $state(false);
 
@@ -41,6 +46,25 @@
 		{ value: 'compact', label: 'Compact' }
 	];
 </script>
+
+{#snippet cover()}
+	<svg viewBox="0 0 56 56" aria-hidden="true">
+		<rect width="56" height="56" fill="currentColor" opacity=".12" />
+		<circle cx="28" cy="28" r="10" fill="currentColor" opacity=".3" />
+	</svg>
+{/snippet}
+
+{#snippet chevron()}
+	<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+		<path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+	</svg>
+{/snippet}
+
+{#snippet railNav()}
+	<span>Home</span>
+	<span>Search</span>
+	<span>Stats</span>
+{/snippet}
 
 {#if slug === 'button'}
 	<div class="row">
@@ -108,6 +132,27 @@
 	<div class="stats">
 		<Stat value={98} suffix="%" label="Lighthouse, all four categories" />
 		<Stat value={0} label="Runtime dependencies" />
+	</div>
+{:else if slug === 'listrow'}
+	<div class="col">
+		<ListRow title="Drafts" meta="12 items" href="/components/listrow" current lead={cover} />
+		<ListRow
+			title="Archive"
+			meta="Saved for later"
+			href="/components/listrow"
+			lead={cover}
+			trailing={chevron}
+		/>
+	</div>
+{:else if slug === 'strike'}
+	<div class="col">
+		<Strike items={drawbacks} />
+	</div>
+{:else if slug === 'window'}
+	<div class="wide-col">
+		<Window rail={railNav}>
+			<p>Real UI goes in the pane, never a screenshot.</p>
+		</Window>
 	</div>
 {:else if slug === 'badge'}
 	<div class="row">
@@ -187,6 +232,11 @@
 		gap: 16px;
 		width: 100%;
 		max-width: 420px;
+	}
+
+	.wide-col {
+		width: 100%;
+		max-width: 620px;
 	}
 
 	.note {
