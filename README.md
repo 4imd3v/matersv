@@ -71,10 +71,22 @@ Esc come from the platform.
 | `pnpm check` | `svelte-check` (0 errors expected) |
 | `pnpm test` | vitest + testing-library |
 | `pnpm publint` | package lint |
+| `pnpm release:patch\|minor\|major` | verify, bump, commit and tag |
 
-## Publishing
+## Releasing
 
 ```sh
+pnpm release:patch   # bug fixes
+pnpm release:minor   # new components, backwards compatible
+pnpm release:major   # breaking API
+```
+
+Each release runs `pnpm check` and `pnpm test` first (`preversion`), bumps
+`package.json`, commits `chore(release): x.y.z` and creates the `vx.y.z` tag.
+Then push and publish:
+
+```sh
+git push --follow-tags
 npm publish --access public
 ```
 

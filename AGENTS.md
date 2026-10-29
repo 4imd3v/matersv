@@ -30,11 +30,16 @@ pnpm test           # vitest + testing-library
 pnpm build          # static demo -> build/
 pnpm package        # library -> dist/ (svelte-package)
 pnpm publint        # package lint (needs dist, run after pnpm package)
+pnpm release:patch # or :minor / :major — verify, bump, commit, tag
 ```
 
 ## Hard rules
 
 - **Do not commit, push, tag or publish unless the user asks.** No auto-commits.
+  The one exception is an explicit release request: `release:patch|minor|major`
+  intentionally commits and tags.
+- **Do not memorize uncommitted work.** Memory describes commits, not the working
+  tree. See Memory below.
 - **Do not add runtime dependencies** without asking. If a platform API or the
   standard library can do it, use that instead.
 - Work in Svelte 5 runes: `$props`, `$state`, `$derived`, `$bindable`,
@@ -147,6 +152,8 @@ demo in a browser:
   ship stale output.
 - Keep tests and demo-only assets out of `src/lib`: everything there is
   packaged. Favicon lives in `static/`; tests live in `tests/`.
+- Releases use `pnpm release:patch|minor|major`: `preversion` runs check + test,
+  then pnpm bumps, commits `chore(release): x.y.z` and tags `vx.y.z`.
 - Version bumps, `npm publish` and tags are the user's call. Do not publish.
 
 ## Known gotchas
@@ -173,5 +180,18 @@ demo in a browser:
 
 ## Memory
 
-If the NWron MCP is available, search project `matersv` before starting and
-record new decisions, gotchas and finished work before ending the session.
+If the NWron MCP is available, search project `matersv` before starting.
+
+Only memorize committed work:
+
+1. Run `git status --short`. If anything is uncommitted, do not write a memory.
+   Ask the user to commit first, or wait for the commit.
+2. Record the commit hash and describe the state at that commit. Never claim work
+   that only exists in the working tree.
+3. When a change alters a decision already in memory, update or supersede that
+   memory after the new commit instead of adding a second copy. Leave stale
+   memories alone until the replacement is committed.
+4. Never commit, tag or publish just to make a memory writable.
+
+If the user asks to memorize while the tree is dirty, say so and stop at the
+commit step unless they explicitly asked you to commit.

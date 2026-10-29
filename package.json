@@ -39,6 +39,10 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"test": "vitest run",
 		"publint": "publint",
+		"release:patch": "pnpm version patch -m \"chore(release): %s\"",
+		"release:minor": "pnpm version minor -m \"chore(release): %s\"",
+		"release:major": "pnpm version major -m \"chore(release): %s\"",
+		"preversion": "pnpm check && pnpm test",
 		"prepublishOnly": "svelte-package -i src/lib -o dist && publint",
 		"prepare": "svelte-kit sync || echo ''"
 	},
