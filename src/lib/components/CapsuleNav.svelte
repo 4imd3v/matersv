@@ -11,13 +11,14 @@
 		const observer = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
-					if (entry.isIntersecting) active = entry.target.id;
+					if (entry.isIntersecting) active = '#' + entry.target.id;
 				}
 			},
 			{ rootMargin: '-35% 0px -65% 0px' }
 		);
 
 		for (const item of items) {
+			if (!item.href.startsWith('#')) continue;
 			const section = document.querySelector(item.href);
 			if (section) observer.observe(section);
 		}
@@ -60,7 +61,7 @@
 
 		<nav class="capsule nav" aria-label="Sections">
 			{#each items as item (item.href)}
-				<a href={item.href} aria-current={active === item.href.slice(1) ? 'true' : undefined}>
+				<a href={item.href} aria-current={active === item.href ? 'true' : undefined}>
 					{item.label}
 				</a>
 			{/each}

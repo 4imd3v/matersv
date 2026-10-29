@@ -62,7 +62,9 @@ src/lib/
   theme.svelte.js        # theme store (applyTheme, initTheme)
   hue.svelte.js          # --h/--c engine (setHue)
   components/*.svelte    # one component per file, scoped styles
-src/routes/+page.svelte  # demo gallery and living docs
+src/routes/+page.svelte  # demo gallery
+src/routes/components/   # /components index and /components/[slug] docs pages
+src/docs/                # docs registry, live examples, code + props blocks
 tests/components.test.js # vitest, kept outside src/lib so it is not packaged
 src/app.html             # pre-paint theme script
 .github/workflows/ci.yml # check, test, package, publint, build
@@ -73,9 +75,12 @@ src/app.html             # pre-paint theme script
 1. Create `src/lib/components/Name.svelte` with a `<style>` block.
 2. Export it from `src/lib/index.js` (alphabetical).
 3. Add a demo card to `src/routes/+page.svelte` using the global `.card` class.
-4. Add a row to the components table in `README.md`.
-5. Add a test when the behavior is non-trivial (state, a11y wiring, branching).
-6. Run the verification list below.
+4. Add an entry to `src/docs/registry.js` (slug, lead, props, code) and a live
+   case in `src/docs/Example.svelte`. `tests/docs.test.js` fails if an exported
+   component has no registry entry.
+5. Add a row to the components table in `README.md`.
+6. Add a test when the behavior is non-trivial (state, a11y wiring, branching).
+7. Run the verification list below.
 
 Component API conventions:
 
@@ -151,7 +156,8 @@ demo in a browser:
 - `prepublishOnly` rebuilds `dist` and runs `publint`, so npm publish cannot
   ship stale output.
 - Keep tests and demo-only assets out of `src/lib`: everything there is
-  packaged. Favicon lives in `static/`; tests live in `tests/`.
+  packaged. Favicon lives in `static/`; tests live in `tests/`; docs data and
+  examples live in `src/docs/`.
 - Releases use `pnpm release:patch|minor|major`: `preversion` runs check + test,
   then pnpm bumps, commits `chore(release): x.y.z` and tags `vx.y.z`.
 - Version bumps, `npm publish` and tags are the user's call. Do not publish.

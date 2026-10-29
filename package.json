@@ -5,6 +5,12 @@
 	"packageManager": "pnpm@12.16.1",
 	"license": "MIT",
 	"description": "Reusable Svelte 5 + pure CSS UI components for wide editorial website UI.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/4imd3v/matersv.git"
+	},
+	"homepage": "https://github.com/4imd3v/matersv#readme",
+	"bugs": "https://github.com/4imd3v/matersv/issues",
 	"keywords": [
 		"svelte",
 		"sveltekit",

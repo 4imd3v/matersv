@@ -15,7 +15,8 @@
 
 	const nav = [
 		{ href: '#components', label: 'Components' },
-		{ href: '#night', label: 'Night' }
+		{ href: '#night', label: 'Night' },
+		{ href: '/components', label: 'Docs' }
 	];
 
 	const presets = [

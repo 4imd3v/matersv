@@ -1,5 +1,7 @@
 # MaterSV
 
+[![CI](https://github.com/4imd3v/matersv/actions/workflows/ci.yml/badge.svg)](https://github.com/4imd3v/matersv/actions/workflows/ci.yml)
+
 A reusable UI component library in pure Svelte 5 + CSS, built for wide editorial
 website UI. No UI framework, no Tailwind, no CSS-in-JS — Svelte 5 runes, OKLCH
 tokens and modern CSS only.
@@ -32,6 +34,14 @@ Inside this repo use the `#lib` alias instead:
 import { Button } from '#lib/index.js';
 import '#lib/matersv.css';
 ```
+
+## Docs
+
+`pnpm dev` serves two surfaces:
+
+- `/` — the gallery and hue demo
+- `/components` — one page per component with a live example, usage snippet and
+  props table (prerendered)
 
 ## Components
 
@@ -119,6 +129,8 @@ content immediately. `prefers-reduced-motion` disables all of it.
 ```
 src/
 	app.html                      # pre-paint theme script, color-scheme, theme-color
+	docs/                         # docs only: registry, live examples, code + props blocks
+	routes/components/            # /components and /components/[slug]
 	lib/
 		matersv.css                 # tokens + base + .wrap/.section/.card/.reveal
 		index.js                    # library entry
@@ -142,6 +154,7 @@ src/
 		+layout.js                  # prerender = true (adapter-static)
 		+layout.svelte
 		+page.svelte                # component gallery + hue demo
+tests/                           # vitest; docs.test.js keeps the registry in sync
 ```
 
 ## Fonts
