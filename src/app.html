@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		<meta name="color-scheme" content="light dark" />
+		<meta name="theme-color" content="#f5fbfe" />
+		<script>
+			// Set the theme before first paint to avoid a flash.
+			(function () {
+				var root = document.documentElement;
+				var theme = null;
+				try {
+					theme = localStorage.getItem('matersv-theme');
+				} catch (e) {}
+				if (theme !== 'light' && theme !== 'dark') {
+					theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				}
+				root.dataset.theme = theme;
+				var meta = document.querySelector('meta[name="theme-color"]');
+				if (meta) meta.content = theme === 'dark' ? '#0b1214' : '#f5fbfe';
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

@@ -1,0 +1,284 @@
+/* Global tokens + base for the design system in DESIGN.md.
+   Component styles live in their own .svelte files. */
+
+@layer tokens, base, components, utilities;
+
+@layer tokens {
+	:root {
+		color-scheme: light;
+
+		/* hue/chroma engine: change these two numbers and the page reskins */
+		--h: 225;
+		--c: 0.1;
+
+		/* Self-host Google Sans / Caveat here when licensed:
+		   @font-face { font-family: 'Google Sans'; src: url('/fonts/GoogleSans.woff2') format('woff2'); font-weight: 100 900; font-display: swap; } */
+		--font-sans: 'Google Sans', 'Google Sans Text', Inter, ui-sans-serif, system-ui, -apple-system,
+			'Segoe UI', Roboto, sans-serif;
+		--font-hand: 'Caveat', ui-rounded, cursive;
+
+		/* type scale */
+		--text-display: clamp(40px, 6.4vw, 96px);
+		--text-h2: clamp(38px, 5.4vw, 80px);
+		--text-h3: clamp(24px, 2.6vw, 36px);
+		--text-lead: clamp(18px, 1.5vw, 21px);
+
+		/* layout */
+		--head: 72px;
+		--gap: clamp(112px, 13vw, 200px);
+
+		/* shape */
+		--radius-card: 28px;
+		--radius-pill: 999px;
+		--radius-circle: 50%;
+
+		/* motion */
+		--ease-glide: cubic-bezier(0.2, 0.7, 0.2, 1);
+		--dur-tap: 0.15s;
+		--dur-control: 0.2s;
+		--dur-surface: 0.4s;
+		--dur-tab: 0.55s;
+
+		/* surfaces */
+		--color-bg: oklch(0.985 calc(var(--c) * 0.07) var(--h));
+		--color-bg-soft: oklch(0.955 calc(var(--c) * 0.12) var(--h));
+		--color-field: oklch(0.91 calc(var(--c) * 0.3) var(--h));
+		--color-night: oklch(0.17 calc(var(--c) * 0.2) var(--h));
+
+		/* text */
+		--color-ink: oklch(0.21 calc(var(--c) * 0.12) var(--h));
+		--color-muted: oklch(0.44 calc(var(--c) * 0.14) var(--h));
+		--color-field-ink: oklch(0.24 calc(var(--c) * 0.45) var(--h));
+
+		/* action */
+		--color-accent: oklch(0.47 calc(var(--c) * 1) var(--h));
+		--color-accent-ink: oklch(0.99 0 0);
+
+		/* the one fixed hue: semantic error, not decoration */
+		--color-danger: oklch(0.52 0.19 25);
+
+		/* the always-dark band */
+		--color-night-ink: oklch(0.96 calc(var(--c) * 0.05) var(--h));
+		--color-night-muted: oklch(0.76 calc(var(--c) * 0.12) var(--h));
+		--color-night-accent: oklch(0.74 calc(var(--c) * 1.05) var(--h));
+		--color-night-field: oklch(0.34 calc(var(--c) * 0.5) var(--h));
+
+		/* floating chrome */
+		--color-capsule: #fff;
+
+		--shadow-capsule:
+			0 0 0 1px color-mix(in oklab, var(--color-ink) 8%, transparent),
+			0 10px 30px -18px oklch(0.2 0.05 var(--h) / 0.5);
+		--shadow-cover:
+			0 0 0 4px var(--color-bg),
+			0 0 0 5px var(--color-field);
+	}
+
+	:root[data-theme='dark'] {
+		color-scheme: dark;
+
+		--color-bg: oklch(0.175 calc(var(--c) * 0.12) var(--h));
+		--color-bg-soft: oklch(0.215 calc(var(--c) * 0.22) var(--h));
+		--color-field: oklch(0.3 calc(var(--c) * 0.4) var(--h));
+		--color-night: oklch(0.13 calc(var(--c) * 0.15) var(--h));
+
+		--color-ink: oklch(0.96 calc(var(--c) * 0.04) var(--h));
+		--color-muted: oklch(0.76 calc(var(--c) * 0.1) var(--h));
+		--color-field-ink: oklch(0.95 calc(var(--c) * 0.1) var(--h));
+
+		--color-accent: oklch(0.82 calc(var(--c) * 0.85) var(--h));
+		--color-accent-ink: oklch(0.2 calc(var(--c) * 0.3) var(--h));
+
+		--color-danger: oklch(0.76 0.15 25);
+
+		/* the night band stays dark in both themes */
+		--color-night-ink: oklch(0.96 calc(var(--c) * 0.05) var(--h));
+		--color-night-muted: oklch(0.76 calc(var(--c) * 0.12) var(--h));
+		--color-night-accent: oklch(0.74 calc(var(--c) * 1.05) var(--h));
+		--color-night-field: oklch(0.34 calc(var(--c) * 0.5) var(--h));
+
+		--color-capsule: color-mix(in oklab, var(--color-bg-soft) 50%, var(--color-field));
+	}
+
+	/* While the viewport sits over the always-dark band */
+	:root[data-over-dark='true'] {
+		--color-capsule: oklch(0.24 calc(var(--c) * 0.3) var(--h));
+	}
+
+	@media (max-width: 560px) {
+		:root {
+			--head: 60px;
+			--gap: 80px;
+		}
+	}
+}
+
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: calc(var(--head) + 24px);
+		background: var(--color-bg);
+	}
+
+	body {
+		margin: 0;
+		min-height: 100svh;
+		background: var(--color-bg);
+		color: var(--color-ink);
+		font: 400 18px/1.55 var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		overflow-x: hidden;
+	}
+
+	h1,
+	h2,
+	h3,
+	p,
+	ul,
+	ol,
+	figure,
+	blockquote {
+		margin: 0;
+		padding: 0;
+	}
+
+	ul,
+	ol {
+		list-style: none;
+	}
+
+	img,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	a {
+		color: inherit;
+		text-underline-offset: 3px;
+	}
+
+	button {
+		font: inherit;
+		color: inherit;
+	}
+
+	::selection {
+		background: var(--color-field);
+		color: var(--color-field-ink);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 3px;
+		border-radius: 6px;
+	}
+}
+
+@layer components {
+	.card {
+		border-radius: var(--radius-card);
+		background: var(--color-bg-soft);
+		padding: clamp(28px, 3.4vw, 52px);
+		transition: background-color var(--dur-surface) ease;
+	}
+
+	.card h3 {
+		font-size: var(--text-h3);
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.card p {
+		margin-top: 12px;
+		max-width: 34ch;
+		color: var(--color-muted);
+	}
+}
+
+@layer utilities {
+	.wrap {
+		width: min(1240px, 100% - 48px);
+		margin-inline: auto;
+	}
+
+	.section {
+		padding-block: var(--gap);
+	}
+
+	.section--field {
+		background: var(--color-field);
+		color: var(--color-field-ink);
+	}
+
+	.section--night {
+		background: var(--color-night);
+		color: var(--color-night-ink);
+	}
+
+	.section--night :focus-visible {
+		outline-color: var(--color-night-accent);
+	}
+
+	.lead {
+		max-width: 46ch;
+		font-size: var(--text-lead);
+		line-height: 1.35;
+		text-wrap: pretty;
+	}
+
+	.muted {
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 560px) {
+		.wrap {
+			width: calc(100% - 32px);
+		}
+	}
+}
+
+/* Scroll-driven reveal. Enhances to an entrance animation where supported;
+   content is never hidden without JS or without support. */
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: reveal-in linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 90%;
+		}
+
+		@keyframes reveal-in {
+			from {
+				opacity: 0;
+				translate: 0 28px;
+			}
+			to {
+				opacity: 1;
+				translate: 0 0;
+			}
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		transition-delay: 0s !important;
+		animation: none !important;
+	}
+}
