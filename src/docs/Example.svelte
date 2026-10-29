@@ -3,6 +3,7 @@
 		Accordion,
 		AccordionItem,
 		Annotation,
+		Avatar,
 		Badge,
 		Breadcrumbs,
 		Button,
@@ -16,10 +17,12 @@
 		Kbd,
 		ListRow,
 		Notice,
+		Pagination,
 		Progress,
 		SectionHeader,
 		SegmentedControl,
 		Select,
+		Slider,
 		Stat,
 		Strike,
 		Switch,
@@ -36,6 +39,7 @@
 	let density = $state('comfortable');
 	let note = $state('');
 	let changelog = $state(true);
+	let volume = $state(64);
 
 	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
 	let plan = $state('team');
@@ -80,7 +84,28 @@
 	<span>Stats</span>
 {/snippet}
 
-{#if slug === 'breadcrumbs'}
+{#if slug === 'avatar'}
+	<div class="row">
+		<Avatar name="Ada Lovelace" />
+		<Avatar name="Grace Hopper" size={64} />
+		<Avatar name="Mater" size={32} />
+		<span class="muted">Initials when there is no portrait</span>
+	</div>
+{:else if slug === 'pagination'}
+	<Pagination
+		current={1}
+		items={[
+			{ href: '/components/pagination', label: '1' },
+			{ href: '/components/pagination', label: '2' },
+			{ href: '/components/pagination', label: '3' },
+			{ href: '/components/pagination', label: '4' }
+		]}
+	/>
+{:else if slug === 'slider'}
+	<div class="col">
+		<Slider label="Volume" bind:value={volume} hint="Arrow keys nudge by one." />
+	</div>
+{:else if slug === 'breadcrumbs'}
 	<Breadcrumbs
 		items={[
 			{ href: '/', label: 'Home' },

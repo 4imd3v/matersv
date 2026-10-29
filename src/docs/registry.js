@@ -56,6 +56,22 @@ export const components = [
 <Annotation arrow>no build step</Annotation>`
 	},
 	{
+		slug: 'avatar',
+		name: 'Avatar',
+		lead: 'Circle portrait with an initials fallback. One accessible name, whether it renders an image or letters.',
+		props: [
+			{ name: 'name', type: 'string', default: '—', description: 'Accessible name and source of the initials.' },
+			{ name: 'src', type: 'string', default: '—', description: 'Image source; initials render without it.' },
+			{ name: 'size', type: 'number', default: '44', description: 'Diameter in px.' }
+		],
+		code: `<script>
+	import { Avatar } from 'matersv';
+</script>
+
+<Avatar name="Ada Lovelace" />
+<Avatar name="Ada Lovelace" src="/people/ada.webp" size={64} />`
+	},
+	{
 		slug: 'badge',
 		name: 'Badge',
 		lead: 'Small state or version label. No borders, no uppercase.',
@@ -315,6 +331,28 @@ export const components = [
 <Notice title="Upload failed" tone="danger">The file was larger than 10 MB.</Notice>`
 	},
 	{
+		slug: 'pagination',
+		name: 'Pagination',
+		lead: 'Page pills in a nav landmark. The current page is a span, not a dead link.',
+		props: [
+			{ name: 'items', type: '{ href, label }[]', default: '—', description: 'Pages in order.' },
+			{ name: 'current', type: 'number', default: '0', description: 'Index of the current page.' },
+			{ name: 'label', type: 'string', default: "'Pagination'", description: 'Accessible name of the nav.' }
+		],
+		code: `<script>
+	import { Pagination } from 'matersv';
+</script>
+
+<Pagination
+	current={1}
+	items={[
+		{ href: '/blog?page=1', label: '1' },
+		{ href: '/blog?page=2', label: '2' },
+		{ href: '/blog?page=3', label: '3' }
+	]}
+/>`
+	},
+	{
 		slug: 'progress',
 		name: 'Progress',
 		lead: 'Native progress element on the field surface, with a percentage and an accessible name.',
@@ -397,6 +435,25 @@ export const components = [
 		{ value: 'team', label: 'Team' }
 	]}
 />`
+	},
+	{
+		slug: 'slider',
+		name: 'Slider',
+		lead: 'Native range input with a pill track and a capsule thumb. Arrow keys, forms and AT come from the platform.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
+			{ name: 'value', type: 'number', default: '0', description: 'Supports bind:value.' },
+			{ name: 'min', type: 'number', default: '0', description: 'Lower bound.' },
+			{ name: 'max', type: 'number', default: '100', description: 'Upper bound.' },
+			{ name: 'step', type: 'number', default: '1', description: 'Keyboard and snap increment.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Help text under the control.' }
+		],
+		code: `<script>
+	import { Slider } from 'matersv';
+	let volume = $state(64);
+</script>
+
+<Slider label="Volume" bind:value={volume} hint="Arrow keys nudge by one." />`
 	},
 	{
 		slug: 'stat',

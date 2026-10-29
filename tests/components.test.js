@@ -6,6 +6,7 @@ import AccordionItem from '../src/lib/components/AccordionItem.svelte';
 import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
 import Annotation from '../src/lib/components/Annotation.svelte';
+import Avatar from '../src/lib/components/Avatar.svelte';
 import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
@@ -13,9 +14,11 @@ import Cover from '../src/lib/components/Cover.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
+import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
+import Slider from '../src/lib/components/Slider.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
 import Strike from '../src/lib/components/Strike.svelte';
 import Window from '../src/lib/components/Window.svelte';
@@ -152,6 +155,59 @@ describe('Window', () => {
 		expect(screen.getByText('Home')).toBeTruthy();
 		expect(screen.getByText('Pane')).toBeTruthy();
 		expect(container.querySelector('.dots')?.getAttribute('aria-hidden')).toBe('true');
+	});
+});
+
+describe('Avatar', () => {
+	it('falls back to initials with one accessible name', () => {
+		render(Avatar, { props: { name: 'Ada Lovelace' } });
+
+		const img = screen.getByRole('img', { name: 'Ada Lovelace' });
+		expect(img.textContent?.trim()).toBe('AL');
+	});
+
+	it('keeps the image out of the accessibility tree', () => {
+		const { container } = render(Avatar, { props: { name: 'Ada', src: '/ada.webp' } });
+		const image = /** @type {HTMLImageElement} */ (container.querySelector('img'));
+
+		expect(image.getAttribute('alt')).toBe('');
+		expect(image.getAttribute('src')).toBe('/ada.webp');
+	});
+});
+
+describe('Pagination', () => {
+	it('marks the current page and links the rest', () => {
+		render(Pagination, {
+			props: {
+				current: 1,
+				items: [
+					{ href: '/p1', label: '1' },
+					{ href: '/p2', label: '2' },
+					{ href: '/p3', label: '3' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('navigation', { name: 'Pagination' })).toBeTruthy();
+		expect(screen.getByText('2').getAttribute('aria-current')).toBe('page');
+		expect(screen.queryByRole('link', { name: '2' })).toBeNull();
+		expect(screen.getByRole('link', { name: '3' })).toBeTruthy();
+	});
+});
+
+describe('Slider', () => {
+	it('renders a native range with bounds and a hint', async () => {
+		render(Slider, { props: { label: 'Volume', value: 40, min: 0, max: 100, hint: 'Nudge it.' } });
+
+		const input = /** @type {HTMLInputElement} */ (
+			screen.getByRole('slider', { name: 'Volume' })
+		);
+		expect(input.value).toBe('40');
+		expect(input.getAttribute('max')).toBe('100');
+		expect(input.getAttribute('aria-describedby')).toBe(screen.getByText('Nudge it.').id);
+
+		await fireEvent.input(input, { target: { value: '70' } });
+		expect(input.value).toBe('70');
 	});
 });
 

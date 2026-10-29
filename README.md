@@ -51,6 +51,7 @@ import '#lib/matersv.css';
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
 | `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
+| `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
@@ -58,6 +59,8 @@ import '#lib/matersv.css';
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Breadcrumbs` | `items: { href, label }[]`, `label` |
+| `Pagination` | `items: { href, label }[]`, `current`, `label` |
+| `Avatar` | `name`, `src`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Strike` | `items: string[]` |
 | `Kbd` | snippet children |

@@ -4,11 +4,13 @@
 	import Accordion from '#lib/components/Accordion.svelte';
 	import AccordionItem from '#lib/components/AccordionItem.svelte';
 	import Annotation from '#lib/components/Annotation.svelte';
+	import Avatar from '#lib/components/Avatar.svelte';
 	import Badge from '#lib/components/Badge.svelte';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import Card from '#lib/components/Card.svelte';
 	import Checkbox from '#lib/components/Checkbox.svelte';
 	import Notice from '#lib/components/Notice.svelte';
+	import Pagination from '#lib/components/Pagination.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
 	import Stat from '#lib/components/Stat.svelte';
@@ -22,6 +24,7 @@
 	import ListRow from '#lib/components/ListRow.svelte';
 	import Progress from '#lib/components/Progress.svelte';
 	import Select from '#lib/components/Select.svelte';
+	import Slider from '#lib/components/Slider.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
@@ -59,6 +62,7 @@
 	let email = $state('');
 	let note = $state('');
 	let changelog = $state(true);
+	let volume = $state(64);
 	let plan = $state('team');
 	let dialogOpen = $state(false);
 	let playing = $state(false);
@@ -242,6 +246,39 @@
 					<h3>Annotation</h3>
 					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
 					<Annotation arrow>one line, never two</Annotation>
+				</article>
+
+				<article class="card reveal">
+					<h3>Avatar</h3>
+					<p>A circle portrait, or its initials. One accessible name either way.</p>
+					<div class="avatars-demo">
+						<Avatar name="Ada Lovelace" />
+						<Avatar name="Grace Hopper" size={64} />
+						<Avatar name="Mater" size={32} />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Slider</h3>
+					<p>Native range input, pill track, capsule thumb. Arrow keys do the rest.</p>
+					<div class="slider-demo">
+						<Slider label="Volume" bind:value={volume} hint="Arrow keys nudge by one." />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Pagination</h3>
+					<p>The current page is a span, not a dead link.</p>
+					<div class="pagination-demo">
+						<Pagination
+							current={1}
+							items={[
+								{ href: '#components', label: '1' },
+								{ href: '#components', label: '2' },
+								{ href: '#components', label: '3' }
+							]}
+						/>
+					</div>
 				</article>
 
 				<article class="card reveal">
@@ -504,6 +541,18 @@
 
 	.annotation-demo {
 		padding-left: clamp(80px, 9vw, 120px);
+	}
+
+	.avatars-demo {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-top: 24px;
+	}
+
+	.slider-demo,
+	.pagination-demo {
+		margin-top: 24px;
 	}
 
 	.crumbs-demo,
