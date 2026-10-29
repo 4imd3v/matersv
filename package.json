@@ -1,6 +1,6 @@
 {
 	"name": "matersv",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"packageManager": "pnpm@12.16.1",
 	"license": "MIT",
@@ -39,6 +39,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"test": "vitest run",
 		"publint": "publint",
+		"prepublishOnly": "svelte-package -i src/lib -o dist && publint",
 		"prepare": "svelte-kit sync || echo ''"
 	},
 	"peerDependencies": {

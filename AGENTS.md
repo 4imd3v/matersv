@@ -57,8 +57,8 @@ src/lib/
   theme.svelte.js        # theme store (applyTheme, initTheme)
   hue.svelte.js          # --h/--c engine (setHue)
   components/*.svelte    # one component per file, scoped styles
-  components/components.test.js
 src/routes/+page.svelte  # demo gallery and living docs
+tests/components.test.js # vitest, kept outside src/lib so it is not packaged
 src/app.html             # pre-paint theme script
 .github/workflows/ci.yml # check, test, package, publint, build
 ```
@@ -143,6 +143,10 @@ demo in a browser:
 - `package.json` `exports` point at `dist`; `files` ships only `dist`.
   `svelte` is a peer dependency (`^5.0.0`). Keep it that way.
 - Run `pnpm package` before `publint`; CI does this in order.
+- `prepublishOnly` rebuilds `dist` and runs `publint`, so npm publish cannot
+  ship stale output.
+- Keep tests and demo-only assets out of `src/lib`: everything there is
+  packaged. Favicon lives in `static/`; tests live in `tests/`.
 - Version bumps, `npm publish` and tags are the user's call. Do not publish.
 
 ## Known gotchas

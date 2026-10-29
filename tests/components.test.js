@@ -2,12 +2,12 @@ import { createRawSnippet } from 'svelte';
 import { fireEvent, render, screen } from '@testing-library/svelte';
 import { describe, expect, it, vi } from 'vitest';
 
-import AccordionItem from './AccordionItem.svelte';
-import Button from './Button.svelte';
-import Input from './Input.svelte';
-import SegmentedControl from './SegmentedControl.svelte';
-import Switch from './Switch.svelte';
-import { applyTheme } from '../theme.svelte.js';
+import AccordionItem from '../src/lib/components/AccordionItem.svelte';
+import Button from '../src/lib/components/Button.svelte';
+import Input from '../src/lib/components/Input.svelte';
+import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
+import Switch from '../src/lib/components/Switch.svelte';
+import { applyTheme } from '../src/lib/theme.svelte.js';
 
 /** @param {string} value */
 const text = (value) =>

@@ -1,6 +1,5 @@
 <script>
 	import '#lib/matersv.css';
-	import favicon from '#lib/assets/favicon.svg';
 	import { onMount } from 'svelte';
 	import { initTheme } from '#lib/theme.svelte.js';
 
@@ -10,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
 {@render children()}

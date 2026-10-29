@@ -75,13 +75,13 @@ Esc come from the platform.
 ## Publishing
 
 ```sh
-pnpm package
-pnpm publint
 npm publish --access public
 ```
 
-`dist/` contains compiled entries, `.d.ts` files and `matersv.css`. The package
-declares `svelte` as a peer dependency (`^5.0.0`) and ships only `dist/`.
+`prepublishOnly` rebuilds `dist` and runs `publint` first. The package declares
+`svelte` as a peer dependency (`^5.0.0`) and ships only `dist/`.
+
+`dist/` holds the entry, the `.svelte` sources, `.d.ts` files and `matersv.css`.
 
 ## Theming
 
