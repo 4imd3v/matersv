@@ -6,10 +6,13 @@ import AccordionItem from '../src/lib/components/AccordionItem.svelte';
 import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
 import Annotation from '../src/lib/components/Annotation.svelte';
+import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
+import Checkbox from '../src/lib/components/Checkbox.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
+import Notice from '../src/lib/components/Notice.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
@@ -149,6 +152,51 @@ describe('Window', () => {
 		expect(screen.getByText('Home')).toBeTruthy();
 		expect(screen.getByText('Pane')).toBeTruthy();
 		expect(container.querySelector('.dots')?.getAttribute('aria-hidden')).toBe('true');
+	});
+});
+
+describe('Checkbox', () => {
+	it('toggles the native input from the label and links the hint', async () => {
+		render(Checkbox, { props: { label: 'Changelog', hint: 'Once a release.' } });
+
+		const box = /** @type {HTMLInputElement} */ (
+			screen.getByRole('checkbox', { name: 'Changelog' })
+		);
+		expect(box.checked).toBe(false);
+		expect(box.getAttribute('aria-describedby')).toBe(screen.getByText('Once a release.').id);
+
+		await fireEvent.click(screen.getByText('Changelog'));
+		expect(box.checked).toBe(true);
+	});
+});
+
+describe('Notice', () => {
+	it('is a polite status for info and an alert for danger', () => {
+		const { unmount } = render(Notice, { props: { title: 'Saved', children: text('Stored.') } });
+		expect(screen.getByRole('status')).toBeTruthy();
+		expect(screen.getByText('Saved')).toBeTruthy();
+		unmount();
+
+		render(Notice, { props: { tone: 'danger', title: 'Failed', children: text('Too big.') } });
+		expect(screen.getByRole('alert')).toBeTruthy();
+	});
+});
+
+describe('Breadcrumbs', () => {
+	it('marks the last crumb as the current page and links the rest', () => {
+		render(Breadcrumbs, {
+			props: {
+				items: [
+					{ href: '/', label: 'Home' },
+					{ href: '/components', label: 'Components' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeTruthy();
+		expect(screen.getByRole('link', { name: 'Home' })).toBeTruthy();
+		expect(screen.getByText('Components').getAttribute('aria-current')).toBe('page');
+		expect(screen.queryByRole('link', { name: 'Components' })).toBeNull();
 	});
 });
 

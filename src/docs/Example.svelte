@@ -4,8 +4,10 @@
 		AccordionItem,
 		Annotation,
 		Badge,
+		Breadcrumbs,
 		Button,
 		Card,
+		Checkbox,
 		Cover,
 		Dialog,
 		Dots,
@@ -13,6 +15,7 @@
 		Input,
 		Kbd,
 		ListRow,
+		Notice,
 		Progress,
 		SectionHeader,
 		SegmentedControl,
@@ -32,6 +35,7 @@
 	let lyrics = $state(true);
 	let density = $state('comfortable');
 	let note = $state('');
+	let changelog = $state(true);
 
 	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
 	let plan = $state('team');
@@ -76,7 +80,25 @@
 	<span>Stats</span>
 {/snippet}
 
-{#if slug === 'button'}
+{#if slug === 'breadcrumbs'}
+	<Breadcrumbs
+		items={[
+			{ href: '/', label: 'Home' },
+			{ href: '/components', label: 'Components' },
+			{ href: '/components/breadcrumbs', label: 'Breadcrumbs' }
+		]}
+	/>
+{:else if slug === 'checkbox'}
+	<div class="col">
+		<Checkbox bind:checked={changelog} label="Email me the changelog" hint="Once a release." />
+		<Checkbox label="Share anonymous usage" hint="Never sold, never combined." />
+	</div>
+{:else if slug === 'notice'}
+	<div class="col">
+		<Notice title="Saved" tone="info">The layout is stored on this device.</Notice>
+		<Notice title="Upload failed" tone="danger">The file was larger than 10 MB.</Notice>
+	</div>
+{:else if slug === 'button'}
 	<div class="row">
 		<Button>Primary</Button>
 		<Button size="lg">Large</Button>

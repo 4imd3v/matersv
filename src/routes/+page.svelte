@@ -5,7 +5,10 @@
 	import AccordionItem from '#lib/components/AccordionItem.svelte';
 	import Annotation from '#lib/components/Annotation.svelte';
 	import Badge from '#lib/components/Badge.svelte';
+	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import Card from '#lib/components/Card.svelte';
+	import Checkbox from '#lib/components/Checkbox.svelte';
+	import Notice from '#lib/components/Notice.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
 	import Stat from '#lib/components/Stat.svelte';
@@ -55,6 +58,7 @@
 	let preset = $state('225');
 	let email = $state('');
 	let note = $state('');
+	let changelog = $state(true);
 	let plan = $state('team');
 	let dialogOpen = $state(false);
 	let playing = $state(false);
@@ -238,6 +242,38 @@
 					<h3>Annotation</h3>
 					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
 					<Annotation arrow>one line, never two</Annotation>
+				</article>
+
+				<article class="card reveal">
+					<h3>Breadcrumbs</h3>
+					<p>A real nav landmark, with <code>aria-current</code> on the crumb you are on.</p>
+					<div class="crumbs-demo">
+						<Breadcrumbs
+							items={[
+								{ href: '/', label: 'Home' },
+								{ href: '/components', label: 'Components' },
+								{ href: '#components', label: 'Breadcrumbs' }
+							]}
+						/>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Checkbox</h3>
+					<p>A circle on the field surface. The label wraps the whole hit area.</p>
+					<div class="checks-demo">
+						<Checkbox bind:checked={changelog} label="Email me the changelog" hint="Once a release." />
+						<Checkbox label="Share anonymous usage" />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Notice</h3>
+					<p>Inline feedback. Danger is an alert, everything else a polite status.</p>
+					<div class="notices-demo">
+						<Notice title="Saved">The layout is stored on this device.</Notice>
+						<Notice title="Upload failed" tone="danger">The file was larger than 10 MB.</Notice>
+					</div>
 				</article>
 
 				<article class="card reveal">
@@ -468,6 +504,18 @@
 
 	.annotation-demo {
 		padding-left: clamp(80px, 9vw, 120px);
+	}
+
+	.crumbs-demo,
+	.checks-demo,
+	.notices-demo {
+		margin-top: 24px;
+	}
+
+	.checks-demo,
+	.notices-demo {
+		display: grid;
+		gap: 16px;
 	}
 
 	.cover-demo {

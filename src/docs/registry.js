@@ -71,6 +71,26 @@ export const components = [
 <Badge tone="accent">v0.1.1</Badge>`
 	},
 	{
+		slug: 'breadcrumbs',
+		name: 'Breadcrumbs',
+		lead: 'Wayfinding with a real nav landmark and aria-current on the last crumb.',
+		props: [
+			{ name: 'items', type: '{ href, label }[]', default: '—', description: 'Trail, root first.' },
+			{ name: 'label', type: 'string', default: "'Breadcrumb'", description: 'Accessible name of the nav.' }
+		],
+		code: `<script>
+	import { Breadcrumbs } from 'matersv';
+</script>
+
+<Breadcrumbs
+	items={[
+		{ href: '/', label: 'Home' },
+		{ href: '/components', label: 'Components' },
+		{ href: '/components/button', label: 'Button' }
+	]}
+/>`
+	},
+	{
 		slug: 'button',
 		name: 'Button',
 		lead: 'Pill action. Renders a link with href, or a disabled button when disabled.',
@@ -128,6 +148,24 @@ export const components = [
 <Card title="One surface, no shadow" lead="Separation comes from colour, never a 1px border.">
 	<p>Cards stay flat; only floating chrome lifts.</p>
 </Card>`
+	},
+	{
+		slug: 'checkbox',
+		name: 'Checkbox',
+		lead: 'A circular checkbox on the field surface. Native input, label wraps the hit area.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
+			{ name: 'checked', type: 'boolean', default: 'false', description: 'Supports bind:checked.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Help text, wired with aria-describedby.' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the control.' },
+			{ name: 'id', type: 'string', default: 'auto', description: 'Field id.' }
+		],
+		code: `<script>
+	import { Checkbox } from 'matersv';
+	let terms = $state(false);
+</script>
+
+<Checkbox bind:checked={terms} label="Email me the changelog" hint="Once a release." />`
 	},
 	{
 		slug: 'cover',
@@ -259,6 +297,22 @@ export const components = [
 
 <ListRow title="Drafts" meta="12 items" href="/drafts" current />
 <ListRow title="Archive" meta="Saved for later" href="/archive" />`
+	},
+	{
+		slug: 'notice',
+		name: 'Notice',
+		lead: 'Inline message on the field surface. Danger is an alert, everything else a polite status.',
+		props: [
+			{ name: 'tone', type: "'info' | 'danger'", default: "'info'", description: 'Surface and the ARIA role.' },
+			{ name: 'title', type: 'string', default: '—', description: 'Optional bold first line.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Message body.' }
+		],
+		code: `<script>
+	import { Notice } from 'matersv';
+</script>
+
+<Notice title="Saved" tone="info">The layout is stored on this device.</Notice>
+<Notice title="Upload failed" tone="danger">The file was larger than 10 MB.</Notice>`
 	},
 	{
 		slug: 'progress',

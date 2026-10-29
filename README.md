@@ -50,11 +50,14 @@ import '#lib/matersv.css';
 | `Button` | `href`, `variant="primary\|text"`, `size="md\|lg"`, `disabled`, `type` |
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
+| `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
+| `Notice` | `tone="info\|danger"`, `title`, snippet children |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
 | `Switch` | `bind:checked`, `label`, `onchange` |
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
+| `Breadcrumbs` | `items: { href, label }[]`, `label` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Strike` | `items: string[]` |
 | `Kbd` | snippet children |
