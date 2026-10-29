@@ -178,6 +178,22 @@ export const components = [
 <Kbd>⌘</Kbd> <Kbd>K</Kbd> to search`
 	},
 	{
+		slug: 'progress',
+		name: 'Progress',
+		lead: 'Native progress element on the field surface, with a percentage and an accessible name.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
+			{ name: 'value', type: 'number', default: '—', description: 'Current value.' },
+			{ name: 'max', type: 'number', default: '100', description: 'Upper bound.' },
+			{ name: 'id', type: 'string', default: 'auto', description: 'Id that links the label to the bar.' }
+		],
+		code: `<script>
+	import { Progress } from 'matersv';
+</script>
+
+<Progress label="Upload" value={64} />`
+	},
+	{
 		slug: 'sectionheader',
 		name: 'SectionHeader',
 		lead: 'Section h2 and lead paragraph with the editorial type scale.',
@@ -220,6 +236,32 @@ export const components = [
 />`
 	},
 	{
+		slug: 'select',
+		name: 'Select',
+		lead: 'Native select with the field pill shape and a chevron. The option list is the platform one.',
+		props: [
+			{ name: 'items', type: '{ value, label }[]', default: '—', description: 'Options in render order.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
+			{ name: 'value', type: 'string', default: "''", description: 'Selected value. Supports bind:value.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Help text under the field.' },
+			{ name: 'error', type: 'string', default: '—', description: 'Error text; sets aria-invalid.' },
+			{ name: 'id', type: 'string', default: 'auto', description: 'Field id.' }
+		],
+		code: `<script>
+	import { Select } from 'matersv';
+	let plan = $state('team');
+</script>
+
+<Select
+	label="Plan"
+	bind:value={plan}
+	items={[
+		{ value: 'solo', label: 'Solo' },
+		{ value: 'team', label: 'Team' }
+	]}
+/>`
+	},
+	{
 		slug: 'switch',
 		name: 'Switch',
 		lead: 'Boolean toggle. The knob is a check icon; the slide is a padding swap.',
@@ -234,6 +276,25 @@ export const components = [
 </script>
 
 <Switch bind:checked={lyrics} label="Show lyrics" />`
+	},
+	{
+		slug: 'textarea',
+		name: 'Textarea',
+		lead: 'Multi-line field with the same label, hint and error wiring as Input.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
+			{ name: 'value', type: 'string', default: "''", description: 'Field value. Supports bind:value.' },
+			{ name: 'rows', type: 'number', default: '4', description: 'Visible rows before scrolling.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Help text under the field.' },
+			{ name: 'error', type: 'string', default: '—', description: 'Error text; sets aria-invalid.' },
+			{ name: 'id', type: 'string', default: 'auto', description: 'Field id.' }
+		],
+		code: `<script>
+	import { Textarea } from 'matersv';
+	let note = $state('');
+</script>
+
+<Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
 	},
 	{
 		slug: 'themetoggle',

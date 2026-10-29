@@ -50,10 +50,13 @@ import '#lib/matersv.css';
 | `Button` | `href`, `variant="primary\|text"`, `size="md\|lg"`, `disabled`, `type` |
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
+| `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
+| `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
 | `Switch` | `bind:checked`, `label`, `onchange` |
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Kbd` | snippet children |
+| `Progress` | `label`, `value`, `max`, `id` |
 | `Accordion` | snippet children (a list of `AccordionItem`) |
 | `AccordionItem` | `title`, `bind:open`, snippet children |
 | `Dialog` | `bind:open`, `title`, snippet children |

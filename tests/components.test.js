@@ -5,8 +5,11 @@ import { describe, expect, it, vi } from 'vitest';
 import AccordionItem from '../src/lib/components/AccordionItem.svelte';
 import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
+import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
+import Select from '../src/lib/components/Select.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
+import Textarea from '../src/lib/components/Textarea.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
 /** @param {string} value */
@@ -88,6 +91,54 @@ describe('Input', () => {
 		expect(input.getAttribute('aria-invalid')).toBe('true');
 		expect(screen.queryByText('No spam.')).toBeNull();
 		expect(input.getAttribute('aria-describedby')).toBe(screen.getByText('Required.').id);
+	});
+});
+
+describe('Textarea', () => {
+	it('binds the value and links the hint', async () => {
+		render(Textarea, { props: { label: 'Note', hint: 'Visible.', value: '' } });
+
+		const field = /** @type {HTMLTextAreaElement} */ (screen.getByLabelText('Note'));
+		expect(field.getAttribute('aria-describedby')).toBe(screen.getByText('Visible.').id);
+
+		await fireEvent.input(field, { target: { value: 'Hi' } });
+		expect(field.value).toBe('Hi');
+	});
+});
+
+describe('Select', () => {
+	it('renders the items and reports the chosen value', async () => {
+		const onchange = vi.fn();
+		render(Select, {
+			props: {
+				label: 'Plan',
+				items: [
+					{ value: 'solo', label: 'Solo' },
+					{ value: 'team', label: 'Team' }
+				],
+				value: 'solo',
+				onchange
+			}
+		});
+
+		const select = /** @type {HTMLSelectElement} */ (screen.getByLabelText('Plan'));
+		expect(select.options).toHaveLength(2);
+		expect(select.value).toBe('solo');
+
+		await fireEvent.change(select, { target: { value: 'team' } });
+		expect(select.value).toBe('team');
+		expect(onchange).toHaveBeenCalled();
+	});
+});
+
+describe('Progress', () => {
+	it('exposes the value with an accessible name', () => {
+		render(Progress, { props: { label: 'Storage', value: 30, max: 60 } });
+
+		const bar = /** @type {HTMLProgressElement} */ (screen.getByRole('progressbar', { name: 'Storage' }));
+		expect(bar.value).toBe(30);
+		expect(bar.max).toBe(60);
+		expect(screen.getByText('50%')).toBeTruthy();
 	});
 });
 

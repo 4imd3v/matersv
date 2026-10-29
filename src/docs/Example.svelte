@@ -8,9 +8,12 @@
 		IconButton,
 		Input,
 		Kbd,
+		Progress,
 		SectionHeader,
 		SegmentedControl,
+		Select,
 		Switch,
+		Textarea,
 		ThemeToggle
 	} from '#lib/index.js';
 
@@ -20,7 +23,15 @@
 	let playing = $state(true);
 	let lyrics = $state(true);
 	let density = $state('comfortable');
+	let note = $state('');
+	let plan = $state('team');
 	let dialogOpen = $state(false);
+
+	const plans = [
+		{ value: 'solo', label: 'Solo' },
+		{ value: 'team', label: 'Team' },
+		{ value: 'studio', label: 'Studio' }
+	];
 
 	const densities = [
 		{ value: 'comfortable', label: 'Comfortable' },
@@ -67,6 +78,18 @@
 			bind:value={email}
 			hint="One issue per month. No spam."
 		/>
+	</div>
+{:else if slug === 'textarea'}
+	<div class="col">
+		<Textarea label="Note" bind:value={note} hint="Shown on the invoice." />
+	</div>
+{:else if slug === 'select'}
+	<div class="col">
+		<Select label="Plan" items={plans} bind:value={plan} hint="Change any time." />
+	</div>
+{:else if slug === 'progress'}
+	<div class="col">
+		<Progress label="Storage" value={64} />
 	</div>
 {:else if slug === 'badge'}
 	<div class="row">

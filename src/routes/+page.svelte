@@ -9,6 +9,9 @@
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
+	import Progress from '#lib/components/Progress.svelte';
+	import Select from '#lib/components/Select.svelte';
+	import Textarea from '#lib/components/Textarea.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
 	import { setHue } from '#lib/hue.svelte.js';
@@ -17,6 +20,12 @@
 		{ href: '#components', label: 'Components' },
 		{ href: '#night', label: 'Night' },
 		{ href: '/components', label: 'Docs' }
+	];
+
+	const plans = [
+		{ value: 'solo', label: 'Solo' },
+		{ value: 'team', label: 'Team' },
+		{ value: 'studio', label: 'Studio' }
 	];
 
 	const presets = [
@@ -35,6 +44,8 @@
 
 	let preset = $state('225');
 	let email = $state('');
+	let note = $state('');
+	let plan = $state('team');
 	let dialogOpen = $state(false);
 	let playing = $state(false);
 	let lyrics = $state(true);
@@ -147,6 +158,30 @@
 							bind:value={email}
 							hint="One issue per month. No spam."
 						/>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Textarea</h3>
+					<p>Multi-line field with the same label, hint and error wiring as Input.</p>
+					<div class="row">
+						<Textarea label="Note" bind:value={note} hint="Shown on the invoice." />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Select</h3>
+					<p>A native select in the field pill, with a chevron instead of the platform arrow.</p>
+					<div class="row">
+						<Select label="Plan" items={plans} bind:value={plan} hint="Change any time." />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Progress</h3>
+					<p>Native <code>progress</code>, filled with the accent at the current hue.</p>
+					<div class="row">
+						<Progress label="Storage" value={64} />
 					</div>
 				</article>
 
