@@ -1,0 +1,111 @@
+import { createRawSnippet } from 'svelte';
+import { fireEvent, render, screen } from '@testing-library/svelte';
+import { describe, expect, it, vi } from 'vitest';
+
+import AccordionItem from './AccordionItem.svelte';
+import Button from './Button.svelte';
+import Input from './Input.svelte';
+import SegmentedControl from './SegmentedControl.svelte';
+import Switch from './Switch.svelte';
+import { applyTheme } from '../theme.svelte.js';
+
+/** @param {string} value */
+const text = (value) =>
+	createRawSnippet(() => ({ render: () => `<span>${value}</span>` }));
+
+describe('Button', () => {
+	it('renders a link when href is set', () => {
+		render(Button, { props: { href: '/download', children: text('Download') } });
+
+		const link = screen.getByRole('link', { name: 'Download' });
+		expect(link.getAttribute('href')).toBe('/download');
+	});
+
+	it('renders a disabled button when a link is disabled', () => {
+		render(Button, { props: { href: '/download', disabled: true, children: text('Download') } });
+
+		const button = /** @type {HTMLButtonElement} */ (
+			screen.getByRole('button', { name: 'Download' })
+		);
+		expect(button.disabled).toBe(true);
+		expect(screen.queryByRole('link')).toBeNull();
+	});
+});
+
+describe('Switch', () => {
+	it('toggles and reports the new value', async () => {
+		const onchange = vi.fn();
+		render(Switch, { props: { label: 'Lyrics', checked: false, onchange } });
+
+		const control = screen.getByRole('switch', { name: 'Lyrics' });
+		expect(control.getAttribute('aria-checked')).toBe('false');
+
+		await fireEvent.click(control);
+
+		expect(control.getAttribute('aria-checked')).toBe('true');
+		expect(onchange).toHaveBeenCalledWith(true);
+	});
+});
+
+describe('SegmentedControl', () => {
+	it('uses native radios and switches the checked item', async () => {
+		render(SegmentedControl, {
+			props: {
+				label: 'Density',
+				items: [
+					{ value: 'comfortable', label: 'Comfortable' },
+					{ value: 'compact', label: 'Compact' }
+				],
+				value: 'comfortable'
+			}
+		});
+
+		const radios = /** @type {HTMLInputElement[]} */ (screen.getAllByRole('radio'));
+		expect(radios).toHaveLength(2);
+		expect(radios[0].checked).toBe(true);
+
+		await fireEvent.click(screen.getByLabelText('Compact'));
+
+		expect(radios[1].checked).toBe(true);
+	});
+});
+
+describe('Input', () => {
+	it('links the hint through aria-describedby', () => {
+		render(Input, { props: { label: 'Email', hint: 'No spam.', value: '' } });
+
+		const input = screen.getByLabelText('Email');
+		const hint = screen.getByText('No spam.');
+
+		expect(input.getAttribute('aria-describedby')).toBe(hint.id);
+		expect(input.hasAttribute('aria-invalid')).toBe(false);
+	});
+
+	it('replaces the hint with the error and marks the field invalid', () => {
+		render(Input, { props: { label: 'Email', hint: 'No spam.', error: 'Required.' } });
+
+		const input = screen.getByLabelText('Email');
+		expect(input.getAttribute('aria-invalid')).toBe('true');
+		expect(screen.queryByText('No spam.')).toBeNull();
+		expect(input.getAttribute('aria-describedby')).toBe(screen.getByText('Required.').id);
+	});
+});
+
+describe('AccordionItem', () => {
+	it('renders a native details/summary pair', () => {
+		render(AccordionItem, { props: { title: 'Question', children: text('Answer') } });
+
+		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
+		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('theme', () => {
+	it('writes the theme to the document root', () => {
+		applyTheme('dark', false);
+		expect(document.documentElement.dataset.theme).toBe('dark');
+
+		applyTheme('light', false);
+		expect(document.documentElement.dataset.theme).toBe('light');
+	});
+});

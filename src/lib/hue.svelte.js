@@ -2,6 +2,10 @@
 // chroma scaled by --c. Changing hue is rare and meaningful.
 export const hue = $state({ h: 225, c: 0.1 });
 
+/**
+ * @param {number} h
+ * @param {number} [c]
+ */
 export function setHue(h, c = hue.c) {
 	hue.h = h;
 	hue.c = c;

@@ -8,22 +8,17 @@ Reference: the visual language is derived from <https://meiro.elianiva.com>
 (Astro + Tailwind 4 in the original). This is an independent Svelte 5 + pure CSS
 rebuild and is not affiliated with that project.
 
-## Run
+## Install
 
 ```sh
-pnpm install
-pnpm dev --open
-pnpm build
-pnpm preview
+pnpm add matersv
 ```
-
-## Using the library
-
-Inside this repo, import through the `#lib` alias:
 
 ```svelte
 <script>
-	import { Button, Input } from '#lib/index.js';
+	import { Button, Input } from 'matersv';
+	import 'matersv/matersv.css'; // once, e.g. in your root layout
+
 	let email = $state('');
 </script>
 
@@ -31,18 +26,11 @@ Inside this repo, import through the `#lib` alias:
 <Button href="/download" size="lg">Download</Button>
 ```
 
-Import the stylesheet once (the demo does it in `src/routes/+layout.svelte`):
+Inside this repo use the `#lib` alias instead:
 
 ```js
+import { Button } from '#lib/index.js';
 import '#lib/matersv.css';
-```
-
-`package.json` exposes the library entry and the stylesheet, so a workspace or
-published install can use:
-
-```svelte
-import { Button } from 'matersv';
-import 'matersv/matersv.css';
 ```
 
 ## Components
@@ -56,6 +44,9 @@ import 'matersv/matersv.css';
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Kbd` | snippet children |
+| `Accordion` | snippet children (a list of `AccordionItem`) |
+| `AccordionItem` | `title`, `bind:open`, snippet children |
+| `Dialog` | `bind:open`, `title`, snippet children |
 | `SectionHeader` | `title`, `lead`, `id` |
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |
 | `ThemeToggle` | — |
@@ -64,6 +55,33 @@ Also exported: `theme`, `applyTheme`, `initTheme`, `hue`, `setHue`.
 
 A `Button` with `href` renders an `<a>`; adding `disabled` renders a disabled
 `<button>` instead, so it cannot be clicked or tabbed to.
+
+`AccordionItem` is a native `<details>`; opening content is animated with
+`::details-content` where supported and toggles instantly elsewhere. `Dialog` is
+a native `<dialog>` opened with `showModal()`: top layer, backdrop, focus trap and
+Esc come from the platform.
+
+## Scripts
+
+| Script | Job |
+| --- | --- |
+| `pnpm dev` | demo app |
+| `pnpm build` | static demo build (`build/`) |
+| `pnpm package` | library build via `svelte-package` (`dist/`) |
+| `pnpm check` | `svelte-check` (0 errors expected) |
+| `pnpm test` | vitest + testing-library |
+| `pnpm publint` | package lint |
+
+## Publishing
+
+```sh
+pnpm package
+pnpm publint
+npm publish --access public
+```
+
+`dist/` contains compiled entries, `.d.ts` files and `matersv.css`. The package
+declares `svelte` as a peer dependency (`^5.0.0`) and ships only `dist/`.
 
 ## Theming
 
@@ -75,6 +93,8 @@ A `Button` with `href` renders an `<a>`; adding `disabled` renders a disabled
   insets and coloured bands, `night` once per page.
 - `--color-danger` is the one fixed hue, reserved for errors.
 - No `border: 1px`. Separation comes from surface changes and `--shadow-capsule`.
+- `CapsuleNav` sets `data-over-dark` on `<html>` while the capsules sit over a
+  `.section--night`, switching chrome to the night tokens.
 
 ## Motion
 
@@ -93,9 +113,12 @@ src/
 		theme.svelte.js             # theme store, persists to localStorage
 		hue.svelte.js               # --h / --c single-hue engine
 		components/
+			Accordion.svelte
+			AccordionItem.svelte
 			Badge.svelte
 			Button.svelte
-			CapsuleNav.svelte        # sticky capsules + scroll spy
+			CapsuleNav.svelte        # sticky capsules, scroll spy, night detection
+			Dialog.svelte
 			IconButton.svelte
 			Input.svelte
 			Kbd.svelte
@@ -117,3 +140,7 @@ the reference, self-host licensed woff2 files in `static/fonts/` and add
 `@font-face` rules in `src/lib/matersv.css` (a commented template is there).
 
 Demo copy is placeholder. Replace the brand name before shipping.
+
+## License
+
+MIT

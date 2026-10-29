@@ -1,8 +1,11 @@
 <script>
 	import CapsuleNav from '#lib/components/CapsuleNav.svelte';
 	import SectionHeader from '#lib/components/SectionHeader.svelte';
+	import Accordion from '#lib/components/Accordion.svelte';
+	import AccordionItem from '#lib/components/AccordionItem.svelte';
 	import Badge from '#lib/components/Badge.svelte';
 	import Button from '#lib/components/Button.svelte';
+	import Dialog from '#lib/components/Dialog.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
@@ -31,6 +34,7 @@
 
 	let preset = $state('225');
 	let email = $state('');
+	let dialogOpen = $state(false);
 	let playing = $state(false);
 	let lyrics = $state(true);
 	let audioOnly = $state(false);
@@ -155,6 +159,36 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Accordion</h3>
+					<p>Native <code>details</code> with no ARIA re-implementation; content animates via <code>::details-content</code>.</p>
+					<div class="row">
+						<Accordion>
+							<AccordionItem title="Is there a runtime dependency?">
+								No. Svelte 5 and CSS only, the platform does the work.
+							</AccordionItem>
+							<AccordionItem title="Does it respect reduced motion?">
+								Yes. The open and close transition is disabled with the rest of the motion.
+							</AccordionItem>
+						</Accordion>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Dialog</h3>
+					<p>Native modal. Top layer, backdrop, focus trap and Esc come from the platform.</p>
+					<div class="row">
+						<Button onclick={() => (dialogOpen = true)}>Open dialog</Button>
+					</div>
+					<Dialog bind:open={dialogOpen} title="Delete workspace?">
+						<p>Everything in <strong>Northwind</strong> will be removed. This cannot be undone.</p>
+						<div class="dialog-actions">
+							<Button variant="text" onclick={() => (dialogOpen = false)}>Cancel</Button>
+							<Button onclick={() => (dialogOpen = false)}>Delete</Button>
+						</div>
+					</Dialog>
+				</article>
+
+				<article class="card reveal">
 					<h3>Switch</h3>
 					<p>The knob is a check icon. The “slide” is a padding swap, so no absolute maths.</p>
 					<div class="row">
@@ -252,6 +286,14 @@
 
 	code {
 		font-size: 0.9em;
+	}
+
+	.dialog-actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 16px;
+		margin-top: 28px;
 	}
 
 	.night h2 {

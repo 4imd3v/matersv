@@ -1,5 +1,5 @@
 <script>
-	let { tone = 'field', class: className = '', children, ...rest } = $props();
+	let { tone = /** @type {'field' | 'accent'} */ ('field'), class: className = '', children, ...rest } = $props();
 </script>
 
 <span class="badge badge--{tone} {className}" {...rest}>{@render children()}</span>

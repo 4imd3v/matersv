@@ -1,5 +1,12 @@
 <script>
-	let { label, pressed, type = 'button', class: className = '', children, ...rest } = $props();
+	let {
+		label,
+		pressed = undefined,
+		type = /** @type {'button' | 'submit' | 'reset'} */ ('button'),
+		class: className = '',
+		children,
+		...rest
+	} = $props();
 </script>
 
 <button {type} class="icon-btn {className}" aria-label={label} aria-pressed={pressed} {...rest}>

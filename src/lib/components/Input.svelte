@@ -2,8 +2,8 @@
 	const uid = $props.id();
 	let {
 		label,
-		hint,
-		error,
+		hint = undefined,
+		error = undefined,
 		value = $bindable(''),
 		type = 'text',
 		id = uid,

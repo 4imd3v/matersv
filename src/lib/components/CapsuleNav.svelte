@@ -1,7 +1,7 @@
 <script>
 	import ThemeToggle from './ThemeToggle.svelte';
 
-	let { brand = 'Mater', items = [], children } = $props();
+	let { brand = 'Mater', items = [], children = undefined } = $props();
 
 	let active = $state('');
 
@@ -23,6 +23,34 @@
 		}
 
 		return () => observer.disconnect();
+	});
+
+	// Over the always-dark band the capsules darken (--color-capsule) and the
+	// chrome switches to night tokens. Observes the top ~12% where the row sits.
+	$effect(() => {
+		const root = document.documentElement;
+		const sections = [...document.querySelectorAll('.section--night')];
+		if (!sections.length) return;
+
+		const visible = new Set();
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) visible.add(entry.target);
+					else visible.delete(entry.target);
+				}
+				if (visible.size) root.dataset.overDark = 'true';
+				else delete root.dataset.overDark;
+			},
+			{ rootMargin: '0px 0px -88% 0px' }
+		);
+
+		for (const section of sections) observer.observe(section);
+
+		return () => {
+			observer.disconnect();
+			delete root.dataset.overDark;
+		};
 	});
 </script>
 
@@ -126,6 +154,34 @@
 		height: 42px;
 	}
 
+	/* Floating chrome over the night band */
+	:global(:root[data-over-dark='true']) .logo,
+	:global(:root[data-over-dark='true']) .tools {
+		color: var(--color-night-ink);
+	}
+
+	:global(:root[data-over-dark='true']) .nav a {
+		color: var(--color-night-muted);
+	}
+
+	:global(:root[data-over-dark='true']) .nav a:hover {
+		color: var(--color-night-ink);
+	}
+
+	:global(:root[data-over-dark='true']) .nav a[aria-current='true'] {
+		background: var(--color-night-field);
+		color: var(--color-night-ink);
+	}
+
+	:global(:root[data-over-dark='true']) .tools :global(.icon-btn):hover {
+		background: var(--color-night-field);
+	}
+
+	:global(:root[data-over-dark='true']) .tools :global(.btn) {
+		background: var(--color-night-accent);
+		color: var(--color-night);
+	}
+
 	@media (max-width: 1024px) {
 		.nav a {
 			padding-inline: 12px;
@@ -134,7 +190,21 @@
 
 	@media (max-width: 640px) {
 		.nav {
+			padding: 4px;
+			gap: 0;
+			overflow-x: auto;
+			scrollbar-width: none;
+		}
+
+		.nav::-webkit-scrollbar {
 			display: none;
+		}
+
+		.nav a {
+			height: 38px;
+			padding-inline: 12px;
+			font-size: 14px;
+			white-space: nowrap;
 		}
 
 		.tools :global(.btn) {

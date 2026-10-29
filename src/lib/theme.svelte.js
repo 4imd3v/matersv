@@ -1,9 +1,14 @@
 // Shared theme state. The initial value is set pre-paint in app.html.
+/** @type {{ current: 'light' | 'dark' }} */
 export const theme = $state({ current: 'light' });
 
 const KEY = 'matersv-theme';
 const META = { light: '#f5fbfe', dark: '#0b1214' };
 
+/**
+ * @param {'light' | 'dark'} next
+ * @param {boolean} [persist]
+ */
 export function applyTheme(next, persist = true) {
 	theme.current = next;
 	document.documentElement.dataset.theme = next;
@@ -14,12 +19,14 @@ export function applyTheme(next, persist = true) {
 		} catch {}
 	}
 
-	const meta = document.querySelector('meta[name="theme-color"]');
+	const meta = /** @type {HTMLMetaElement | null} */ (
+		document.querySelector('meta[name="theme-color"]')
+	);
 	if (meta) meta.content = META[next];
 }
 
 export function initTheme() {
-	theme.current = document.documentElement.dataset.theme ?? 'light';
+	theme.current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 
 	// Only follow the OS when the user has not chosen a theme manually.
 	matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {

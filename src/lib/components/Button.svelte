@@ -1,9 +1,9 @@
 <script>
 	let {
-		href,
-		variant = 'primary',
-		size = 'md',
-		type = 'button',
+		href = undefined,
+		variant = /** @type {'primary' | 'text'} */ ('primary'),
+		size = /** @type {'md' | 'lg'} */ ('md'),
+		type = /** @type {'button' | 'submit' | 'reset'} */ ('button'),
 		disabled = false,
 		class: className = '',
 		children,

@@ -1,5 +1,5 @@
 <script>
-	let { checked = $bindable(false), label, onchange, class: className = '', ...rest } = $props();
+	let { checked = $bindable(false), label, onchange = undefined, class: className = '', ...rest } = $props();
 
 	function toggle() {
 		checked = !checked;

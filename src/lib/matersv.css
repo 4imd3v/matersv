@@ -6,6 +6,7 @@
 @layer tokens {
 	:root {
 		color-scheme: light;
+		interpolate-size: allow-keywords;
 
 		/* hue/chroma engine: change these two numbers and the page reskins */
 		--h: 225;

@@ -1,5 +1,5 @@
 <script>
-	let { title, lead, id } = $props();
+	let { title, lead = undefined, id = undefined } = $props();
 </script>
 
 <header class="section-head reveal">
