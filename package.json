@@ -44,6 +44,7 @@
 		"package": "svelte-package -i src/lib -o dist",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"test": "vitest run",
+		"test:e2e": "playwright test",
 		"publint": "publint",
 		"release:patch": "pnpm version patch -m \"chore(release): %s\"",
 		"release:minor": "pnpm version minor -m \"chore(release): %s\"",
@@ -56,6 +57,8 @@
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.14.0",
+		"@playwright/test": "^1.64.1",
 		"@sveltejs/adapter-static": "^4.0.0",
 		"@sveltejs/kit": "^3.0.0",
 		"@sveltejs/package": "^3.0.1",

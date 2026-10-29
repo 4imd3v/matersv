@@ -8,7 +8,7 @@
 
 <header class="head">
 	<div class="wrap row">
-		<a class="capsule brand" href="/" aria-label="MaterSV home">Mater</a>
+		<a class="capsule brand" href="/">Mater<span class="sr-only"> home</span></a>
 
 		<nav class="capsule links" aria-label="Documentation">
 			<a href="/" aria-current={here === '/' ? 'true' : undefined}>Home</a>

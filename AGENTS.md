@@ -66,6 +66,8 @@ src/routes/+page.svelte  # demo gallery
 src/routes/components/   # /components index and /components/[slug] docs pages
 src/docs/                # docs registry, live examples, code + props blocks
 tests/components.test.js # vitest, kept outside src/lib so it is not packaged
+e2e/                     # Playwright + axe; docs, dialog, accordion, theme
+playwright.config.js
 src/app.html             # pre-paint theme script
 .github/workflows/ci.yml # check, test, package, publint, build
 ```
@@ -133,13 +135,16 @@ Component API conventions:
 ```sh
 pnpm check
 pnpm test
+pnpm test:e2e   # needs: pnpm exec playwright install
 pnpm package
 pnpm publint
 pnpm build
 ```
 
-All must pass. `pnpm check` must report 0 errors and 0 warnings. Then check the
-demo in a browser:
+All must pass. `pnpm check` must report 0 errors and 0 warnings. `test:e2e`
+runs Chromium, Firefox and WebKit plus an axe WCAG 2.1 A/AA pass. WebKit needs
+the host libraries from `playwright install --with-deps`; without them run
+`--project=chromium --project=firefox`. Then check the demo in a browser:
 
 - light and dark theme, 1440px and ~500px wide
 - keyboard focus, Esc on Dialog, Accordion open/close
@@ -181,8 +186,13 @@ demo in a browser:
   fresh `#hash` load highlights the right item. The initial hash scroll is
   smooth; screenshots taken immediately show mid-scroll and faded reveals.
 - `pnpm build` (static demo) and `pnpm package` (library) are different. Run both.
-- Current browser verification is Chrome. Firefox and Safari were not tested;
-  scroll-driven reveals and details/dialog animations degrade gracefully there.
+- Playwright covers Chromium and Firefox locally and WebKit in CI. Axe checks
+  `/`, `/components`, `/components/button`, `/components/dialog`, the open
+  dialog and the dark home page.
+- The open-dialog axe scan waits for the entrance animation to finish; otherwise
+  a mid-transition opacity shows up as a false color-contrast failure.
+- Scroll-driven reveals and details/dialog animations degrade gracefully where
+  unsupported; content is never hidden.
 
 ## Memory
 

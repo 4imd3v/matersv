@@ -80,8 +80,22 @@ Esc come from the platform.
 | `pnpm package` | library build via `svelte-package` (`dist/`) |
 | `pnpm check` | `svelte-check` (0 errors expected) |
 | `pnpm test` | vitest + testing-library |
+| `pnpm test:e2e` | Playwright + axe (Chromium, Firefox, WebKit) |
 | `pnpm publint` | package lint |
 | `pnpm release:patch\|minor\|major` | verify, bump, commit and tag |
+
+## Testing
+
+```sh
+pnpm test                         # unit tests
+pnpm exec playwright install      # once locally
+pnpm test:e2e                     # builds, previews and runs the browser suite
+```
+
+The e2e suite runs Chromium, Firefox and WebKit, checks WCAG 2.1 A/AA with axe
+on the docs pages, and covers the dialog, accordion, theme toggle and docs nav.
+CI installs the browsers with `playwright install --with-deps`; on Linux,
+WebKit also needs those host libraries locally (`playwright install-deps`).
 
 ## Releasing
 
@@ -155,6 +169,8 @@ src/
 		+layout.svelte
 		+page.svelte                # component gallery + hue demo
 tests/                           # vitest; docs.test.js keeps the registry in sync
+e2e/                             # Playwright: a11y + interaction
+playwright.config.js
 ```
 
 ## Fonts

@@ -57,7 +57,7 @@
 
 <header class="site-head">
 	<div class="wrap site-head__row">
-		<a class="capsule logo" href="#top" aria-label="Back to top">{brand}</a>
+		<a class="capsule logo" href="#top">{brand}<span class="sr-only"> home</span></a>
 
 		<nav class="capsule nav" aria-label="Sections">
 			{#each items as item (item.href)}
