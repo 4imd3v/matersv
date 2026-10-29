@@ -42,6 +42,20 @@ export const components = [
 </AccordionItem>`
 	},
 	{
+		slug: 'annotation',
+		name: 'Annotation',
+		lead: 'One handwritten line, rotated off the grid. Decorative, so the arrow is hidden from assistive tech.',
+		props: [
+			{ name: 'arrow', type: 'boolean', default: 'false', description: 'Draws the hand-drawn arrow pointing back at the content.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The note. One line reads best.' }
+		],
+		code: `<script>
+	import { Annotation } from 'matersv';
+</script>
+
+<Annotation arrow>no build step</Annotation>`
+	},
+	{
 		slug: 'badge',
 		name: 'Badge',
 		lead: 'Small state or version label. No borders, no uppercase.',
@@ -97,6 +111,23 @@ export const components = [
 		{ href: '/components', label: 'Docs' }
 	]}
 />`
+	},
+	{
+		slug: 'card',
+		name: 'Card',
+		lead: 'A flat colour surface with an optional h3 and lead. Padding, radius and copy width come from the layout tokens.',
+		props: [
+			{ name: 'title', type: 'string', default: '—', description: 'Optional h3 heading.' },
+			{ name: 'lead', type: 'string', default: '—', description: 'Optional lead paragraph.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Card body.' }
+		],
+		code: `<script>
+	import { Card } from 'matersv';
+</script>
+
+<Card title="One surface, no shadow" lead="Separation comes from colour, never a 1px border.">
+	<p>Cards stay flat; only floating chrome lifts.</p>
+</Card>`
 	},
 	{
 		slug: 'dialog',
@@ -260,6 +291,22 @@ export const components = [
 		{ value: 'team', label: 'Team' }
 	]}
 />`
+	},
+	{
+		slug: 'stat',
+		name: 'Stat',
+		lead: 'Big tabular figure with a caption. Renders the final value on the server and counts up when it scrolls into view.',
+		props: [
+			{ name: 'value', type: 'number', default: '—', description: 'The number to display.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Caption under the figure.' },
+			{ name: 'suffix', type: 'string', default: "''", description: 'Unit or symbol appended to the figure.' },
+			{ name: 'duration', type: 'number', default: '1000', description: 'Count-up length in ms; skipped with reduced motion.' }
+		],
+		code: `<script>
+	import { Stat } from 'matersv';
+</script>
+
+<Stat value={98} suffix="%" label="Lighthouse, all four categories" />`
 	},
 	{
 		slug: 'switch',

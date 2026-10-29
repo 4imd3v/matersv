@@ -5,9 +5,12 @@ import { describe, expect, it, vi } from 'vitest';
 import AccordionItem from '../src/lib/components/AccordionItem.svelte';
 import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
+import Annotation from '../src/lib/components/Annotation.svelte';
+import Card from '../src/lib/components/Card.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
+import Stat from '../src/lib/components/Stat.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
@@ -91,6 +94,36 @@ describe('Input', () => {
 		expect(input.getAttribute('aria-invalid')).toBe('true');
 		expect(screen.queryByText('No spam.')).toBeNull();
 		expect(input.getAttribute('aria-describedby')).toBe(screen.getByText('Required.').id);
+	});
+});
+
+describe('Card', () => {
+	it('renders the title, lead and body', () => {
+		render(Card, {
+			props: { title: 'Surface', lead: 'Flat colour.', children: text('Body copy') }
+		});
+
+		expect(screen.getByRole('heading', { level: 3, name: 'Surface' })).toBeTruthy();
+		expect(screen.getByText('Flat colour.')).toBeTruthy();
+		expect(screen.getByText('Body copy')).toBeTruthy();
+	});
+});
+
+describe('Annotation', () => {
+	it('keeps the arrow out of the accessibility tree', () => {
+		const { container } = render(Annotation, { props: { arrow: true, children: text('note') } });
+
+		expect(screen.getByText('note')).toBeTruthy();
+		expect(container.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true');
+	});
+});
+
+describe('Stat', () => {
+	it('shows the final figure with its suffix and label', () => {
+		render(Stat, { props: { value: 98, suffix: '%', label: 'Lighthouse' } });
+
+		expect(screen.getByText('98%')).toBeTruthy();
+		expect(screen.getByText('Lighthouse')).toBeTruthy();
 	});
 });
 

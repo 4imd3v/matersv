@@ -55,12 +55,15 @@ import '#lib/matersv.css';
 | `Switch` | `bind:checked`, `label`, `onchange` |
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
+| `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Kbd` | snippet children |
 | `Progress` | `label`, `value`, `max`, `id` |
 | `Accordion` | snippet children (a list of `AccordionItem`) |
 | `AccordionItem` | `title`, `bind:open`, snippet children |
 | `Dialog` | `bind:open`, `title`, snippet children |
+| `Card` | `title`, `lead`, snippet children |
 | `SectionHeader` | `title`, `lead`, `id` |
+| `Annotation` | `arrow`, snippet children |
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |
 | `ThemeToggle` | — |
 

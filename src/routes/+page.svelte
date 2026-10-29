@@ -3,7 +3,10 @@
 	import SectionHeader from '#lib/components/SectionHeader.svelte';
 	import Accordion from '#lib/components/Accordion.svelte';
 	import AccordionItem from '#lib/components/AccordionItem.svelte';
+	import Annotation from '#lib/components/Annotation.svelte';
 	import Badge from '#lib/components/Badge.svelte';
+	import Card from '#lib/components/Card.svelte';
+	import Stat from '#lib/components/Stat.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
@@ -185,6 +188,24 @@
 					</div>
 				</article>
 
+				<Card
+					class="reveal"
+					title="Card"
+					lead="The surface primitive: flat colour, 28px radius, copy capped at 34ch."
+				>
+					<div class="row">
+						<Badge>bg-soft</Badge>
+						<Badge>28px</Badge>
+						<Badge>no shadow</Badge>
+					</div>
+				</Card>
+
+				<article class="card reveal annotation-demo">
+					<h3>Annotation</h3>
+					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
+					<Annotation arrow>one line, never two</Annotation>
+				</article>
+
 				<article class="card reveal">
 					<h3>Badge</h3>
 					<p>Small state and version labels. No borders, no uppercase.</p>
@@ -253,6 +274,11 @@
 				Night stays dark in both themes and keeps the page hue. Use it once per page, for the
 				section that should interrupt.
 			</p>
+			<div class="stats">
+				<Stat value={98} suffix="%" label="Lighthouse, all four categories" />
+				<Stat value={0} label="Runtime dependencies" />
+				<Stat value={4} label="Surfaces, no borders" />
+			</div>
 			<ul class="strike">
 				{#each ['Chromium inside', 'Ads', 'Telemetry'] as item}
 					<li class="reveal"><span>{item}</span></li>
@@ -344,6 +370,18 @@
 	.night .lead {
 		margin-top: 28px;
 		opacity: 0.8;
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: clamp(24px, 3vw, 48px);
+		max-width: 720px;
+		margin-top: clamp(40px, 5vw, 64px);
+	}
+
+	.annotation-demo {
+		padding-left: clamp(80px, 9vw, 120px);
 	}
 
 	.strike {

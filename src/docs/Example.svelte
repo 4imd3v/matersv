@@ -2,8 +2,10 @@
 	import {
 		Accordion,
 		AccordionItem,
+		Annotation,
 		Badge,
 		Button,
+		Card,
 		Dialog,
 		IconButton,
 		Input,
@@ -12,6 +14,7 @@
 		SectionHeader,
 		SegmentedControl,
 		Select,
+		Stat,
 		Switch,
 		Textarea,
 		ThemeToggle
@@ -91,6 +94,21 @@
 	<div class="col">
 		<Progress label="Storage" value={64} />
 	</div>
+{:else if slug === 'card'}
+	<div class="col">
+		<Card title="One surface, no shadow" lead="Separation comes from colour, never a 1px border.">
+			<p>Cards stay flat; only floating chrome lifts.</p>
+		</Card>
+	</div>
+{:else if slug === 'annotation'}
+	<div class="note">
+		<Annotation arrow>no runtime deps</Annotation>
+	</div>
+{:else if slug === 'stat'}
+	<div class="stats">
+		<Stat value={98} suffix="%" label="Lighthouse, all four categories" />
+		<Stat value={0} label="Runtime dependencies" />
+	</div>
 {:else if slug === 'badge'}
 	<div class="row">
 		<Badge>New</Badge>
@@ -169,6 +187,18 @@
 		gap: 16px;
 		width: 100%;
 		max-width: 420px;
+	}
+
+	.note {
+		padding: 24px 0 24px 80px;
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 24px;
+		width: 100%;
+		max-width: 480px;
 	}
 
 	.actions {
