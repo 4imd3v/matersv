@@ -21,7 +21,10 @@ for (const path of [
 	'/components',
 	'/components/button',
 	'/components/dialog',
+	'/components/codeblock',
 	'/components/menu',
+	'/components/prose',
+	'/components/radiogroup',
 	'/components/searchfield',
 	'/components/toast'
 ]) {

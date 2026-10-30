@@ -11,6 +11,7 @@
 	import Checkbox from '#lib/components/Checkbox.svelte';
 	import Notice from '#lib/components/Notice.svelte';
 	import Pagination from '#lib/components/Pagination.svelte';
+	import CodeBlock from '#lib/components/CodeBlock.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
 	import EmptyState from '#lib/components/EmptyState.svelte';
@@ -30,7 +31,9 @@
 	import ListRow from '#lib/components/ListRow.svelte';
 	import Menu from '#lib/components/Menu.svelte';
 	import Progress from '#lib/components/Progress.svelte';
+	import Prose from '#lib/components/Prose.svelte';
 	import Quote from '#lib/components/Quote.svelte';
+	import RadioGroup from '#lib/components/RadioGroup.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
@@ -506,6 +509,40 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Radio group</h3>
+					<p>A real fieldset and legend, so the group is announced once. Arrows come from the platform.</p>
+					<div class="radio-demo">
+						<RadioGroup label="Plan" items={plans} bind:value={plan} />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Prose</h3>
+					<p>Article typography in one wrapper: headings, lists, quotes and rules from tokens.</p>
+					<div class="prose-demo">
+						<Prose>
+							<h3>One hue, four surfaces</h3>
+							<p>
+								Every colour derives from <code>--h</code> and <code>--c</code>.
+								<strong>Nothing is outlined.</strong>
+							</p>
+							<ul>
+								<li>No runtime dependencies</li>
+								<li>No uppercase labels</li>
+							</ul>
+						</Prose>
+					</div>
+				</article>
+
+				<article class="card reveal wide">
+					<h3>CodeBlock</h3>
+					<p>A monospace panel with a copy button. The result is announced, not just coloured.</p>
+					<div class="code-demo">
+						<CodeBlock label="theme.svelte.js" code={'export const theme = $state("light");'} />
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>Menu</h3>
 					<p>A native popover in the top layer. Esc, light dismiss and the arrows all work.</p>
 					<div class="row">
@@ -808,6 +845,24 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.radio-demo,
+	.prose-demo {
+		margin-top: 24px;
+	}
+
+	.radio-demo {
+		max-width: 320px;
+	}
+
+	.prose-demo {
+		max-width: 440px;
+	}
+
+	.code-demo {
+		max-width: 520px;
+		margin-top: 24px;
 	}
 
 	.search-demo {

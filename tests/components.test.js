@@ -10,6 +10,7 @@ import Avatar from '../src/lib/components/Avatar.svelte';
 import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
+import CodeBlock from '../src/lib/components/CodeBlock.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
 import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
@@ -19,7 +20,9 @@ import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
+import Prose from '../src/lib/components/Prose.svelte';
 import Quote from '../src/lib/components/Quote.svelte';
+import RadioGroup from '../src/lib/components/RadioGroup.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
@@ -462,6 +465,70 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('RadioGroup', () => {
+	it('is a named group of native radios', async () => {
+		render(RadioGroup, {
+			props: {
+				label: 'Plan',
+				value: 'solo',
+				items: [
+					{ value: 'solo', label: 'Solo' },
+					{ value: 'team', label: 'Team', hint: 'Five seats.' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('group', { name: 'Plan' })).toBeTruthy();
+
+		const solo = /** @type {HTMLInputElement} */ (screen.getByRole('radio', { name: 'Solo' }));
+		const team = /** @type {HTMLInputElement} */ (screen.getByRole('radio', { name: 'Team' }));
+		expect(solo.checked).toBe(true);
+		expect(team.getAttribute('aria-describedby')).toBeTruthy();
+
+		await fireEvent.click(team);
+		expect(team.checked).toBe(true);
+		expect(solo.checked).toBe(false);
+	});
+});
+
+describe('Prose', () => {
+	it('renders article markup inside one wrapper', () => {
+		render(Prose, {
+			props: {
+				class: 'article',
+				children: createRawSnippet(() => ({
+					render: () => '<h2>Title</h2><p>Body</p>'
+				}))
+			}
+		});
+
+		const heading = screen.getByRole('heading', { name: 'Title' });
+		expect(heading.closest('.prose')).not.toBeNull();
+		expect(heading.closest('.prose')?.classList.contains('article')).toBe(true);
+	});
+});
+
+describe('CodeBlock', () => {
+	it('copies the code and announces it', async () => {
+		const writeText = vi.fn(() => Promise.resolve());
+		Object.defineProperty(navigator, 'clipboard', {
+			value: { writeText },
+			configurable: true
+		});
+
+		render(CodeBlock, { props: { code: 'const a = 1;', label: 'a.js' } });
+
+		expect(screen.getByText('a.js')).toBeTruthy();
+		expect(screen.getByText('const a = 1;')).toBeTruthy();
+
+		await fireEvent.click(screen.getByRole('button', { name: 'Copy code' }));
+
+		expect(writeText).toHaveBeenCalledWith('const a = 1;');
+		expect(await screen.findByText('Copied')).toBeTruthy();
+		expect(screen.getByRole('status').textContent).toBe('Copied to clipboard');
 	});
 });
 

@@ -184,6 +184,20 @@ export const components = [
 <Checkbox bind:checked={terms} label="Email me the changelog" hint="Once a release." />`
 	},
 	{
+		slug: 'codeblock',
+		name: 'CodeBlock',
+		lead: 'A monospace panel on the field surface with a copy button and a polite announcement of the result.',
+		props: [
+			{ name: 'code', type: 'string', default: '—', description: 'The text to show and copy.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Caption above the block, usually a filename.' }
+		],
+		code: `<script>
+	import { CodeBlock } from 'matersv';
+</script>
+
+<CodeBlock label="app.html" code={'<meta name="theme-color" content="#f5fbfe" />'} />`
+	},
+	{
 		slug: 'cover',
 		name: 'Cover',
 		lead: 'Square art mounted with the ring shadow: a bg gap and a field hairline, never a pasted image.',
@@ -429,6 +443,26 @@ export const components = [
 <Progress label="Upload" value={64} />`
 	},
 	{
+		slug: 'prose',
+		name: 'Prose',
+		lead: 'Article typography in one wrapper: headings, paragraphs, lists, links, inline code, quotes and rules, all from tokens.',
+		props: [
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Unstyled article markup.' }
+		],
+		code: `<script>
+	import { Prose } from 'matersv';
+</script>
+
+<Prose>
+	<h2>One hue, four surfaces</h2>
+	<p>Every colour derives from <code>--h</code> and <code>--c</code>.</p>
+	<ul>
+		<li>No runtime dependencies</li>
+		<li>No borders</li>
+	</ul>
+</Prose>`
+	},
+	{
 		slug: 'quote',
 		name: 'Quote',
 		lead: 'A pull quote at heading scale, with the attribution set in the handwritten face.',
@@ -441,6 +475,32 @@ export const components = [
 </script>
 
 <Quote cite="Dieter Rams">Less, but better.</Quote>`
+	},
+	{
+		slug: 'radiogroup',
+		name: 'RadioGroup',
+		lead: 'Native radios in a real fieldset, so the group is announced once and the arrow keys work without JavaScript.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Legend text.' },
+			{ name: 'items', type: 'RadioItem[]', default: '—', description: 'Each item is { value, label, hint? }.' },
+			{ name: 'value', type: 'string', default: '—', description: 'Chosen value. Supports bind:value.' },
+			{ name: 'name', type: 'string', default: 'generated', description: 'Radio group name.' }
+		],
+		code: `<script>
+	import { RadioGroup } from 'matersv';
+
+	let plan = $state('team');
+</script>
+
+<RadioGroup
+	label="Plan"
+	bind:value={plan}
+	items={[
+		{ value: 'solo', label: 'Solo', hint: 'One seat.' },
+		{ value: 'team', label: 'Team', hint: 'Five seats.' },
+		{ value: 'studio', label: 'Studio' }
+	]}
+/>`
 	},
 	{
 		slug: 'searchfield',

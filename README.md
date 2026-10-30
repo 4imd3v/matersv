@@ -53,6 +53,7 @@ import '#lib/matersv.css';
 | `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
 | `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
 | `Fieldset` | `legend`, `hint`, snippet children |
+| `RadioGroup` | `label`, `items: { value, label, hint? }[]`, `bind:value`, `name` |
 | `Spinner` | `size`, `label` |
 | `Skeleton` | `width`, `height`, `shape="pill\|card\|circle"` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
@@ -71,6 +72,7 @@ import '#lib/matersv.css';
 | `Tooltip` | `text`, snippet children (the trigger) |
 | `Quote` | `cite`, snippet children |
 | `EmptyState` | `title`, `lead`, `icon` / children snippets |
+| `Prose` | snippet children (article markup) |
 | `Avatar` | `name`, `src`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Strike` | `items: string[]` |
@@ -81,6 +83,7 @@ import '#lib/matersv.css';
 | `AccordionItem` | `title`, `bind:open`, snippet children |
 | `Dialog` | `bind:open`, `title`, snippet children |
 | `Card` | `title`, `lead`, snippet children |
+| `CodeBlock` | `code`, `label` |
 | `Cover` | `src`, `alt`, `width`, `height`, or snippet children |
 | `Dots` | `count`, `value` (decorative, pair with a number) |
 | `SectionHeader` | `title`, `lead`, `id` |

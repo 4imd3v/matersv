@@ -9,6 +9,7 @@
 		Button,
 		Card,
 		Checkbox,
+		CodeBlock,
 		Cover,
 		Dialog,
 		Dots,
@@ -22,7 +23,9 @@
 		Notice,
 		Pagination,
 		Progress,
+		Prose,
 		Quote,
+		RadioGroup,
 		SearchField,
 		SectionHeader,
 		SegmentedControl,
@@ -348,6 +351,31 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'codeblock'}
+	<div class="wide-col">
+		<CodeBlock label="app.html" code={'<meta name="theme-color" content="#f5fbfe" />'} />
+	</div>
+{:else if slug === 'prose'}
+	<div class="wide-col">
+		<Prose>
+			<h2>One hue, four surfaces</h2>
+			<p>
+				Every colour derives from <code>--h</code> and <code>--c</code>, so a single pair of
+				numbers reskins the page. <strong>Nothing is outlined.</strong>
+			</p>
+			<ul>
+				<li>No runtime dependencies</li>
+				<li>No borders, no uppercase labels</li>
+			</ul>
+			<blockquote>Separation comes from surface changes.</blockquote>
+			<hr />
+			<p>Motion is punctuation, never decoration.</p>
+		</Prose>
+	</div>
+{:else if slug === 'radiogroup'}
+	<div class="col">
+		<RadioGroup label="Plan" items={plans} bind:value={plan} />
 	</div>
 {:else if slug === 'menu'}
 	<div class="row">
