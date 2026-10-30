@@ -31,6 +31,49 @@ test('theme toggle persists across reloads', async ({ page }) => {
 	await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
+test('tabs move and select with the arrow keys', async ({ page }) => {
+	await page.goto('/components/tabs');
+
+	const tablist = page.getByRole('tablist', { name: 'Details' });
+	const tabs = tablist.getByRole('tab');
+	await tabs.nth(0).focus();
+
+	await expect(tabs.nth(0)).toHaveAttribute('aria-selected', 'true');
+
+	await page.keyboard.press('ArrowRight');
+	await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
+	await expect(tabs.nth(1)).toBeFocused();
+	await expect(page.getByRole('tabpanel')).toContainText('No runtime dependencies');
+
+	await page.keyboard.press('Home');
+	await expect(tabs.nth(0)).toHaveAttribute('aria-selected', 'true');
+});
+
+test('slider steps with the arrow keys', async ({ page }) => {
+	await page.goto('/components/slider');
+
+	const slider = page.getByRole('slider', { name: 'Volume' });
+	await expect(slider).toHaveValue('64');
+
+	await slider.focus();
+	await page.keyboard.press('ArrowRight');
+	await expect(slider).toHaveValue('65');
+
+	await page.keyboard.press('ArrowLeft');
+	await expect(slider).toHaveValue('64');
+});
+
+test('checkbox toggles from the keyboard', async ({ page }) => {
+	await page.goto('/components/checkbox');
+
+	const box = page.getByRole('checkbox', { name: 'Share anonymous usage' });
+	await box.focus();
+	await expect(box).not.toBeChecked();
+
+	await page.keyboard.press('Space');
+	await expect(box).toBeChecked();
+});
+
 test('home nav links to the docs index', async ({ page }) => {
 	await page.goto('/');
 

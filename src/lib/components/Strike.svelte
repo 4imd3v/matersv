@@ -30,8 +30,9 @@
 	.strike span {
 		position: relative;
 		display: inline-block;
-		/* Final state, so reduced motion and no-support both show the point. */
-		opacity: 0.4;
+		/* Final state, so reduced motion and no-support both show the point.
+		   0.55 is the lightest value that keeps large text above 3:1 on bg-soft. */
+		opacity: 0.55;
 	}
 
 	.strike span::after {
