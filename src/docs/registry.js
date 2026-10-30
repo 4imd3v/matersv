@@ -72,6 +72,31 @@ export const components = [
 <Avatar name="Ada Lovelace" src="/people/ada.webp" size={64} />`
 	},
 	{
+		slug: 'avatargroup',
+		name: 'AvatarGroup',
+		lead: 'A stacked row of avatars with a +N tail. The names are read once as a list instead of one per circle.',
+		props: [
+			{ name: 'people', type: '{ name, src? }[]', default: '—', description: 'Everyone in the group.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Group name.' },
+			{ name: 'max', type: 'number', default: '4', description: 'How many circles to show before the tail.' },
+			{ name: 'size', type: 'number', default: '40', description: 'Circle size in px.' }
+		],
+		code: `<script>
+	import { AvatarGroup } from 'matersv';
+</script>
+
+<AvatarGroup
+	label="Reviewers"
+	people={[
+		{ name: 'Ada Lovelace' },
+		{ name: 'Grace Hopper' },
+		{ name: 'Alan Turing' },
+		{ name: 'Katherine Johnson' },
+		{ name: 'Edsger Dijkstra' }
+	]}
+/>`
+	},
+	{
 		slug: 'badge',
 		name: 'Badge',
 		lead: 'Small state or version label. No borders, no uppercase.',
@@ -405,6 +430,26 @@ export const components = [
 <Notice title="Upload failed" tone="danger">The file was larger than 10 MB.</Notice>`
 	},
 	{
+		slug: 'numberinput',
+		name: 'NumberInput',
+		lead: 'A number field with circular minus and plus buttons. Both clamp to min and max and disable themselves at the ends.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible label, also the name of both buttons.' },
+			{ name: 'value', type: 'number', default: '0', description: 'Current value. Supports bind:value.' },
+			{ name: 'min', type: 'number', default: '—', description: 'Lower bound.' },
+			{ name: 'max', type: 'number', default: '—', description: 'Upper bound.' },
+			{ name: 'step', type: 'number', default: '1', description: 'Amount per click.' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input and both buttons.' }
+		],
+		code: `<script>
+	import { NumberInput } from 'matersv';
+
+	let seats = $state(3);
+</script>
+
+<NumberInput label="Seats" bind:value={seats} min={1} max={20} />`
+	},
+	{
 		slug: 'pagination',
 		name: 'Pagination',
 		lead: 'Page pills in a nav landmark. The current page is a span, not a dead link.',
@@ -657,6 +702,29 @@ export const components = [
 </script>
 
 <Spinner size={20} label="Saving" />`
+	},
+	{
+		slug: 'steps',
+		name: 'Steps',
+		lead: 'A vertical numbered path. The current step gets the accent circle and aria-current, finished steps stay filled.',
+		props: [
+			{ name: 'items', type: '{ label, hint? }[]', default: '—', description: 'Ordered steps.' },
+			{ name: 'current', type: 'number', default: '1', description: '1-based index of the current step.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the list.' }
+		],
+		code: `<script>
+	import { Steps } from 'matersv';
+</script>
+
+<Steps
+	label="Checkout"
+	current={2}
+	items={[
+		{ label: 'Cart', hint: 'Two items' },
+		{ label: 'Shipping', hint: 'Address and speed' },
+		{ label: 'Payment' }
+	]}
+/>`
 	},
 	{
 		slug: 'strike',

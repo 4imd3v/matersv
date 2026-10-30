@@ -7,6 +7,7 @@ import Button from '../src/lib/components/Button.svelte';
 import Input from '../src/lib/components/Input.svelte';
 import Annotation from '../src/lib/components/Annotation.svelte';
 import Avatar from '../src/lib/components/Avatar.svelte';
+import AvatarGroup from '../src/lib/components/AvatarGroup.svelte';
 import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
@@ -18,6 +19,7 @@ import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
+import NumberInput from '../src/lib/components/NumberInput.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import Prose from '../src/lib/components/Prose.svelte';
@@ -30,6 +32,7 @@ import Skeleton from '../src/lib/components/Skeleton.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
 import Spinner from '../src/lib/components/Spinner.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
+import Steps from '../src/lib/components/Steps.svelte';
 import Strike from '../src/lib/components/Strike.svelte';
 import Window from '../src/lib/components/Window.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
@@ -465,6 +468,64 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('AvatarGroup', () => {
+	it('shows max circles plus a tail and names everyone once', () => {
+		render(AvatarGroup, {
+			props: {
+				label: 'Reviewers',
+				max: 2,
+				people: [{ name: 'Ada' }, { name: 'Grace' }, { name: 'Alan' }]
+			}
+		});
+
+		expect(screen.getByRole('group', { name: 'Reviewers' })).toBeTruthy();
+		expect(screen.getByText('+1')).toBeTruthy();
+		expect(screen.getByText('Ada, Grace, Alan')).toBeTruthy();
+	});
+});
+
+describe('NumberInput', () => {
+	it('steps and clamps between min and max', async () => {
+		render(NumberInput, { props: { label: 'Seats', value: 2, min: 1, max: 4 } });
+
+		const input = /** @type {HTMLInputElement} */ (screen.getByLabelText('Seats'));
+		const increase = screen.getByRole('button', { name: 'Increase Seats' });
+		const decrease = screen.getByRole('button', { name: 'Decrease Seats' });
+
+		await fireEvent.click(increase);
+		await fireEvent.click(increase);
+		expect(input.value).toBe('4');
+		expect(/** @type {HTMLButtonElement} */ (increase).disabled).toBe(true);
+
+		await fireEvent.click(decrease);
+		await fireEvent.click(decrease);
+		await fireEvent.click(decrease);
+		expect(input.value).toBe('1');
+		expect(/** @type {HTMLButtonElement} */ (decrease).disabled).toBe(true);
+	});
+});
+
+describe('Steps', () => {
+	it('marks only the current step with aria-current', () => {
+		render(Steps, {
+			props: {
+				label: 'Checkout',
+				current: 2,
+				items: [{ label: 'Cart' }, { label: 'Shipping' }, { label: 'Payment' }]
+			}
+		});
+
+		const items = [...document.querySelectorAll('li')];
+		expect(items.map((item) => item.getAttribute('data-state'))).toEqual([
+			'done',
+			'current',
+			'next'
+		]);
+		expect(screen.getByText('Shipping').closest('li')?.getAttribute('aria-current')).toBe('step');
+		expect(screen.getByText('Payment').closest('li')?.getAttribute('aria-current')).toBeNull();
 	});
 });
 

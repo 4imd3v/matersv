@@ -57,6 +57,7 @@ import '#lib/matersv.css';
 | `Spinner` | `size`, `label` |
 | `Skeleton` | `width`, `height`, `shape="pill\|card\|circle"` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
+| `NumberInput` | `label`, `bind:value`, `min`, `max`, `step`, `disabled` |
 | `Toast` | `message`, `bind:open`, `duration` (ms, 0 keeps it open) |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
@@ -74,7 +75,9 @@ import '#lib/matersv.css';
 | `EmptyState` | `title`, `lead`, `icon` / children snippets |
 | `Prose` | snippet children (article markup) |
 | `Avatar` | `name`, `src`, `size` |
+| `AvatarGroup` | `people: { name, src? }[]`, `label`, `max`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
+| `Steps` | `items: { label, hint? }[]`, `current`, `label` |
 | `Strike` | `items: string[]` |
 | `Kbd` | snippet children |
 | `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |

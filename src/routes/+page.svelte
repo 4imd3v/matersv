@@ -5,11 +5,13 @@
 	import AccordionItem from '#lib/components/AccordionItem.svelte';
 	import Annotation from '#lib/components/Annotation.svelte';
 	import Avatar from '#lib/components/Avatar.svelte';
+	import AvatarGroup from '#lib/components/AvatarGroup.svelte';
 	import Badge from '#lib/components/Badge.svelte';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import Card from '#lib/components/Card.svelte';
 	import Checkbox from '#lib/components/Checkbox.svelte';
 	import Notice from '#lib/components/Notice.svelte';
+	import NumberInput from '#lib/components/NumberInput.svelte';
 	import Pagination from '#lib/components/Pagination.svelte';
 	import CodeBlock from '#lib/components/CodeBlock.svelte';
 	import Cover from '#lib/components/Cover.svelte';
@@ -17,6 +19,7 @@
 	import EmptyState from '#lib/components/EmptyState.svelte';
 	import Fieldset from '#lib/components/Fieldset.svelte';
 	import Stat from '#lib/components/Stat.svelte';
+	import Steps from '#lib/components/Steps.svelte';
 	import Strike from '#lib/components/Strike.svelte';
 	import Table from '#lib/components/Table.svelte';
 	import Tabs from '#lib/components/Tabs.svelte';
@@ -59,6 +62,20 @@
 		{ value: 'title', label: 'Title A–Z' }
 	];
 
+	const reviewers = [
+		{ name: 'Ada Lovelace' },
+		{ name: 'Grace Hopper' },
+		{ name: 'Alan Turing' },
+		{ name: 'Katherine Johnson' },
+		{ name: 'Edsger Dijkstra' }
+	];
+
+	const checkout = [
+		{ label: 'Cart', hint: 'Two items' },
+		{ label: 'Shipping', hint: 'Address and speed' },
+		{ label: 'Payment' }
+	];
+
 	const plans = [
 		{ value: 'solo', label: 'Solo' },
 		{ value: 'team', label: 'Team' },
@@ -99,6 +116,7 @@
 	let sort = $state('newest');
 	let query = $state('');
 	let toastOpen = $state(false);
+	let seats = $state(3);
 
 	// Demo of the hue engine: two numbers on <html> reskin every token.
 	$effect(() => {
@@ -509,6 +527,30 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Avatar group</h3>
+					<p>Stacked circles with a +N tail. The names are read once, not five times.</p>
+					<div class="avatargroup-demo">
+						<AvatarGroup label="Reviewers" people={reviewers} />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Number input</h3>
+					<p>Pill field with circular buttons. Both clamp to min and max and disable at the ends.</p>
+					<div class="number-demo">
+						<NumberInput label="Seats" bind:value={seats} min={1} max={20} />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Steps</h3>
+					<p>A vertical path: accent for the current step, filled for the finished ones, muted ahead.</p>
+					<div class="steps-demo">
+						<Steps label="Checkout" current={2} items={checkout} />
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>Radio group</h3>
 					<p>A real fieldset and legend, so the group is announced once. Arrows come from the platform.</p>
 					<div class="radio-demo">
@@ -845,6 +887,20 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.avatargroup-demo,
+	.number-demo,
+	.steps-demo {
+		margin-top: 24px;
+	}
+
+	.number-demo {
+		max-width: 260px;
+	}
+
+	.steps-demo {
+		max-width: 360px;
 	}
 
 	.radio-demo,

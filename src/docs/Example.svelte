@@ -4,6 +4,7 @@
 		AccordionItem,
 		Annotation,
 		Avatar,
+		AvatarGroup,
 		Badge,
 		Breadcrumbs,
 		Button,
@@ -21,6 +22,7 @@
 		ListRow,
 		Menu,
 		Notice,
+		NumberInput,
 		Pagination,
 		Progress,
 		Prose,
@@ -34,6 +36,7 @@
 		Slider,
 		Spinner,
 		Stat,
+		Steps,
 		Strike,
 		Switch,
 		Table,
@@ -59,6 +62,21 @@
 	let sort = $state('newest');
 	let query = $state('');
 	let toastOpen = $state(false);
+	let seats = $state(3);
+
+	const reviewers = [
+		{ name: 'Ada Lovelace' },
+		{ name: 'Grace Hopper' },
+		{ name: 'Alan Turing' },
+		{ name: 'Katherine Johnson' },
+		{ name: 'Edsger Dijkstra' }
+	];
+
+	const checkout = [
+		{ label: 'Cart', hint: 'Two items' },
+		{ label: 'Shipping', hint: 'Address and speed' },
+		{ label: 'Payment' }
+	];
 
 	const sortItems = [
 		{ value: 'newest', label: 'Newest first' },
@@ -351,6 +369,19 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'avatargroup'}
+	<div class="row">
+		<AvatarGroup label="Reviewers" people={reviewers} />
+		<span class="muted">Five reviewers, four circles</span>
+	</div>
+{:else if slug === 'numberinput'}
+	<div class="col">
+		<NumberInput label="Seats" bind:value={seats} min={1} max={20} />
+	</div>
+{:else if slug === 'steps'}
+	<div class="wide-col">
+		<Steps label="Checkout" current={2} items={checkout} />
 	</div>
 {:else if slug === 'codeblock'}
 	<div class="wide-col">

@@ -19,11 +19,14 @@ async function expectNoViolations(page) {
 for (const path of [
 	'/',
 	'/components',
+	'/components/avatargroup',
 	'/components/button',
 	'/components/dialog',
 	'/components/codeblock',
 	'/components/menu',
+	'/components/numberinput',
 	'/components/prose',
+	'/components/steps',
 	'/components/radiogroup',
 	'/components/searchfield',
 	'/components/toast'
