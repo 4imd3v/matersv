@@ -54,6 +54,8 @@ import '#lib/matersv.css';
 | `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
 | `Fieldset` | `legend`, `hint`, snippet children |
 | `RadioGroup` | `label`, `items: { value, label, hint? }[]`, `bind:value`, `name` |
+| `Rating` | `label`, `bind:value`, `max`, `readonly` |
+| `ScrollProgress` | — |
 | `Spinner` | `size`, `label` |
 | `Skeleton` | `width`, `height`, `shape="pill\|card\|circle"` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
@@ -89,6 +91,7 @@ import '#lib/matersv.css';
 | `CodeBlock` | `code`, `label` |
 | `Cover` | `src`, `alt`, `width`, `height`, or snippet children |
 | `Dots` | `count`, `value` (decorative, pair with a number) |
+| `Figure` | `src`, `alt`, `ratio`, `caption`, `credit`, `width`, `height`, `loading` |
 | `SectionHeader` | `title`, `lead`, `id` |
 | `Annotation` | `arrow`, snippet children |
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |

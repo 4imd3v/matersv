@@ -313,6 +313,33 @@ export const components = [
 </Fieldset>`
 	},
 	{
+		slug: 'figure',
+		name: 'Figure',
+		lead: 'An image at a fixed ratio with a caption and an optional credit. The frame sits on the field surface, so a transparent image never flashes.',
+		props: [
+			{ name: 'src', type: 'string', default: '—', description: 'Image source. Omit it to pass inline media as children.' },
+			{ name: 'alt', type: 'string', default: "''", description: 'Empty means decorative.' },
+			{ name: 'ratio', type: 'string', default: "'16 / 9'", description: 'Any aspect-ratio value.' },
+			{ name: 'caption', type: 'string', default: '—', description: 'Caption under the frame.' },
+			{ name: 'credit', type: 'string', default: '—', description: 'Attribution, muted and after the caption.' },
+			{ name: 'width', type: 'number', default: '—', description: 'Intrinsic width, avoids layout shift.' },
+			{ name: 'height', type: 'number', default: '—', description: 'Intrinsic height.' },
+			{ name: 'loading', type: "'lazy' | 'eager'", default: "'lazy'", description: 'Native loading hint.' }
+		],
+		code: `<script>
+	import { Figure } from 'matersv';
+</script>
+
+<Figure
+	src="/shots/home.webp"
+	alt="The home screen at 1440px"
+	width={1440}
+	height={888}
+	caption="One hue, four surfaces, capsule chrome."
+	credit="MaterSV"
+/>`
+	},
+	{
 		slug: 'iconbutton',
 		name: 'IconButton',
 		lead: 'Circular 44px control for a single icon with an accessible label.',
@@ -546,6 +573,36 @@ export const components = [
 		{ value: 'studio', label: 'Studio' }
 	]}
 />`
+	},
+	{
+		slug: 'rating',
+		name: 'Rating',
+		lead: 'Native radios drawn as stars, or a read-only display. Arrow keys, forms and screen readers work without JavaScript.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Group name. Visually hidden.' },
+			{ name: 'value', type: 'number', default: '0', description: 'Stars filled. Supports bind:value.' },
+			{ name: 'max', type: 'number', default: '5', description: 'How many stars.' },
+			{ name: 'readonly', type: 'boolean', default: 'false', description: 'Renders one image labelled “N out of M” instead of controls.' }
+		],
+		code: `<script>
+	import { Rating } from 'matersv';
+
+	let score = $state(4);
+</script>
+
+<Rating label="Your rating" bind:value={score} />
+<Rating label="Average" value={4} readonly />`
+	},
+	{
+		slug: 'scrollprogress',
+		name: 'ScrollProgress',
+		lead: 'A reading bar driven by a scroll timeline: no JavaScript, no observer. It is decorative and simply absent where scroll timelines are unsupported or motion is reduced.',
+		props: [],
+		code: `<script>
+	import { ScrollProgress } from 'matersv';
+</script>
+
+<ScrollProgress />`
 	},
 	{
 		slug: 'searchfield',

@@ -14,6 +14,7 @@ import Checkbox from '../src/lib/components/Checkbox.svelte';
 import CodeBlock from '../src/lib/components/CodeBlock.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
 import EmptyState from '../src/lib/components/EmptyState.svelte';
+import Figure from '../src/lib/components/Figure.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
@@ -25,6 +26,8 @@ import Progress from '../src/lib/components/Progress.svelte';
 import Prose from '../src/lib/components/Prose.svelte';
 import Quote from '../src/lib/components/Quote.svelte';
 import RadioGroup from '../src/lib/components/RadioGroup.svelte';
+import Rating from '../src/lib/components/Rating.svelte';
+import ScrollProgress from '../src/lib/components/ScrollProgress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
@@ -468,6 +471,58 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Figure', () => {
+	it('renders the image, caption and credit in a fixed ratio frame', () => {
+		const { container } = render(Figure, {
+			props: {
+				src: '/shots/home.webp',
+				alt: 'Home screen',
+				ratio: '4 / 3',
+				caption: 'One hue',
+				credit: 'MaterSV'
+			}
+		});
+
+		expect(screen.getByRole('img', { name: 'Home screen' }).getAttribute('src')).toBe(
+			'/shots/home.webp'
+		);
+		expect(screen.getByText('One hue')).toBeTruthy();
+		expect(screen.getByText('MaterSV')).toBeTruthy();
+		expect(container.querySelector('figure')?.getAttribute('style')).toContain('--ratio: 4 / 3');
+	});
+});
+
+describe('Rating', () => {
+	it('uses native radios and reports the chosen star', async () => {
+		render(Rating, { props: { label: 'Your rating', value: 2 } });
+
+		const third = /** @type {HTMLInputElement} */ (screen.getByRole('radio', { name: '3 of 5' }));
+		expect(third.checked).toBe(false);
+
+		await fireEvent.click(third);
+		expect(third.checked).toBe(true);
+		expect(/** @type {HTMLInputElement} */ (screen.getByRole('radio', { name: '2 of 5' })).checked).toBe(
+			false
+		);
+	});
+
+	it('reads as one image when read-only', () => {
+		render(Rating, { props: { label: 'Average', value: 4, readonly: true } });
+
+		expect(screen.getByRole('img', { name: '4 out of 5' })).toBeTruthy();
+		expect(screen.queryByRole('radio')).toBeNull();
+	});
+});
+
+describe('ScrollProgress', () => {
+	it('is decorative', () => {
+		render(ScrollProgress, {});
+
+		const bar = document.querySelector('.progress');
+		expect(bar?.getAttribute('aria-hidden')).toBe('true');
 	});
 });
 

@@ -23,11 +23,14 @@ for (const path of [
 	'/components/button',
 	'/components/dialog',
 	'/components/codeblock',
+	'/components/figure',
 	'/components/menu',
 	'/components/numberinput',
 	'/components/prose',
+	'/components/rating',
 	'/components/steps',
 	'/components/radiogroup',
+	'/components/scrollprogress',
 	'/components/searchfield',
 	'/components/toast'
 ]) {

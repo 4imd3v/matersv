@@ -28,6 +28,7 @@
 	import Window from '#lib/components/Window.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
+	import Figure from '#lib/components/Figure.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
@@ -37,6 +38,8 @@
 	import Prose from '#lib/components/Prose.svelte';
 	import Quote from '#lib/components/Quote.svelte';
 	import RadioGroup from '#lib/components/RadioGroup.svelte';
+	import Rating from '#lib/components/Rating.svelte';
+	import ScrollProgress from '#lib/components/ScrollProgress.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
@@ -117,6 +120,7 @@
 	let query = $state('');
 	let toastOpen = $state(false);
 	let seats = $state(3);
+	let score = $state(4);
 
 	// Demo of the hue engine: two numbers on <html> reskin every token.
 	$effect(() => {
@@ -527,6 +531,34 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Figure</h3>
+					<p>A fixed ratio on the field surface, with a caption and a credit.</p>
+					<div class="figure-demo">
+						<Figure ratio="16 / 9" caption="One hue, four surfaces." credit="MaterSV">
+							{@render coverArt()}
+						</Figure>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Rating</h3>
+					<p>Native radios drawn as stars, plus a read-only display that reads as one image.</p>
+					<div class="rating-demo">
+						<Rating label="Your rating" bind:value={score} />
+						<Rating label="Average" value={4} readonly />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Scroll progress</h3>
+					<p>A reading bar on a scroll timeline: no JavaScript, no observer.</p>
+					<div class="scroll-demo">
+						<ScrollProgress />
+						<span>Fixed to the top of this page</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>Avatar group</h3>
 					<p>Stacked circles with a +N tail. The names are read once, not five times.</p>
 					<div class="avatargroup-demo">
@@ -887,6 +919,29 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.figure-demo,
+	.rating-demo,
+	.scroll-demo {
+		margin-top: 24px;
+	}
+
+	.figure-demo {
+		max-width: 380px;
+	}
+
+	.rating-demo {
+		display: grid;
+		gap: 10px;
+		justify-items: start;
+	}
+
+	.scroll-demo {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-size: 15px;
 	}
 
 	.avatargroup-demo,

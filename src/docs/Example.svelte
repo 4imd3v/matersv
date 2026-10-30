@@ -16,6 +16,7 @@
 		Dots,
 		EmptyState,
 		Fieldset,
+		Figure,
 		IconButton,
 		Input,
 		Kbd,
@@ -28,6 +29,8 @@
 		Prose,
 		Quote,
 		RadioGroup,
+		Rating,
+		ScrollProgress,
 		SearchField,
 		SectionHeader,
 		SegmentedControl,
@@ -63,6 +66,7 @@
 	let query = $state('');
 	let toastOpen = $state(false);
 	let seats = $state(3);
+	let score = $state(3);
 
 	const reviewers = [
 		{ name: 'Ada Lovelace' },
@@ -117,6 +121,17 @@
 		<rect width="760" height="760" fill="currentColor" opacity=".08" />
 		<circle cx="380" cy="380" r="220" fill="currentColor" opacity=".18" />
 		<circle cx="380" cy="380" r="120" fill="currentColor" opacity=".3" />
+	</svg>
+{/snippet}
+
+{#snippet shot()}
+	<svg viewBox="0 0 720 405" aria-hidden="true">
+		<rect width="720" height="405" fill="currentColor" opacity=".1" />
+		<rect x="40" y="40" width="250" height="24" rx="12" fill="currentColor" opacity=".25" />
+		<rect x="40" y="84" width="420" height="12" rx="6" fill="currentColor" opacity=".18" />
+		<rect x="40" y="150" width="180" height="215" rx="26" fill="currentColor" opacity=".2" />
+		<rect x="240" y="150" width="180" height="215" rx="26" fill="currentColor" opacity=".14" />
+		<rect x="440" y="150" width="180" height="215" rx="26" fill="currentColor" opacity=".08" />
 	</svg>
 {/snippet}
 
@@ -369,6 +384,25 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'figure'}
+	<div class="wide-col">
+		<Figure ratio="16 / 9" caption="One hue, four surfaces, capsule chrome." credit="MaterSV">
+			{@render shot()}
+		</Figure>
+	</div>
+{:else if slug === 'rating'}
+	<div class="col">
+		<Rating label="Your rating" bind:value={score} />
+		<Rating label="Average" value={4} readonly />
+	</div>
+{:else if slug === 'scrollprogress'}
+	<div class="col">
+		<ScrollProgress />
+		<p class="note">
+			ScrollProgress is fixed to the top of the demo site itself. Scroll this page and watch the
+			accent bar fill.
+		</p>
 	</div>
 {:else if slug === 'avatargroup'}
 	<div class="row">
