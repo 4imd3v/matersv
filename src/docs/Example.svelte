@@ -8,6 +8,7 @@
 		Badge,
 		Breadcrumbs,
 		Button,
+		Byline,
 		Card,
 		Checkbox,
 		CodeBlock,
@@ -17,6 +18,7 @@
 		EmptyState,
 		Fieldset,
 		Figure,
+		FileInput,
 		IconButton,
 		Input,
 		Kbd,
@@ -45,6 +47,7 @@
 		Table,
 		Tabs,
 		Textarea,
+		Timeline,
 		Toast,
 		Tooltip,
 		Window,
@@ -74,6 +77,11 @@
 		{ name: 'Alan Turing' },
 		{ name: 'Katherine Johnson' },
 		{ name: 'Edsger Dijkstra' }
+	];
+
+	const releases = [
+		{ date: 'March 2026', title: '0.2.0', body: 'Strike, Tabs, Quote, EmptyState.' },
+		{ date: 'February 2026', title: '0.1.2', body: 'The first tagged release.' }
 	];
 
 	const checkout = [
@@ -384,6 +392,19 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'byline'}
+	<div class="col">
+		<Byline name="Ada Lovelace" href="/components" meta="12 March 2026 · 6 min read" />
+		<Byline name="Grace Hopper" meta="5 March 2026 · 3 min read" />
+	</div>
+{:else if slug === 'fileinput'}
+	<div class="col">
+		<FileInput label="Cover image" accept="image/*" hint="WebP or AVIF, at least 1600px wide." />
+	</div>
+{:else if slug === 'timeline'}
+	<div class="wide-col">
+		<Timeline label="Releases" items={releases} />
 	</div>
 {:else if slug === 'figure'}
 	<div class="wide-col">

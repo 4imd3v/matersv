@@ -152,6 +152,27 @@ export const components = [
 <Button variant="text">Cancel</Button>`
 	},
 	{
+		slug: 'byline',
+		name: 'Byline',
+		lead: 'Author line: avatar, name as a link when you pass one, and a single meta line for date and reading time.',
+		props: [
+			{ name: 'name', type: 'string', default: '—', description: 'Author name.' },
+			{ name: 'src', type: 'string', default: '—', description: 'Portrait. Initials when omitted.' },
+			{ name: 'href', type: 'string', default: '—', description: 'Turns the name into a link.' },
+			{ name: 'meta', type: 'string', default: '—', description: 'Second line, usually date and reading time.' },
+			{ name: 'size', type: 'number', default: '40', description: 'Avatar size in px.' }
+		],
+		code: `<script>
+	import { Byline } from 'matersv';
+</script>
+
+<Byline
+	name="Ada Lovelace"
+	href="/authors/ada"
+	meta="12 March 2026 · 6 min read"
+/>`
+	},
+	{
 		slug: 'capsulenav',
 		name: 'CapsuleNav',
 		lead: 'Floating capsule header with a scroll spy and automatic night-band contrast.',
@@ -337,6 +358,27 @@ export const components = [
 	height={888}
 	caption="One hue, four surfaces, capsule chrome."
 	credit="MaterSV"
+/>`
+	},
+	{
+		slug: 'fileinput',
+		name: 'FileInput',
+		lead: 'The native file input under a pill: the whole control opens the picker, the chosen name is shown, and the input keeps its tab stop.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible label, wired with for/id.' },
+			{ name: 'accept', type: 'string', default: '—', description: 'Native accept filter.' },
+			{ name: 'multiple', type: 'boolean', default: 'false', description: 'Allows several files; the summary becomes a count.' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the picker.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Hint under the control, wired with aria-describedby.' }
+		],
+		code: `<script>
+	import { FileInput } from 'matersv';
+</script>
+
+<FileInput
+	label="Cover image"
+	accept="image/*"
+	hint="WebP or AVIF, at least 1600px wide."
 />`
 	},
 	{
@@ -865,6 +907,26 @@ export const components = [
 <Tabs {items} bind:value={tab} label="Details">
 	{#if tab === 'specs'}<p>Pill controls, one hue.</p>{:else}<p>No runtime dependencies.</p>{/if}
 </Tabs>`
+	},
+	{
+		slug: 'timeline',
+		name: 'Timeline',
+		lead: 'A dated vertical story: accent dot, rail on the field surface, date in tabular numerals, then title and body.',
+		props: [
+			{ name: 'items', type: 'TimelineEntry[]', default: '—', description: 'Each entry is { date, title, body? }.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the list.' }
+		],
+		code: `<script>
+	import { Timeline } from 'matersv';
+</script>
+
+<Timeline
+	label="Releases"
+	items={[
+		{ date: 'March 2026', title: '0.2.0', body: 'Strike, Tabs, Quote, EmptyState.' },
+		{ date: 'February 2026', title: '0.1.2', body: 'The first tagged release.' }
+	]}
+/>`
 	},
 	{
 		slug: 'textarea',

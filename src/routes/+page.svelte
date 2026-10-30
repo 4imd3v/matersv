@@ -1,4 +1,5 @@
 <script>
+	import Byline from '#lib/components/Byline.svelte';
 	import CapsuleNav from '#lib/components/CapsuleNav.svelte';
 	import SectionHeader from '#lib/components/SectionHeader.svelte';
 	import Accordion from '#lib/components/Accordion.svelte';
@@ -29,6 +30,7 @@
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
 	import Figure from '#lib/components/Figure.svelte';
+	import FileInput from '#lib/components/FileInput.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
@@ -46,6 +48,7 @@
 	import Slider from '#lib/components/Slider.svelte';
 	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
+	import Timeline from '#lib/components/Timeline.svelte';
 	import Toast from '#lib/components/Toast.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
@@ -71,6 +74,11 @@
 		{ name: 'Alan Turing' },
 		{ name: 'Katherine Johnson' },
 		{ name: 'Edsger Dijkstra' }
+	];
+
+	const releases = [
+		{ date: 'March 2026', title: '0.2.0', body: 'Strike, Tabs, Quote, EmptyState.' },
+		{ date: 'February 2026', title: '0.1.2', body: 'The first tagged release.' }
 	];
 
 	const checkout = [
@@ -531,6 +539,30 @@
 				</article>
 
 				<article class="card reveal">
+					<h3>Byline</h3>
+					<p>Author line: avatar, optional link, one meta line for date and reading time.</p>
+					<div class="byline-demo">
+						<Byline name="Ada Lovelace" href="#components" meta="12 March 2026 · 6 min read" />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>File input</h3>
+					<p>The native picker under a pill: the whole control opens it, the name is shown.</p>
+					<div class="file-demo">
+						<FileInput label="Cover image" accept="image/*" hint="WebP or AVIF, 1600px wide." />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Timeline</h3>
+					<p>A dated rail: accent dot, tabular date, then title and body.</p>
+					<div class="timeline-demo">
+						<Timeline label="Releases" items={releases} />
+					</div>
+				</article>
+
+				<article class="card reveal">
 					<h3>Figure</h3>
 					<p>A fixed ratio on the field surface, with a caption and a credit.</p>
 					<div class="figure-demo">
@@ -919,6 +951,17 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.byline-demo,
+	.file-demo,
+	.timeline-demo {
+		margin-top: 24px;
+	}
+
+	.file-demo,
+	.timeline-demo {
+		max-width: 420px;
 	}
 
 	.figure-demo,

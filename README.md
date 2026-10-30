@@ -48,8 +48,10 @@ import '#lib/matersv.css';
 | Component | API |
 | --- | --- |
 | `Button` | `href`, `variant="primary\|text"`, `size="md\|lg"`, `disabled`, `type` |
+| `Byline` | `name`, `src`, `href`, `meta`, `size` |
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
+| `FileInput` | `label`, `accept`, `multiple`, `disabled`, `hint` |
 | `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
 | `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
 | `Fieldset` | `legend`, `hint`, snippet children |
@@ -80,6 +82,7 @@ import '#lib/matersv.css';
 | `AvatarGroup` | `people: { name, src? }[]`, `label`, `max`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Steps` | `items: { label, hint? }[]`, `current`, `label` |
+| `Timeline` | `items: { date, title, body? }[]`, `label` |
 | `Strike` | `items: string[]` |
 | `Kbd` | snippet children |
 | `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |

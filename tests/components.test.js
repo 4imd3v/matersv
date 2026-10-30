@@ -9,6 +9,7 @@ import Annotation from '../src/lib/components/Annotation.svelte';
 import Avatar from '../src/lib/components/Avatar.svelte';
 import AvatarGroup from '../src/lib/components/AvatarGroup.svelte';
 import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
+import Byline from '../src/lib/components/Byline.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
 import CodeBlock from '../src/lib/components/CodeBlock.svelte';
@@ -16,6 +17,7 @@ import Cover from '../src/lib/components/Cover.svelte';
 import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Figure from '../src/lib/components/Figure.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
+import FileInput from '../src/lib/components/FileInput.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Menu from '../src/lib/components/Menu.svelte';
@@ -44,6 +46,7 @@ import Tabs from '../src/lib/components/Tabs.svelte';
 import Tooltip from '../src/lib/components/Tooltip.svelte';
 import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
+import Timeline from '../src/lib/components/Timeline.svelte';
 import Toast from '../src/lib/components/Toast.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
@@ -471,6 +474,52 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Byline', () => {
+	it('links the name when href is given and keeps the meta line', () => {
+		render(Byline, {
+			props: { name: 'Ada Lovelace', href: '/authors/ada', meta: '12 March 2026 · 6 min read' }
+		});
+
+		const link = screen.getByRole('link', { name: 'Ada Lovelace' });
+		expect(link.getAttribute('href')).toBe('/authors/ada');
+		expect(screen.getByText('12 March 2026 · 6 min read')).toBeTruthy();
+	});
+});
+
+describe('FileInput', () => {
+	it('shows the chosen file name and stays labelled', async () => {
+		render(FileInput, { props: { label: 'Cover image', hint: 'WebP only.' } });
+
+		const input = /** @type {HTMLInputElement} */ (screen.getByLabelText('Cover image'));
+		expect(input.type).toBe('file');
+		expect(screen.getByText('No file chosen')).toBeTruthy();
+
+		const file = new File(['x'], 'cover.webp', { type: 'image/webp' });
+		await fireEvent.change(input, { target: { files: [file] } });
+
+		expect(screen.getByText('cover.webp')).toBeTruthy();
+	});
+});
+
+describe('Timeline', () => {
+	it('renders one dated entry per item', () => {
+		render(Timeline, {
+			props: {
+				label: 'Releases',
+				items: [
+					{ date: 'March 2026', title: '0.2.0', body: 'New components.' },
+					{ date: 'February 2026', title: '0.1.2' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('list', { name: 'Releases' })).toBeTruthy();
+		expect(document.querySelectorAll('li')).toHaveLength(2);
+		expect(screen.getByText('March 2026')).toBeTruthy();
+		expect(screen.getByText('New components.')).toBeTruthy();
 	});
 });
 
