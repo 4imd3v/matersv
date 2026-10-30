@@ -188,6 +188,9 @@ the host libraries from `playwright install --with-deps`; without them run
 - `CapsuleNav` scroll spy uses IntersectionObserver, not scroll offsets, so a
   fresh `#hash` load highlights the right item. The initial hash scroll is
   smooth; screenshots taken immediately show mid-scroll and faded reveals.
+- Demo `href`s are crawled by the static build: a missing `#id` or route fails
+  `pnpm build` with `prerender_missing_id` / `prerender_http_error`. `tests/docs.test.js`
+  checks them, so fix the link, not the test.
 - `pnpm build` (static demo) and `pnpm package` (library) are different. Run both.
 - Playwright covers Chromium and Firefox locally and WebKit in CI. Axe checks
   `/`, `/components`, `/components/button`, `/components/dialog`, the open

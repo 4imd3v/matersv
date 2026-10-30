@@ -274,7 +274,7 @@
 		<Button>Primary</Button>
 		<Button size="lg">Large</Button>
 		<Button variant="text">Text action</Button>
-		<Button href="#docs" disabled>Disabled link</Button>
+		<Button href="#usage" disabled>Disabled link</Button>
 	</div>
 {:else if slug === 'iconbutton'}
 	<div class="row">
