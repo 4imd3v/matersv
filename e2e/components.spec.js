@@ -91,6 +91,17 @@ test('popover opens under its trigger and closes on Escape', async ({ page }) =>
 	await expect(trigger).toBeFocused();
 });
 
+test('sheet opens as a modal drawer and closes on Escape', async ({ page }) => {
+	await page.goto('/components/sheet');
+
+	await page.getByRole('button', { name: 'Open sheet' }).click();
+	const sheet = page.getByRole('dialog', { name: 'Filters' });
+	await expect(sheet).toBeVisible();
+
+	await page.keyboard.press('Escape');
+	await expect(sheet).toBeHidden();
+});
+
 test('combobox filters and selects from the keyboard', async ({ page }) => {
 	await page.goto('/components/combobox');
 

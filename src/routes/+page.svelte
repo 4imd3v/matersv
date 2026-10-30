@@ -23,6 +23,7 @@
 	import EmptyState from '#lib/components/EmptyState.svelte';
 	import Fieldset from '#lib/components/Fieldset.svelte';
 	import Stat from '#lib/components/Stat.svelte';
+	import StatusDot from '#lib/components/StatusDot.svelte';
 	import Steps from '#lib/components/Steps.svelte';
 	import Strike from '#lib/components/Strike.svelte';
 	import Table from '#lib/components/Table.svelte';
@@ -48,6 +49,7 @@
 	import ScrollProgress from '#lib/components/ScrollProgress.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
+	import Sheet from '#lib/components/Sheet.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
 	import SkipLink from '#lib/components/SkipLink.svelte';
 	import Slider from '#lib/components/Slider.svelte';
@@ -55,6 +57,7 @@
 	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
 	import Timeline from '#lib/components/Timeline.svelte';
+	import Toolbar from '#lib/components/Toolbar.svelte';
 	import Toast from '#lib/components/Toast.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
@@ -152,6 +155,7 @@
 	let seats = $state(3);
 	let score = $state(4);
 	let filtersOpen = $state(false);
+	let sheetOpen = $state(false);
 	let showLyrics = $state(true);
 
 	// Demo of the hue engine: two numbers on <html> reskin every token.
@@ -559,6 +563,52 @@
 						<span>Lyrics</span>
 						<Switch bind:checked={audioOnly} label="Audio only" />
 						<span>Audio only</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Sheet</h3>
+					<p>A modal drawer from the right, from the bottom below 560px. Native dialog underneath.</p>
+					<div class="row">
+						<Button onclick={() => (sheetOpen = true)}>Open sheet</Button>
+						<Sheet bind:open={sheetOpen} title="Filters">
+							<p>Narrow the shelf down.</p>
+							<Checkbox label="Show lyrics" bind:checked={showLyrics} />
+						</Sheet>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Status dot</h3>
+					<p>Dot and label in the three tones the palette allows: accent, danger, muted.</p>
+					<div class="status-demo">
+						<StatusDot label="Deployed" />
+						<StatusDot label="Degraded" tone="danger" />
+						<StatusDot label="Queued" tone="muted" />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Toolbar</h3>
+					<p>One pill that groups controls under a single name, lifted off field so child hover reads.</p>
+					<div class="row">
+						<Toolbar label="Playback">
+							<IconButton label="Previous">
+								<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+								</svg>
+							</IconButton>
+							<IconButton label="Play" pressed={playing} onclick={() => (playing = !playing)}>
+								<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M8 5v14l11-7z" />
+								</svg>
+							</IconButton>
+							<IconButton label="Next">
+								<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M18 18l-8.5-6L18 6v12zM6 6v12h2V6H6z" />
+								</svg>
+							</IconButton>
+						</Toolbar>
 					</div>
 				</article>
 
@@ -1042,6 +1092,13 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.status-demo {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		margin-top: 24px;
 	}
 
 	.carousel-demo,

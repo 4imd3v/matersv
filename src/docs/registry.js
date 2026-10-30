@@ -824,6 +824,26 @@ export const components = [
 />`
 	},
 	{
+		slug: 'sheet',
+		name: 'Sheet',
+		lead: 'A modal drawer: from the right on wide screens, from the bottom on a phone. Native dialog, so the top layer, focus trap and Esc come from the platform.',
+		props: [
+			{ name: 'title', type: 'string', default: '—', description: 'Heading, also the dialog name.' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Visibility. Supports bind:open.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Drawer content.' }
+		],
+		code: `<script>
+	import { Button, Sheet } from 'matersv';
+
+	let open = $state(false);
+</script>
+
+<Button onclick={() => (open = true)}>Filters</Button>
+<Sheet bind:open title="Filters">
+	<p>Narrow the shelf down.</p>
+</Sheet>`
+	},
+	{
 		slug: 'skiplink',
 		name: 'SkipLink',
 		lead: 'The first tab stop: hidden until focused, then a pill over the page that jumps to the main content.',
@@ -902,6 +922,22 @@ export const components = [
 </script>
 
 <Spinner size={20} label="Saving" />`
+	},
+	{
+		slug: 'statusdot',
+		name: 'StatusDot',
+		lead: 'A dot and a label, in the three tones the palette allows: accent for ok, danger for errors, muted for idle.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Status text.' },
+			{ name: 'tone', type: "'ok' | 'danger' | 'muted'", default: "'ok'", description: 'Dot colour.' }
+		],
+		code: `<script>
+	import { StatusDot } from 'matersv';
+</script>
+
+<StatusDot label="Deployed" />
+<StatusDot label="Degraded" tone="danger" />
+<StatusDot label="Queued" tone="muted" />`
 	},
 	{
 		slug: 'steps',
@@ -1068,6 +1104,24 @@ export const components = [
 </script>
 
 <Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
+	},
+	{
+		slug: 'toolbar',
+		name: 'Toolbar',
+		lead: 'One pill that groups controls, named once for screen readers. The surface is lifted off field so a child button still shows its own hover.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the toolbar.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The controls.' }
+		],
+		code: `<script>
+	import { IconButton, Toolbar } from 'matersv';
+</script>
+
+<Toolbar label="Playback">
+	<IconButton label="Previous">…</IconButton>
+	<IconButton label="Play">…</IconButton>
+	<IconButton label="Next">…</IconButton>
+</Toolbar>`
 	},
 	{
 		slug: 'toast',

@@ -41,11 +41,13 @@
 		SectionHeader,
 		SegmentedControl,
 		Select,
+		Sheet,
 		Skeleton,
 		SkipLink,
 		Slider,
 		Spinner,
 		Stat,
+		StatusDot,
 		Steps,
 		Strike,
 		Switch,
@@ -55,6 +57,7 @@
 		Textarea,
 		Timeline,
 		Toast,
+		Toolbar,
 		Tooltip,
 		Window,
 		Wordmark,
@@ -77,6 +80,7 @@
 	let seats = $state(3);
 	let score = $state(3);
 	let filtersOpen = $state(false);
+	let sheetOpen = $state(false);
 	let showLyrics = $state(true);
 
 	const reviewers = [
@@ -416,6 +420,40 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'sheet'}
+	<div class="row">
+		<Button onclick={() => (sheetOpen = true)}>Open sheet</Button>
+		<Sheet bind:open={sheetOpen} title="Filters">
+			<p>Narrow the shelf down. The drawer becomes a bottom sheet below 560px.</p>
+			<Checkbox label="Show lyrics" bind:checked={showLyrics} />
+		</Sheet>
+	</div>
+{:else if slug === 'statusdot'}
+	<div class="row">
+		<StatusDot label="Deployed" />
+		<StatusDot label="Degraded" tone="danger" />
+		<StatusDot label="Queued" tone="muted" />
+	</div>
+{:else if slug === 'toolbar'}
+	<div class="row">
+		<Toolbar label="Playback">
+			<IconButton label="Previous">
+				<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+				</svg>
+			</IconButton>
+			<IconButton label="Play" pressed={playing} onclick={() => (playing = !playing)}>
+				<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M8 5v14l11-7z" />
+				</svg>
+			</IconButton>
+			<IconButton label="Next">
+				<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M18 18l-8.5-6L18 6v12zM6 6v12h2V6H6z" />
+				</svg>
+			</IconButton>
+		</Toolbar>
 	</div>
 {:else if slug === 'carousel'}
 	<div class="wide-col">

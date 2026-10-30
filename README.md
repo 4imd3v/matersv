@@ -63,6 +63,7 @@ import '#lib/matersv.css';
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
 | `NumberInput` | `label`, `bind:value`, `min`, `max`, `step`, `disabled` |
 | `Toast` | `message`, `bind:open`, `duration` (ms, 0 keeps it open) |
+| `Toolbar` | `label`, snippet children |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
 | `SearchField` | `label`, `bind:value`, `placeholder`, `id`, `shortcut` snippet |
@@ -82,6 +83,7 @@ import '#lib/matersv.css';
 | `Avatar` | `name`, `src`, `size` |
 | `AvatarGroup` | `people: { name, src? }[]`, `label`, `max`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
+| `StatusDot` | `label`, `tone="ok\|danger\|muted"` |
 | `Steps` | `items: { label, hint? }[]`, `current`, `label` |
 | `Timeline` | `items: { date, title, body? }[]`, `label` |
 | `Strike` | `items: string[]` |
@@ -94,6 +96,7 @@ import '#lib/matersv.css';
 | `Accordion` | snippet children (a list of `AccordionItem`) |
 | `AccordionItem` | `title`, `bind:open`, snippet children |
 | `Dialog` | `bind:open`, `title`, snippet children |
+| `Sheet` | `bind:open`, `title`, snippet children |
 | `Card` | `title`, `lead`, snippet children |
 | `CodeBlock` | `code`, `label` |
 | `Carousel` | `label`, snippet children (one snapped slide each) |

@@ -35,10 +35,13 @@ for (const path of [
 	'/components/prose',
 	'/components/rating',
 	'/components/steps',
+	'/components/statusdot',
 	'/components/taglist',
+	'/components/toolbar',
 	'/components/timeline',
 	'/components/radiogroup',
 	'/components/scrollprogress',
+	'/components/sheet',
 	'/components/searchfield',
 	'/components/skiplink',
 	'/components/toast'

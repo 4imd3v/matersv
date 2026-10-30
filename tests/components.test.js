@@ -39,6 +39,7 @@ import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Skeleton from '../src/lib/components/Skeleton.svelte';
 import SkipLink from '../src/lib/components/SkipLink.svelte';
+import StatusDot from '../src/lib/components/StatusDot.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
 import Spinner from '../src/lib/components/Spinner.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
@@ -54,6 +55,7 @@ import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import Timeline from '../src/lib/components/Timeline.svelte';
 import Toast from '../src/lib/components/Toast.svelte';
+import Toolbar from '../src/lib/components/Toolbar.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
 /** @param {string} value */
@@ -480,6 +482,33 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('StatusDot', () => {
+	it('renders the label and its tone', () => {
+		render(StatusDot, { props: { label: 'Degraded', tone: 'danger' } });
+
+		const status = screen.getByText('Degraded');
+		expect(status.getAttribute('data-tone')).toBe('danger');
+		expect(status.querySelector('.dot')?.getAttribute('aria-hidden')).toBe('true');
+	});
+});
+
+describe('Toolbar', () => {
+	it('is a named group of controls', () => {
+		render(Toolbar, {
+			props: {
+				label: 'Playback',
+				children: createRawSnippet(() => ({
+					render: () => '<button type="button">Play</button>'
+				}))
+			}
+		});
+
+		const toolbar = screen.getByRole('toolbar', { name: 'Playback' });
+		expect(toolbar).toBeTruthy();
+		expect(screen.getByRole('button', { name: 'Play' })).toBeTruthy();
 	});
 });
 
