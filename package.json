@@ -45,6 +45,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"test": "vitest run",
 		"test:e2e": "playwright test",
+		"test:e2e:quick": "playwright test --project=chromium",
 		"publint": "publint",
 		"release:patch": "pnpm version patch -m \"chore(release): %s\"",
 		"release:minor": "pnpm version minor -m \"chore(release): %s\"",

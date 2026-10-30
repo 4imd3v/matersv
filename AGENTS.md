@@ -138,16 +138,17 @@ Component API conventions:
 ```sh
 pnpm check
 pnpm test
-pnpm test:e2e   # needs: pnpm exec playwright install
+pnpm test:e2e:quick   # Chromium only, for the local loop
+pnpm test:e2e         # all three browsers, what CI runs
 pnpm package
 pnpm publint
 pnpm build
 ```
 
-All must pass. `pnpm check` must report 0 errors and 0 warnings. `test:e2e`
-runs Chromium, Firefox and WebKit plus an axe WCAG 2.1 A/AA pass. WebKit needs
-the host libraries from `playwright install --with-deps`; without them run
-`--project=chromium --project=firefox`. Then check the demo in a browser:
+All must pass. `pnpm check` must report 0 errors and 0 warnings. Locally run
+`pnpm test:e2e:quick` (Chromium); `pnpm test:e2e` runs Chromium, Firefox and
+WebKit plus the axe WCAG 2.1 A/AA pass and is what CI uses. WebKit needs the host
+libraries from `playwright install --with-deps`. Then check the demo in a browser:
 
 - light and dark theme, 1440px and ~500px wide
 - keyboard focus, Esc on Dialog, Accordion open/close

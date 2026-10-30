@@ -136,7 +136,8 @@ Esc come from the platform.
 | `pnpm package` | library build via `svelte-package` (`dist/`) |
 | `pnpm check` | `svelte-check` (0 errors expected) |
 | `pnpm test` | vitest + testing-library |
-| `pnpm test:e2e` | Playwright + axe (Chromium, Firefox, WebKit) |
+| `pnpm test:e2e` | Playwright + axe (Chromium, Firefox, WebKit) — CI |
+| `pnpm test:e2e:quick` | Same suite in Chromium only — local loop |
 | `pnpm publint` | package lint |
 | `pnpm release:patch\|minor\|major` | verify, bump, commit and tag |
 
@@ -145,7 +146,8 @@ Esc come from the platform.
 ```sh
 pnpm test                         # unit tests
 pnpm exec playwright install      # once locally
-pnpm test:e2e                     # builds, previews and runs the browser suite
+pnpm test:e2e:quick               # Chromium only (local)
+pnpm test:e2e                     # all three browsers (CI)
 ```
 
 The e2e suite runs Chromium, Firefox and WebKit, checks WCAG 2.1 A/AA with axe
