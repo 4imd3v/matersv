@@ -27,6 +27,7 @@ for (const path of [
 	'/components/dialog',
 	'/components/codeblock',
 	'/components/figure',
+	'/components/filedrop',
 	'/components/fileinput',
 	'/components/menu',
 	'/components/numberinput',
@@ -37,12 +38,14 @@ for (const path of [
 	'/components/steps',
 	'/components/statusdot',
 	'/components/taglist',
+	'/components/toc',
 	'/components/toolbar',
 	'/components/timeline',
 	'/components/radiogroup',
 	'/components/scrollprogress',
 	'/components/sheet',
 	'/components/searchfield',
+	'/components/sidenote',
 	'/components/skiplink',
 	'/components/toast'
 ]) {

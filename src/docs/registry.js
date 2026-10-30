@@ -406,6 +406,28 @@ export const components = [
 />`
 	},
 	{
+		slug: 'filedrop',
+		name: 'FileDrop',
+		lead: 'A drop zone that is also the file picker. Drag state is a surface shift, and the chosen names replace the prompt.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Prompt inside the zone; also names the input.' },
+			{ name: 'accept', type: 'string', default: '—', description: 'Native accept filter.' },
+			{ name: 'multiple', type: 'boolean', default: 'false', description: 'Allows several files.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Small line under the prompt.' },
+			{ name: 'onfiles', type: '(files: File[]) => void', default: '—', description: 'Called with the current selection.' }
+		],
+		code: `<script>
+	import { FileDrop } from 'matersv';
+</script>
+
+<FileDrop
+	label="Drop a cover here"
+	accept="image/*"
+	hint="WebP or AVIF, at least 1600px wide."
+	onfiles={(files) => console.log(files)}
+/>`
+	},
+	{
 		slug: 'fileinput',
 		name: 'FileInput',
 		lead: 'The native file input under a pill: the whole control opens the picker, the chosen name is shown, and the input keeps its tab stop.',
@@ -844,6 +866,23 @@ export const components = [
 </Sheet>`
 	},
 	{
+		slug: 'sidenote',
+		name: 'Sidenote',
+		lead: 'An aside that hangs in the margin on wide screens and falls into the flow below 760px. Muted, so it never competes with the body.',
+		props: [
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The note. Two or three lines at most.' }
+		],
+		code: `<script>
+	import { Prose, Sidenote } from 'matersv';
+</script>
+
+<Prose>
+	<p>Body copy that the note belongs to.</p>
+	<Sidenote>The margin is where a caveat belongs.</Sidenote>
+	<p>The argument continues.</p>
+</Prose>`
+	},
+	{
 		slug: 'skiplink',
 		name: 'SkipLink',
 		lead: 'The first tab stop: hidden until focused, then a pill over the page that jumps to the main content.',
@@ -1104,6 +1143,30 @@ export const components = [
 </script>
 
 <Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
+	},
+	{
+		slug: 'toc',
+		name: 'Toc',
+		lead: 'On-page navigation with one current section. Pass current yourself; there is no scroll spy and no observer.',
+		props: [
+			{ name: 'items', type: 'TocEntry[]', default: '—', description: 'Each item is { href, label }.' },
+			{ name: 'current', type: 'string', default: '—', description: 'Href of the active section; gets aria-current.' },
+			{ name: 'label', type: 'string', default: "'On this page'", description: 'Accessible name of the nav.' }
+		],
+		code: `<script>
+	import { Toc } from 'matersv';
+
+	let current = $state('#surfaces');
+</script>
+
+<Toc
+	{current}
+	items={[
+		{ href: '#surfaces', label: 'Surfaces' },
+		{ href: '#shape', label: 'Shape' },
+		{ href: '#motion', label: 'Motion' }
+	]}
+/>`
 	},
 	{
 		slug: 'toolbar',

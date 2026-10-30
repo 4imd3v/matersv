@@ -20,6 +20,7 @@
 		EmptyState,
 		Fieldset,
 		Figure,
+		FileDrop,
 		FileInput,
 		IconButton,
 		Input,
@@ -42,6 +43,7 @@
 		SegmentedControl,
 		Select,
 		Sheet,
+		Sidenote,
 		Skeleton,
 		SkipLink,
 		Slider,
@@ -57,6 +59,7 @@
 		Textarea,
 		Timeline,
 		Toast,
+		Toc,
 		Toolbar,
 		Tooltip,
 		Window,
@@ -420,6 +423,36 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'filedrop'}
+	<div class="wide-col">
+		<FileDrop
+			label="Drop a cover here"
+			accept="image/*"
+			hint="WebP or AVIF, at least 1600px wide."
+		/>
+	</div>
+{:else if slug === 'sidenote'}
+	<div class="wide-col">
+		<Prose>
+			<p>
+				The band is the unit of rhythm on this page, and the note below belongs to this
+				paragraph rather than to the page.
+			</p>
+			<Sidenote>One hue means every surface is a lighter or darker version of the same colour.</Sidenote>
+			<p>The argument continues in the body column while the note keeps to itself.</p>
+		</Prose>
+	</div>
+{:else if slug === 'toc'}
+	<div class="col">
+		<Toc
+			current="#usage"
+			items={[
+				{ href: '#example', label: 'Example' },
+				{ href: '#usage', label: 'Usage' },
+				{ href: '#props', label: 'Props' }
+			]}
+		/>
 	</div>
 {:else if slug === 'sheet'}
 	<div class="row">

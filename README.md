@@ -51,6 +51,7 @@ import '#lib/matersv.css';
 | `Byline` | `name`, `src`, `href`, `meta`, `size` |
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
+| `FileDrop` | `label`, `accept`, `multiple`, `hint`, `onfiles` |
 | `FileInput` | `label`, `accept`, `multiple`, `disabled`, `hint` |
 | `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
 | `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
@@ -63,6 +64,7 @@ import '#lib/matersv.css';
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
 | `NumberInput` | `label`, `bind:value`, `min`, `max`, `step`, `disabled` |
 | `Toast` | `message`, `bind:open`, `duration` (ms, 0 keeps it open) |
+| `Toc` | `items: { href, label }[]`, `current`, `label` |
 | `Toolbar` | `label`, snippet children |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
@@ -90,6 +92,7 @@ import '#lib/matersv.css';
 | `Kbd` | snippet children |
 | `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |
 | `Popover` | `label`, `bind:open`, `role="dialog\|region"`, `trigger` / `children` snippets |
+| `Sidenote` | snippet children |
 | `SkipLink` | `href`, `label` |
 | `TagList` | `items: { href, label }[]`, `label` |
 | `Progress` | `label`, `value`, `max`, `id` |

@@ -19,6 +19,7 @@ import Cover from '../src/lib/components/Cover.svelte';
 import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Figure from '../src/lib/components/Figure.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
+import FileDrop from '../src/lib/components/FileDrop.svelte';
 import FileInput from '../src/lib/components/FileInput.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
@@ -38,6 +39,7 @@ import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Skeleton from '../src/lib/components/Skeleton.svelte';
+import Sidenote from '../src/lib/components/Sidenote.svelte';
 import SkipLink from '../src/lib/components/SkipLink.svelte';
 import StatusDot from '../src/lib/components/StatusDot.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
@@ -55,6 +57,7 @@ import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import Timeline from '../src/lib/components/Timeline.svelte';
 import Toast from '../src/lib/components/Toast.svelte';
+import Toc from '../src/lib/components/Toc.svelte';
 import Toolbar from '../src/lib/components/Toolbar.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
@@ -482,6 +485,51 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('FileDrop', () => {
+	it('takes a dropped file and reports it', async () => {
+		const onfiles = vi.fn();
+		render(FileDrop, { props: { label: 'Drop a cover', onfiles } });
+
+		const zone = screen.getByText('Drop a cover');
+		expect(zone.closest('label')?.textContent).toContain('click to browse');
+
+		const file = new File(['x'], 'cover.webp', { type: 'image/webp' });
+		await fireEvent.drop(/** @type {Element} */ (zone.closest('label')), {
+			dataTransfer: { files: [file] }
+		});
+
+		expect(onfiles).toHaveBeenCalledTimes(1);
+		expect(screen.getByText('cover.webp')).toBeTruthy();
+	});
+});
+
+describe('Sidenote', () => {
+	it('renders as an aside with the given text', () => {
+		render(Sidenote, { props: { children: text('A caveat.') } });
+
+		const note = screen.getByText('A caveat.').closest('aside');
+		expect(note).not.toBeNull();
+	});
+});
+
+describe('Toc', () => {
+	it('marks only the current section', () => {
+		render(Toc, {
+			props: {
+				current: '#shape',
+				items: [
+					{ href: '#surfaces', label: 'Surfaces' },
+					{ href: '#shape', label: 'Shape' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('navigation', { name: 'On this page' })).toBeTruthy();
+		expect(screen.getByRole('link', { name: 'Shape' }).getAttribute('aria-current')).toBe('true');
+		expect(screen.getByRole('link', { name: 'Surfaces' }).getAttribute('aria-current')).toBeNull();
 	});
 });
 

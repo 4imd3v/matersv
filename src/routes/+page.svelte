@@ -34,6 +34,7 @@
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
 	import Figure from '#lib/components/Figure.svelte';
+	import FileDrop from '#lib/components/FileDrop.svelte';
 	import FileInput from '#lib/components/FileInput.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Input from '#lib/components/Input.svelte';
@@ -50,6 +51,7 @@
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Sheet from '#lib/components/Sheet.svelte';
+	import Sidenote from '#lib/components/Sidenote.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
 	import SkipLink from '#lib/components/SkipLink.svelte';
 	import Slider from '#lib/components/Slider.svelte';
@@ -57,6 +59,7 @@
 	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
 	import Timeline from '#lib/components/Timeline.svelte';
+	import Toc from '#lib/components/Toc.svelte';
 	import Toolbar from '#lib/components/Toolbar.svelte';
 	import Toast from '#lib/components/Toast.svelte';
 	import Switch from '#lib/components/Switch.svelte';
@@ -563,6 +566,41 @@
 						<span>Lyrics</span>
 						<Switch bind:checked={audioOnly} label="Audio only" />
 						<span>Audio only</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>File drop</h3>
+					<p>A drop zone that is also the picker. The drag state is a surface shift, not a dashed border.</p>
+					<div class="filedrop-demo">
+						<FileDrop label="Drop a cover here" accept="image/*" hint="WebP or AVIF, 1600px wide." />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Sidenote</h3>
+					<p>An aside that hangs in the margin above 760px and falls into the flow below it.</p>
+					<div class="sidenote-demo">
+						<Prose>
+							<p>The band is the unit of rhythm on this page, and the note that follows belongs to it.</p>
+							<Sidenote>One hue means every surface is the same colour, lighter or darker.</Sidenote>
+							<p>The body column continues while the note keeps to itself.</p>
+						</Prose>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Toc</h3>
+					<p>On-page navigation with one current section. You pass current; there is no observer.</p>
+					<div class="toc-demo">
+						<Toc
+							current="#components"
+							items={[
+								{ href: '#main', label: 'Top' },
+								{ href: '#components', label: 'Components' },
+								{ href: '#night', label: 'Night' }
+							]}
+						/>
 					</div>
 				</article>
 
@@ -1092,6 +1130,24 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.filedrop-demo,
+	.sidenote-demo,
+	.toc-demo {
+		margin-top: 24px;
+	}
+
+	.filedrop-demo {
+		max-width: 440px;
+	}
+
+	.sidenote-demo {
+		max-width: 520px;
+	}
+
+	.toc-demo {
+		max-width: 240px;
 	}
 
 	.status-demo {

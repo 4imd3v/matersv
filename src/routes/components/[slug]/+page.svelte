@@ -36,19 +36,19 @@
 				<p class="lead">{component.lead}</p>
 			</header>
 
-			<section>
+			<section id="example">
 				<h2>Example</h2>
 				<div class="preview">
 					<Example slug={component.slug} />
 				</div>
 			</section>
 
-			<section>
+			<section id="usage">
 				<h2>Usage</h2>
 				<Code code={component.code} />
 			</section>
 
-			<section>
+			<section id="props">
 				<h2>Props</h2>
 				<PropsTable props={component.props} />
 			</section>
