@@ -557,6 +557,29 @@ export const components = [
 <Progress label="Upload" value={64} />`
 	},
 	{
+		slug: 'popover',
+		name: 'Popover',
+		lead: 'A non-modal panel on a native popover: top layer, Esc and light dismiss from the platform, focus moved in and returned, and the panel placed under its trigger.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the panel.' },
+			{ name: 'trigger', type: 'Snippet', default: '—', description: 'Content of the trigger button.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Panel content.' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Visibility. Supports bind:open.' },
+			{ name: 'role', type: "'dialog' | 'region'", default: "'dialog'", description: 'Panel role. Use region for passive content.' }
+		],
+		code: `<script>
+	import { Popover, Checkbox } from 'matersv';
+
+	let open = $state(false);
+	let lyrics = $state(true);
+</script>
+
+<Popover label="Filters" bind:open>
+	{#snippet trigger()}Filters{/snippet}
+	<Checkbox label="Show lyrics" bind:checked={lyrics} />
+</Popover>`
+	},
+	{
 		slug: 'prose',
 		name: 'Prose',
 		lead: 'Article typography in one wrapper: headings, paragraphs, lists, links, inline code, quotes and rules, all from tokens.',
@@ -736,6 +759,21 @@ export const components = [
 		{ value: 'team', label: 'Team' }
 	]}
 />`
+	},
+	{
+		slug: 'skiplink',
+		name: 'SkipLink',
+		lead: 'The first tab stop: hidden until focused, then a pill over the page that jumps to the main content.',
+		props: [
+			{ name: 'href', type: 'string', default: "'#main'", description: 'Target id.' },
+			{ name: 'label', type: 'string', default: "'Skip to content'", description: 'Link text.' }
+		],
+		code: `<script>
+	import { SkipLink } from 'matersv';
+</script>
+
+<SkipLink />
+<main id="main">…</main>`
 	},
 	{
 		slug: 'skeleton',
@@ -925,6 +963,27 @@ export const components = [
 	items={[
 		{ date: 'March 2026', title: '0.2.0', body: 'Strike, Tabs, Quote, EmptyState.' },
 		{ date: 'February 2026', title: '0.1.2', body: 'The first tagged release.' }
+	]}
+/>`
+	},
+	{
+		slug: 'taglist',
+		name: 'TagList',
+		lead: 'A wrapped row of topic pills. Links, not buttons, because they navigate; hover fills with the accent.',
+		props: [
+			{ name: 'items', type: 'Tag[]', default: '—', description: 'Each item is { href, label }.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the list.' }
+		],
+		code: `<script>
+	import { TagList } from 'matersv';
+</script>
+
+<TagList
+	label="Topics"
+	items={[
+		{ href: '/topics/design', label: 'Design' },
+		{ href: '/topics/svelte', label: 'Svelte' },
+		{ href: '/topics/css', label: 'CSS' }
 	]}
 />`
 	},

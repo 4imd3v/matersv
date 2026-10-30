@@ -36,6 +36,7 @@
 	import Kbd from '#lib/components/Kbd.svelte';
 	import ListRow from '#lib/components/ListRow.svelte';
 	import Menu from '#lib/components/Menu.svelte';
+	import Popover from '#lib/components/Popover.svelte';
 	import Progress from '#lib/components/Progress.svelte';
 	import Prose from '#lib/components/Prose.svelte';
 	import Quote from '#lib/components/Quote.svelte';
@@ -45,7 +46,9 @@
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
+	import SkipLink from '#lib/components/SkipLink.svelte';
 	import Slider from '#lib/components/Slider.svelte';
+	import TagList from '#lib/components/TagList.svelte';
 	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
 	import Timeline from '#lib/components/Timeline.svelte';
@@ -129,6 +132,8 @@
 	let toastOpen = $state(false);
 	let seats = $state(3);
 	let score = $state(4);
+	let filtersOpen = $state(false);
+	let showLyrics = $state(true);
 
 	// Demo of the hue engine: two numbers on <html> reskin every token.
 	$effect(() => {
@@ -180,7 +185,7 @@
 	<span>Stats</span>
 {/snippet}
 
-<main>
+<main id="main">
 	<section id="top" class="section section--field hero">
 		<div class="wrap hero__inner">
 			<h1 class="reveal">One hue.<br />Four surfaces.<br />No bloat.</h1>
@@ -535,6 +540,42 @@
 						<span>Lyrics</span>
 						<Switch bind:checked={audioOnly} label="Audio only" />
 						<span>Audio only</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Popover</h3>
+					<p>A non-modal panel on a native popover. Esc, light dismiss and focus return come free.</p>
+					<div class="row">
+						<Popover label="Filters" bind:open={filtersOpen}>
+							{#snippet trigger()}Filters{/snippet}
+							<Checkbox label="Show lyrics" bind:checked={showLyrics} />
+						</Popover>
+						<span>{filtersOpen ? 'Open' : 'Closed'}</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Skip link</h3>
+					<p>The first tab stop. Hidden until focused, then a pill that jumps to the main content.</p>
+					<div class="skip-demo">
+						<SkipLink href="#main" />
+						<span>Press Tab to reveal it</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Tag list</h3>
+					<p>Topic pills that navigate. Hover fills with the accent; the row wraps on narrow screens.</p>
+					<div class="tags-demo">
+						<TagList
+							label="Topics"
+							items={[
+								{ href: '#components', label: 'Design' },
+								{ href: '#components', label: 'Svelte' },
+								{ href: '#components', label: 'CSS' }
+							]}
+						/>
 					</div>
 				</article>
 
@@ -951,6 +992,18 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.skip-demo,
+	.tags-demo {
+		margin-top: 24px;
+	}
+
+	.skip-demo {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-size: 15px;
 	}
 
 	.byline-demo,

@@ -74,6 +74,23 @@ test('menu opens, moves with the arrow keys and closes on Escape', async ({ page
 	await expect(page.getByText('Sorted by title')).toBeVisible();
 });
 
+test('popover opens under its trigger and closes on Escape', async ({ page }) => {
+	await page.goto('/components/popover');
+
+	const trigger = page.getByRole('button', { name: 'Filters' });
+	const panel = page.getByRole('dialog', { name: 'Filters' });
+
+	await trigger.click();
+	await expect(panel).toBeVisible();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+	await expect(panel).toBeFocused();
+
+	await page.keyboard.press('Escape');
+	await expect(panel).toBeHidden();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+	await expect(trigger).toBeFocused();
+});
+
 test('slider steps with the arrow keys', async ({ page }) => {
 	await page.goto('/components/slider');
 

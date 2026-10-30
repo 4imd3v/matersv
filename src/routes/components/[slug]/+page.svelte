@@ -13,7 +13,7 @@
 	<meta name="description" content={component.lead} />
 </svelte:head>
 
-<main class="page">
+<main class="page" id="main">
 	<div class="wrap docs">
 		<aside class="sidebar">
 			<a class="back" href="/components">All components</a>

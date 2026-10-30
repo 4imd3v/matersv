@@ -86,6 +86,9 @@ import '#lib/matersv.css';
 | `Strike` | `items: string[]` |
 | `Kbd` | snippet children |
 | `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |
+| `Popover` | `label`, `bind:open`, `role="dialog\|region"`, `trigger` / `children` snippets |
+| `SkipLink` | `href`, `label` |
+| `TagList` | `items: { href, label }[]`, `label` |
 | `Progress` | `label`, `value`, `max`, `id` |
 | `Accordion` | snippet children (a list of `AccordionItem`) |
 | `AccordionItem` | `title`, `bind:open`, snippet children |

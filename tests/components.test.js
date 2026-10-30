@@ -24,6 +24,7 @@ import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import NumberInput from '../src/lib/components/NumberInput.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
+import Popover from '../src/lib/components/Popover.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import Prose from '../src/lib/components/Prose.svelte';
 import Quote from '../src/lib/components/Quote.svelte';
@@ -34,6 +35,7 @@ import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Skeleton from '../src/lib/components/Skeleton.svelte';
+import SkipLink from '../src/lib/components/SkipLink.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
 import Spinner from '../src/lib/components/Spinner.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
@@ -43,6 +45,7 @@ import Window from '../src/lib/components/Window.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
 import Table from '../src/lib/components/Table.svelte';
 import Tabs from '../src/lib/components/Tabs.svelte';
+import TagList from '../src/lib/components/TagList.svelte';
 import Tooltip from '../src/lib/components/Tooltip.svelte';
 import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
@@ -474,6 +477,56 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Popover', () => {
+	it('wires the trigger to a named panel', () => {
+		render(Popover, {
+			props: {
+				label: 'Filters',
+				trigger: text('Filters'),
+				children: text('Filter body')
+			}
+		});
+
+		const trigger = screen.getByRole('button', { name: 'Filters' });
+		expect(trigger.getAttribute('aria-expanded')).toBe('false');
+		expect(trigger.getAttribute('popovertarget')).toBeTruthy();
+
+		// jsdom hides a closed popover, so reach it by attribute.
+		const panel = /** @type {HTMLElement} */ (document.querySelector('[popover]'));
+		expect(panel.getAttribute('role')).toBe('dialog');
+		expect(panel.getAttribute('aria-label')).toBe('Filters');
+		expect(panel.getAttribute('popover')).toBe('auto');
+		expect(panel.textContent).toContain('Filter body');
+	});
+});
+
+describe('SkipLink', () => {
+	it('points at the main id by default', () => {
+		render(SkipLink, {});
+
+		const link = screen.getByRole('link', { name: 'Skip to content' });
+		expect(link.getAttribute('href')).toBe('#main');
+	});
+});
+
+describe('TagList', () => {
+	it('renders one link per tag inside a named list', () => {
+		render(TagList, {
+			props: {
+				label: 'Topics',
+				items: [
+					{ href: '/components', label: 'Design' },
+					{ href: '/components', label: 'Svelte' }
+				]
+			}
+		});
+
+		expect(screen.getByRole('list', { name: 'Topics' })).toBeTruthy();
+		expect(screen.getAllByRole('link')).toHaveLength(2);
+		expect(screen.getByRole('link', { name: 'Svelte' }).getAttribute('href')).toBe('/components');
 	});
 });
 

@@ -28,13 +28,16 @@ for (const path of [
 	'/components/fileinput',
 	'/components/menu',
 	'/components/numberinput',
+	'/components/popover',
 	'/components/prose',
 	'/components/rating',
 	'/components/steps',
+	'/components/taglist',
 	'/components/timeline',
 	'/components/radiogroup',
 	'/components/scrollprogress',
 	'/components/searchfield',
+	'/components/skiplink',
 	'/components/toast'
 ]) {
 	test(`no accessibility violations on ${path}`, async ({ page }) => {

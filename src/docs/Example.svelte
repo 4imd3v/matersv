@@ -27,6 +27,7 @@
 		Notice,
 		NumberInput,
 		Pagination,
+		Popover,
 		Progress,
 		Prose,
 		Quote,
@@ -38,6 +39,7 @@
 		SegmentedControl,
 		Select,
 		Skeleton,
+		SkipLink,
 		Slider,
 		Spinner,
 		Stat,
@@ -46,6 +48,7 @@
 		Switch,
 		Table,
 		Tabs,
+		TagList,
 		Textarea,
 		Timeline,
 		Toast,
@@ -70,6 +73,8 @@
 	let toastOpen = $state(false);
 	let seats = $state(3);
 	let score = $state(3);
+	let filtersOpen = $state(false);
+	let showLyrics = $state(true);
 
 	const reviewers = [
 		{ name: 'Ada Lovelace' },
@@ -392,6 +397,32 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'popover'}
+	<div class="row">
+		<Popover label="Filters" bind:open={filtersOpen}>
+			{#snippet trigger()}Filters{/snippet}
+			<Checkbox label="Show lyrics" bind:checked={showLyrics} />
+		</Popover>
+		<span class="muted">{filtersOpen ? 'Open' : 'Closed'}</span>
+	</div>
+{:else if slug === 'skiplink'}
+	<div class="col">
+		<SkipLink href="#main" />
+		<p class="note">
+			SkipLink is the first tab stop on the demo site. Press Tab from the address bar to see it.
+		</p>
+	</div>
+{:else if slug === 'taglist'}
+	<div class="wide-col">
+		<TagList
+			label="Topics"
+			items={[
+				{ href: '/components', label: 'Design' },
+				{ href: '/components', label: 'Svelte' },
+				{ href: '/components', label: 'CSS' }
+			]}
+		/>
 	</div>
 {:else if slug === 'byline'}
 	<div class="col">

@@ -1,5 +1,6 @@
 <script>
 	import { tick } from 'svelte';
+	import { placePopover } from '../popover-place.js';
 
 	const uid = $props.id();
 
@@ -34,16 +35,8 @@
 		list[(index + list.length) % list.length]?.focus();
 	}
 
-	/** Keep the panel under the trigger; the top layer does not anchor itself. */
 	function place() {
-		if (!trigger || !panel) return;
-
-		const rect = trigger.getBoundingClientRect();
-		// Keep the panel on screen when the trigger sits near the right edge.
-		const maxX = window.innerWidth - panel.offsetWidth - 16;
-		panel.style.setProperty('--menu-x', `${Math.max(16, Math.min(rect.left, maxX))}px`);
-		panel.style.setProperty('--menu-y', `${rect.bottom + 8}px`);
-		panel.style.setProperty('--menu-w', `${rect.width}px`);
+		placePopover(trigger, panel);
 	}
 
 	$effect(() => {
@@ -178,9 +171,9 @@
 	[popover] {
 		position: fixed;
 		inset: auto;
-		top: var(--menu-y, 0);
-		left: var(--menu-x, 0);
-		min-width: var(--menu-w, 0);
+		top: var(--popover-y, 0);
+		left: var(--popover-x, 0);
+		min-width: var(--popover-w, 0);
 		margin: 0;
 		padding: 6px;
 		border: 0;
