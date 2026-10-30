@@ -31,9 +31,12 @@
 		Stat,
 		Strike,
 		Switch,
+		Table,
 		Tabs,
 		Textarea,
+		Tooltip,
 		Window,
+		Wordmark,
 		ThemeToggle
 	} from '#lib/index.js';
 
@@ -330,6 +333,57 @@
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
 	</div>
+{:else if slug === 'table'}
+	<div class="wide-col">
+		<Table caption="Plan limits">
+			<thead>
+				<tr>
+					<th scope="col">Plan</th>
+					<th scope="col">Seats</th>
+					<th scope="col">Storage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Solo</th>
+					<td>1</td>
+					<td>20 GB</td>
+				</tr>
+				<tr>
+					<th scope="row">Team</th>
+					<td>5</td>
+					<td>120 GB</td>
+				</tr>
+				<tr>
+					<th scope="row">Studio</th>
+					<td>20</td>
+					<td>1 TB</td>
+				</tr>
+			</tbody>
+		</Table>
+	</div>
+{:else if slug === 'tooltip'}
+	<div class="row">
+		<Tooltip text="Copy link">
+			<IconButton label="Copy link">
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path
+						d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1m3 6a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"
+						stroke="currentColor"
+						stroke-width="1.9"
+						stroke-linecap="round"
+					/>
+				</svg>
+			</IconButton>
+		</Tooltip>
+		<Tooltip text="Synced two minutes ago">
+			<Badge>Synced</Badge>
+		</Tooltip>
+	</div>
+{:else if slug === 'wordmark'}
+	<div class="mark-demo">
+		<Wordmark text="Mater" />
+	</div>
 {:else if slug === 'capsulenav'}
 	<p class="note">
 		CapsuleNav is the header of the demo site itself. Open the home page to see it in
@@ -355,6 +409,12 @@
 	.wide-col {
 		width: 100%;
 		max-width: 620px;
+	}
+
+	.mark-demo {
+		overflow: hidden;
+		width: 100%;
+		padding-top: 80px;
 	}
 
 	.cover-demo {

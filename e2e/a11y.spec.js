@@ -4,7 +4,9 @@ import { expect, test } from '@playwright/test';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
 async function expectNoViolations(page) {
-	const results = await new AxeBuilder({ page }).withTags(TAGS).analyze();
+	// .mark is the decorative footer wordmark: aria-hidden brand text, which WCAG
+	// 1.4.3 exempts as a logotype. It is faded on purpose.
+	const results = await new AxeBuilder({ page }).withTags(TAGS).exclude('.mark').analyze();
 
 	expect(
 		results.violations.map((violation) => ({

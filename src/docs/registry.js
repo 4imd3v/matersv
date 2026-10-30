@@ -581,6 +581,37 @@ export const components = [
 <Switch bind:checked={lyrics} label="Show lyrics" />`
 	},
 	{
+		slug: 'table',
+		name: 'Table',
+		lead: 'Quiet rows with tabular numerals. You write the semantic thead and th scope; the component only sets the rhythm and the hover surface.',
+		props: [
+			{ name: 'caption', type: 'string', default: '—', description: 'Caption above the table.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'thead and tbody markup.' }
+		],
+		code: `<script>
+	import { Table } from 'matersv';
+</script>
+
+<Table caption="Plan limits">
+	<thead>
+		<tr>
+			<th scope="col">Plan</th>
+			<th scope="col">Seats</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Solo</th>
+			<td>1</td>
+		</tr>
+		<tr>
+			<th scope="row">Team</th>
+			<td>5</td>
+		</tr>
+	</tbody>
+</Table>`
+	},
+	{
 		slug: 'tabs',
 		name: 'Tabs',
 		lead: 'One panel at a time, with arrow keys, Home and End. Moving focus also selects.',
@@ -623,6 +654,24 @@ export const components = [
 <Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
 	},
 	{
+		slug: 'tooltip',
+		name: 'Tooltip',
+		lead: 'A pill label above its trigger, on hover and on keyboard focus. Decorative: the trigger still needs its own accessible name.',
+		props: [
+			{ name: 'text', type: 'string', default: '—', description: 'The label.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The trigger. Hover or focus it.' }
+		],
+		code: `<script>
+	import { IconButton, Tooltip } from 'matersv';
+</script>
+
+<Tooltip text="Copy link">
+	<IconButton label="Copy link">
+		<svg viewBox="0 0 24 24" aria-hidden="true">…</svg>
+	</IconButton>
+</Tooltip>`
+	},
+	{
 		slug: 'window',
 		name: 'Window',
 		lead: 'App window frame: optional rail, inset pane and monochrome chrome dots, so the page keeps one hue.',
@@ -637,6 +686,19 @@ export const components = [
 <Window>
 	<p>Real UI goes in the pane, never a screenshot.</p>
 </Window>`
+	},
+	{
+		slug: 'wordmark',
+		name: 'Wordmark',
+		lead: 'Giant brand mark cropped by the viewport and faded out by a mask. Decorative, so the real name still belongs in the footer copy.',
+		props: [
+			{ name: 'text', type: 'string', default: '—', description: 'The brand name. Reads best in one short word.' }
+		],
+		code: `<script>
+	import { Wordmark } from 'matersv';
+</script>
+
+<Wordmark text="Mater" />`
 	},
 	{
 		slug: 'themetoggle',

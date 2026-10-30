@@ -28,7 +28,10 @@ import Stat from '../src/lib/components/Stat.svelte';
 import Strike from '../src/lib/components/Strike.svelte';
 import Window from '../src/lib/components/Window.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
+import Table from '../src/lib/components/Table.svelte';
 import Tabs from '../src/lib/components/Tabs.svelte';
+import Tooltip from '../src/lib/components/Tooltip.svelte';
+import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
@@ -456,6 +459,56 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Table', () => {
+	it('labels the table with its caption', () => {
+		render(Table, {
+			props: {
+				caption: 'Plan limits',
+				children: createRawSnippet(() => ({
+					render: () => '<thead><tr><th scope="col">Plan</th></tr></thead><tbody><tr><td>Solo</td></tr></tbody>'
+				}))
+			}
+		});
+
+		const table = screen.getByRole('table', { name: 'Plan limits' });
+		expect(table).toBeTruthy();
+		expect(screen.getByRole('columnheader', { name: 'Plan' })).toBeTruthy();
+	});
+
+	it('renders the rows it is given', () => {
+		render(Table, {
+			props: {
+				children: createRawSnippet(() => ({
+					render: () => '<tbody><tr><th scope="row">Solo</th><td>1</td></tr></tbody>'
+				}))
+			}
+		});
+
+		expect(screen.getByRole('rowheader', { name: 'Solo' })).toBeTruthy();
+		expect(screen.getByRole('cell', { name: '1' })).toBeTruthy();
+	});
+});
+
+describe('Tooltip', () => {
+	it('keeps the label decorative so the trigger stays the accessible name', () => {
+		render(Tooltip, { props: { text: 'Copy link', children: text('Copy') } });
+
+		expect(screen.getByText('Copy')).toBeTruthy();
+		const bubble = screen.getByText('Copy link');
+		expect(bubble.getAttribute('aria-hidden')).toBe('true');
+		expect(bubble.closest('[tabindex]')).toBeNull();
+	});
+});
+
+describe('Wordmark', () => {
+	it('renders the brand as decorative text', () => {
+		render(Wordmark, { props: { text: 'Mater' } });
+
+		const mark = screen.getByText('Mater');
+		expect(mark.getAttribute('aria-hidden')).toBe('true');
 	});
 });
 

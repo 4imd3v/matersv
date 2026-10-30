@@ -63,7 +63,9 @@ import '#lib/matersv.css';
 | `Badge` | `tone="field\|accent"` |
 | `Breadcrumbs` | `items: { href, label }[]`, `label` |
 | `Pagination` | `items: { href, label }[]`, `current`, `label` |
+| `Table` | `caption`, snippet children (you write `th scope`) |
 | `Tabs` | `items: { value, label }[]`, `bind:value`, `label`, snippet children |
+| `Tooltip` | `text`, snippet children (the trigger) |
 | `Quote` | `cite`, snippet children |
 | `EmptyState` | `title`, `lead`, `icon` / children snippets |
 | `Avatar` | `name`, `src`, `size` |
@@ -83,6 +85,7 @@ import '#lib/matersv.css';
 | `CapsuleNav` | `brand`, `items: { href, label }[]`, children snippet for extra actions |
 | `ThemeToggle` | — |
 | `Window` | `rail` snippet, snippet children |
+| `Wordmark` | `text` |
 
 Also exported: `theme`, `applyTheme`, `initTheme`, `hue`, `setHue`.
 

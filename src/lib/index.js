@@ -30,10 +30,13 @@ export { default as Spinner } from './components/Spinner.svelte';
 export { default as Stat } from './components/Stat.svelte';
 export { default as Strike } from './components/Strike.svelte';
 export { default as Switch } from './components/Switch.svelte';
+export { default as Table } from './components/Table.svelte';
 export { default as Tabs } from './components/Tabs.svelte';
 export { default as Textarea } from './components/Textarea.svelte';
 export { default as ThemeToggle } from './components/ThemeToggle.svelte';
+export { default as Tooltip } from './components/Tooltip.svelte';
 export { default as Window } from './components/Window.svelte';
+export { default as Wordmark } from './components/Wordmark.svelte';
 
 export { applyTheme, initTheme, theme } from './theme.svelte.js';
 export { hue, setHue } from './hue.svelte.js';

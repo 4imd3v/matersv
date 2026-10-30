@@ -17,7 +17,10 @@
 	import Fieldset from '#lib/components/Fieldset.svelte';
 	import Stat from '#lib/components/Stat.svelte';
 	import Strike from '#lib/components/Strike.svelte';
+	import Table from '#lib/components/Table.svelte';
 	import Tabs from '#lib/components/Tabs.svelte';
+	import Tooltip from '#lib/components/Tooltip.svelte';
+	import Wordmark from '#lib/components/Wordmark.svelte';
 	import Window from '#lib/components/Window.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
@@ -486,6 +489,61 @@
 					</div>
 				</article>
 
+				<article class="card reveal wide">
+					<h3>Table</h3>
+					<p>Quiet rows and tabular numerals. You keep the semantics; the surface does the separation.</p>
+					<div class="table-demo">
+						<Table caption="Plan limits">
+							<thead>
+								<tr>
+									<th scope="col">Plan</th>
+									<th scope="col">Seats</th>
+									<th scope="col">Storage</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Solo</th>
+									<td>1</td>
+									<td>20 GB</td>
+								</tr>
+								<tr>
+									<th scope="row">Team</th>
+									<td>5</td>
+									<td>120 GB</td>
+								</tr>
+								<tr>
+									<th scope="row">Studio</th>
+									<td>20</td>
+									<td>1 TB</td>
+								</tr>
+							</tbody>
+						</Table>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Tooltip</h3>
+					<p>A pill label on hover and on keyboard focus. The trigger keeps the accessible name.</p>
+					<div class="row">
+						<Tooltip text="Copy link">
+							<IconButton label="Copy link">
+								<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path
+										d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1m3 6a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"
+										stroke="currentColor"
+										stroke-width="1.9"
+										stroke-linecap="round"
+									/>
+								</svg>
+							</IconButton>
+						</Tooltip>
+						<Tooltip text="Synced two minutes ago">
+							<Badge>Synced</Badge>
+						</Tooltip>
+					</div>
+				</article>
+
 				<article class="card reveal">
 					<h3>Segmented control</h3>
 					<p>Native radios, so arrow keys, forms and screen readers work without JavaScript.</p>
@@ -523,6 +581,9 @@
 	<div class="wrap footer__inner">
 		<p>Built with Svelte 5 and modern CSS. Tokens and rules from <code>DESIGN.md</code>.</p>
 		<p class="muted">One hue · four surfaces · capsule chrome</p>
+	</div>
+	<div class="wrap footer__mark">
+		<Wordmark text="Mater" />
 	</div>
 </footer>
 
@@ -700,6 +761,10 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.table-demo {
+		margin-top: 20px;
 	}
 
 	.footer__inner {
