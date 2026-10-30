@@ -91,6 +91,35 @@ test('popover opens under its trigger and closes on Escape', async ({ page }) =>
 	await expect(trigger).toBeFocused();
 });
 
+test('combobox filters and selects from the keyboard', async ({ page }) => {
+	await page.goto('/components/combobox');
+
+	const input = page.getByRole('combobox', { name: 'City' });
+	await input.click();
+	await expect(input).toHaveAttribute('aria-expanded', 'true');
+
+	await input.fill('ky');
+	await expect(page.getByRole('option')).toHaveCount(1);
+	await page.keyboard.press('ArrowDown');
+	await page.keyboard.press('Enter');
+
+	await expect(input).toHaveValue('Kyoto');
+	await expect(input).toHaveAttribute('aria-expanded', 'false');
+	await expect(page.getByText('Chosen: kyoto')).toBeVisible();
+});
+
+test('carousel moves its rail with the next button', async ({ page }) => {
+	await page.goto('/components/carousel');
+
+	const track = page.locator('.track');
+	const before = await track.evaluate((element) => element.scrollLeft);
+	await page.getByRole('button', { name: 'Next' }).click();
+	await page.waitForTimeout(600);
+
+	const after = await track.evaluate((element) => element.scrollLeft);
+	expect(after).toBeGreaterThan(before);
+});
+
 test('slider steps with the arrow keys', async ({ page }) => {
 	await page.goto('/components/slider');
 

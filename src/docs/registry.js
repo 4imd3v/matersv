@@ -212,6 +212,24 @@ export const components = [
 </Card>`
 	},
 	{
+		slug: 'carousel',
+		name: 'Carousel',
+		lead: 'A scroll-snap rail with Previous and Next buttons. Touch, wheel and the buttons all move the same track; nothing is hidden from the DOM.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the region.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The slides. Each direct child snaps to the start.' }
+		],
+		code: `<script>
+	import { Carousel, Card } from 'matersv';
+</script>
+
+<Carousel label="Screens">
+	<Card title="Home" lead="The hero band." />
+	<Card title="Search" lead="Fuzzy, instant." />
+	<Card title="Player" lead="Cover and queue." />
+</Carousel>`
+	},
+	{
 		slug: 'checkbox',
 		name: 'Checkbox',
 		lead: 'A circular checkbox on the field surface. Native input, label wraps the hit area.',
@@ -242,6 +260,33 @@ export const components = [
 </script>
 
 <CodeBlock label="app.html" code={'<meta name="theme-color" content="#f5fbfe" />'} />`
+	},
+	{
+		slug: 'combobox',
+		name: 'Combobox',
+		lead: 'A filterable select: type to narrow, arrows to move, Enter to choose. The listbox stays a listbox; focus never leaves the input.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Visible label, also the listbox name.' },
+			{ name: 'items', type: 'ComboItem[]', default: '—', description: 'Each item is { value, label }.' },
+			{ name: 'value', type: 'string', default: "''", description: 'Chosen value. Supports bind:value.' },
+			{ name: 'placeholder', type: 'string', default: '—', description: 'Placeholder text.' },
+			{ name: 'id', type: 'string', default: 'generated', description: 'Input id.' }
+		],
+		code: `<script>
+	import { Combobox } from 'matersv';
+
+	let city = $state('oslo');
+</script>
+
+<Combobox
+	label="City"
+	bind:value={city}
+	items={[
+		{ value: 'oslo', label: 'Oslo' },
+		{ value: 'lisbon', label: 'Lisbon' },
+		{ value: 'kyoto', label: 'Kyoto' }
+	]}
+/>`
 	},
 	{
 		slug: 'cover',
@@ -517,6 +562,24 @@ export const components = [
 </script>
 
 <NumberInput label="Seats" bind:value={seats} min={1} max={20} />`
+	},
+	{
+		slug: 'pager',
+		name: 'Pager',
+		lead: 'Previous and next links with a small kicker and a balanced title. One side alone sits on its own edge.',
+		props: [
+			{ name: 'prev', type: '{ href, title }', default: '—', description: 'Left link.' },
+			{ name: 'next', type: '{ href, title }', default: '—', description: 'Right link.' },
+			{ name: 'label', type: 'string', default: "'Pagination'", description: 'Accessible name of the nav.' }
+		],
+		code: `<script>
+	import { Pager } from 'matersv';
+</script>
+
+<Pager
+	prev={{ href: '/posts/one', title: 'The quiet band' }}
+	next={{ href: '/posts/three', title: 'Capsule chrome' }}
+/>`
 	},
 	{
 		slug: 'pagination',

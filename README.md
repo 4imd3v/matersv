@@ -70,6 +70,7 @@ import '#lib/matersv.css';
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Breadcrumbs` | `items: { href, label }[]`, `label` |
+| `Pager` | `prev` / `next`: `{ href, title }`, `label` |
 | `Pagination` | `items: { href, label }[]`, `current`, `label` |
 | `Menu` | `items: { value, label }[]`, `label`, `onselect` |
 | `Table` | `caption`, snippet children (you write `th scope`) |
@@ -95,6 +96,8 @@ import '#lib/matersv.css';
 | `Dialog` | `bind:open`, `title`, snippet children |
 | `Card` | `title`, `lead`, snippet children |
 | `CodeBlock` | `code`, `label` |
+| `Carousel` | `label`, snippet children (one snapped slide each) |
+| `Combobox` | `label`, `items: { value, label }[]`, `bind:value`, `placeholder`, `id` |
 | `Cover` | `src`, `alt`, `width`, `height`, or snippet children |
 | `Dots` | `count`, `value` (decorative, pair with a number) |
 | `Figure` | `src`, `alt`, `ratio`, `caption`, `credit`, `width`, `height`, `loading` |

@@ -10,11 +10,14 @@
 	import Badge from '#lib/components/Badge.svelte';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import Card from '#lib/components/Card.svelte';
+	import Carousel from '#lib/components/Carousel.svelte';
 	import Checkbox from '#lib/components/Checkbox.svelte';
 	import Notice from '#lib/components/Notice.svelte';
 	import NumberInput from '#lib/components/NumberInput.svelte';
+	import Pager from '#lib/components/Pager.svelte';
 	import Pagination from '#lib/components/Pagination.svelte';
 	import CodeBlock from '#lib/components/CodeBlock.svelte';
+	import Combobox from '#lib/components/Combobox.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
 	import EmptyState from '#lib/components/EmptyState.svelte';
@@ -77,6 +80,22 @@
 		{ name: 'Alan Turing' },
 		{ name: 'Katherine Johnson' },
 		{ name: 'Edsger Dijkstra' }
+	];
+
+	let city = $state('oslo');
+
+	const cities = [
+		{ value: 'oslo', label: 'Oslo' },
+		{ value: 'lisbon', label: 'Lisbon' },
+		{ value: 'kyoto', label: 'Kyoto' },
+		{ value: 'montevideo', label: 'Montevideo' }
+	];
+
+	const slides = [
+		{ title: 'Home', lead: 'The hero band.' },
+		{ title: 'Search', lead: 'Fuzzy, instant.' },
+		{ title: 'Player', lead: 'Cover and queue.' },
+		{ title: 'Library', lead: 'Everything saved.' }
 	];
 
 	const releases = [
@@ -543,6 +562,37 @@
 					</div>
 				</article>
 
+				<article class="card reveal wide">
+					<h3>Carousel</h3>
+					<p>A scroll-snap rail with Previous and Next. Touch, wheel and the buttons move the same track.</p>
+					<div class="carousel-demo">
+						<Carousel label="Screens">
+							{#each slides as slide (slide.title)}
+								<Card title={slide.title} lead={slide.lead} />
+							{/each}
+						</Carousel>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Combobox</h3>
+					<p>Type to narrow, arrows to move, Enter to choose. Focus never leaves the input.</p>
+					<div class="combo-demo">
+						<Combobox label="City" items={cities} bind:value={city} placeholder="Start typing" />
+					</div>
+				</article>
+
+				<article class="card reveal wide">
+					<h3>Pager</h3>
+					<p>Previous and next with a small kicker and a balanced title.</p>
+					<div class="pager-demo">
+						<Pager
+							prev={{ href: '#components', title: 'Accordion' }}
+							next={{ href: '#components', title: 'Carousel' }}
+						/>
+					</div>
+				</article>
+
 				<article class="card reveal">
 					<h3>Popover</h3>
 					<p>A non-modal panel on a native popover. Esc, light dismiss and focus return come free.</p>
@@ -992,6 +1042,16 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.carousel-demo,
+	.combo-demo,
+	.pager-demo {
+		margin-top: 24px;
+	}
+
+	.combo-demo {
+		max-width: 360px;
 	}
 
 	.skip-demo,

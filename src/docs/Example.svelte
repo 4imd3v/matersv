@@ -10,8 +10,10 @@
 		Button,
 		Byline,
 		Card,
+		Carousel,
 		Checkbox,
 		CodeBlock,
+		Combobox,
 		Cover,
 		Dialog,
 		Dots,
@@ -26,6 +28,7 @@
 		Menu,
 		Notice,
 		NumberInput,
+		Pager,
 		Pagination,
 		Popover,
 		Progress,
@@ -82,6 +85,22 @@
 		{ name: 'Alan Turing' },
 		{ name: 'Katherine Johnson' },
 		{ name: 'Edsger Dijkstra' }
+	];
+
+	let city = $state('oslo');
+
+	const cities = [
+		{ value: 'oslo', label: 'Oslo' },
+		{ value: 'lisbon', label: 'Lisbon' },
+		{ value: 'kyoto', label: 'Kyoto' },
+		{ value: 'montevideo', label: 'Montevideo' }
+	];
+
+	const slides = [
+		{ title: 'Home', lead: 'The hero band.' },
+		{ title: 'Search', lead: 'Fuzzy, instant.' },
+		{ title: 'Player', lead: 'Cover and queue.' },
+		{ title: 'Library', lead: 'Everything saved.' }
 	];
 
 	const releases = [
@@ -397,6 +416,26 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'carousel'}
+	<div class="wide-col">
+		<Carousel label="Screens">
+			{#each slides as slide (slide.title)}
+				<Card title={slide.title} lead={slide.lead} />
+			{/each}
+		</Carousel>
+	</div>
+{:else if slug === 'combobox'}
+	<div class="col">
+		<Combobox label="City" items={cities} bind:value={city} placeholder="Start typing" />
+		<span class="muted">Chosen: {city}</span>
+	</div>
+{:else if slug === 'pager'}
+	<div class="wide-col">
+		<Pager
+			prev={{ href: '/components/accordion', title: 'Accordion' }}
+			next={{ href: '/components/carousel', title: 'Carousel' }}
+		/>
 	</div>
 {:else if slug === 'popover'}
 	<div class="row">

@@ -1,4 +1,4 @@
-import { createRawSnippet } from 'svelte';
+import { createRawSnippet, tick } from 'svelte';
 import { fireEvent, render, screen } from '@testing-library/svelte';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -11,8 +11,10 @@ import AvatarGroup from '../src/lib/components/AvatarGroup.svelte';
 import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Byline from '../src/lib/components/Byline.svelte';
 import Card from '../src/lib/components/Card.svelte';
+import Carousel from '../src/lib/components/Carousel.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
 import CodeBlock from '../src/lib/components/CodeBlock.svelte';
+import Combobox from '../src/lib/components/Combobox.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
 import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Figure from '../src/lib/components/Figure.svelte';
@@ -23,6 +25,7 @@ import ListRow from '../src/lib/components/ListRow.svelte';
 import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import NumberInput from '../src/lib/components/NumberInput.svelte';
+import Pager from '../src/lib/components/Pager.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
 import Popover from '../src/lib/components/Popover.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
@@ -477,6 +480,83 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Combobox', () => {
+	const items = [
+		{ value: 'oslo', label: 'Oslo' },
+		{ value: 'lisbon', label: 'Lisbon' },
+		{ value: 'kyoto', label: 'Kyoto' }
+	];
+
+	it('filters as you type and sets the value on Enter', async () => {
+		render(Combobox, { props: { label: 'City', items, value: '' } });
+
+		const input = /** @type {HTMLInputElement} */ (screen.getByRole('combobox', { name: 'City' }));
+		expect(input.getAttribute('aria-expanded')).toBe('false');
+
+		input.focus();
+		await tick();
+		expect(input.getAttribute('aria-expanded')).toBe('true');
+		expect(screen.getAllByRole('option')).toHaveLength(3);
+
+		await fireEvent.input(input, { target: { value: 'ky' } });
+		expect(screen.getAllByRole('option')).toHaveLength(1);
+		expect(screen.getByRole('option', { name: 'Kyoto' })).toBeTruthy();
+
+		await fireEvent.keyDown(input, { key: 'ArrowDown' });
+		await fireEvent.keyDown(input, { key: 'Enter' });
+
+		expect(input.value).toBe('Kyoto');
+		expect(input.getAttribute('aria-expanded')).toBe('false');
+	});
+
+	it('says so when nothing matches', async () => {
+		render(Combobox, { props: { label: 'City', items, value: '' } });
+
+		const input = /** @type {HTMLInputElement} */ (screen.getByRole('combobox', { name: 'City' }));
+		input.focus();
+		await tick();
+		await fireEvent.input(input, { target: { value: 'zzz' } });
+
+		expect(screen.getByText('No matches')).toBeTruthy();
+	});
+});
+
+describe('Carousel', () => {
+	it('is a named region with Previous and Next controls', async () => {
+		render(Carousel, {
+			props: {
+				label: 'Screens',
+				children: createRawSnippet(() => ({ render: () => '<div>Slide</div>' }))
+			}
+		});
+
+		expect(screen.getByRole('region', { name: 'Screens' })).toBeTruthy();
+		expect(screen.getByText('Slide')).toBeTruthy();
+
+		// jsdom has no layout, so scrolling is a no-op; the controls must not throw.
+		await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'Previous' }));
+	});
+});
+
+describe('Pager', () => {
+	it('links both sides and leaves a missing side out', () => {
+		render(Pager, {
+			props: {
+				prev: { href: '/components/accordion', title: 'Accordion' },
+				next: { href: '/components/carousel', title: 'Carousel' }
+			}
+		});
+
+		const nav = screen.getByRole('navigation', { name: 'Pagination' });
+		expect(nav).toBeTruthy();
+		expect(screen.getByRole('link', { name: /Accordion/ }).getAttribute('href')).toBe(
+			'/components/accordion'
+		);
+		expect(screen.getByRole('link', { name: /Carousel/ })).toBeTruthy();
 	});
 });
 
