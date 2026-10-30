@@ -12,6 +12,7 @@
 		Cover,
 		Dialog,
 		Dots,
+		EmptyState,
 		Fieldset,
 		IconButton,
 		Input,
@@ -20,6 +21,7 @@
 		Notice,
 		Pagination,
 		Progress,
+		Quote,
 		SectionHeader,
 		SegmentedControl,
 		Select,
@@ -29,6 +31,7 @@
 		Stat,
 		Strike,
 		Switch,
+		Tabs,
 		Textarea,
 		Window,
 		ThemeToggle
@@ -43,6 +46,12 @@
 	let note = $state('');
 	let changelog = $state(true);
 	let volume = $state(64);
+	let tab = $state('specs');
+
+	const tabItems = [
+		{ value: 'specs', label: 'Specs' },
+		{ value: 'reviews', label: 'Reviews' }
+	];
 
 	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
 	let plan = $state('team');
@@ -87,7 +96,27 @@
 	<span>Stats</span>
 {/snippet}
 
-{#if slug === 'fieldset'}
+{#if slug === 'emptystate'}
+	<div class="col">
+		<EmptyState title="No drafts" lead="Anything you save lands here first.">
+			<Button variant="text">Start a draft</Button>
+		</EmptyState>
+	</div>
+{:else if slug === 'quote'}
+	<div class="col">
+		<Quote cite="Dieter Rams">Less, but better.</Quote>
+	</div>
+{:else if slug === 'tabs'}
+	<div class="col">
+		<Tabs items={tabItems} bind:value={tab} label="Details">
+			{#if tab === 'specs'}
+				<p>Pill controls, one hue, no borders.</p>
+			{:else}
+				<p>No runtime dependencies; the platform does the work.</p>
+			{/if}
+		</Tabs>
+	</div>
+{:else if slug === 'fieldset'}
 	<div class="col">
 		<Fieldset legend="Notifications" hint="Applies to this device.">
 			<Checkbox label="Releases" />

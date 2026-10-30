@@ -238,6 +238,24 @@ export const components = [
 <p>17 of 20</p>`
 	},
 	{
+		slug: 'emptystate',
+		name: 'EmptyState',
+		lead: 'What a list says when it has nothing to show: a title, a line of guidance and one action.',
+		props: [
+			{ name: 'title', type: 'string', default: '—', description: 'The state in three words.' },
+			{ name: 'lead', type: 'string', default: '—', description: 'What to do next.' },
+			{ name: 'icon', type: 'Snippet', default: '—', description: 'Optional 24px glyph on a circle.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'One action.' }
+		],
+		code: `<script>
+	import { Button, EmptyState } from 'matersv';
+</script>
+
+<EmptyState title="No drafts" lead="Anything you save lands here first.">
+	<Button variant="text">Start a draft</Button>
+</EmptyState>`
+	},
+	{
 		slug: 'fieldset',
 		name: 'Fieldset',
 		lead: 'A group of controls with a real legend, so a set of checkboxes is announced as one group.',
@@ -385,6 +403,20 @@ export const components = [
 </script>
 
 <Progress label="Upload" value={64} />`
+	},
+	{
+		slug: 'quote',
+		name: 'Quote',
+		lead: 'A pull quote at heading scale, with the attribution set in the handwritten face.',
+		props: [
+			{ name: 'cite', type: 'string', default: '—', description: 'Attribution line.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The quote itself.' }
+		],
+		code: `<script>
+	import { Quote } from 'matersv';
+</script>
+
+<Quote cite="Dieter Rams">Less, but better.</Quote>`
 	},
 	{
 		slug: 'sectionheader',
@@ -547,6 +579,29 @@ export const components = [
 </script>
 
 <Switch bind:checked={lyrics} label="Show lyrics" />`
+	},
+	{
+		slug: 'tabs',
+		name: 'Tabs',
+		lead: 'One panel at a time, with arrow keys, Home and End. Moving focus also selects.',
+		props: [
+			{ name: 'items', type: '{ value, label }[]', default: '—', description: 'Tabs in order.' },
+			{ name: 'value', type: 'string', default: 'first item', description: 'Active tab. Supports bind:value.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name of the tab list.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'Panel content; switch on the bound value.' }
+		],
+		code: `<script>
+	import { Tabs } from 'matersv';
+	let tab = $state('specs');
+	const items = [
+		{ value: 'specs', label: 'Specs' },
+		{ value: 'reviews', label: 'Reviews' }
+	];
+</script>
+
+<Tabs {items} bind:value={tab} label="Details">
+	{#if tab === 'specs'}<p>Pill controls, one hue.</p>{:else}<p>No runtime dependencies.</p>{/if}
+</Tabs>`
 	},
 	{
 		slug: 'textarea',

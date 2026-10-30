@@ -63,6 +63,9 @@ import '#lib/matersv.css';
 | `Badge` | `tone="field\|accent"` |
 | `Breadcrumbs` | `items: { href, label }[]`, `label` |
 | `Pagination` | `items: { href, label }[]`, `current`, `label` |
+| `Tabs` | `items: { value, label }[]`, `bind:value`, `label`, snippet children |
+| `Quote` | `cite`, snippet children |
+| `EmptyState` | `title`, `lead`, `icon` / children snippets |
 | `Avatar` | `name`, `src`, `size` |
 | `Stat` | `value`, `label`, `suffix`, `duration` |
 | `Strike` | `items: string[]` |

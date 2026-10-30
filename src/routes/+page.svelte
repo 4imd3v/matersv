@@ -13,9 +13,11 @@
 	import Pagination from '#lib/components/Pagination.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
+	import EmptyState from '#lib/components/EmptyState.svelte';
 	import Fieldset from '#lib/components/Fieldset.svelte';
 	import Stat from '#lib/components/Stat.svelte';
 	import Strike from '#lib/components/Strike.svelte';
+	import Tabs from '#lib/components/Tabs.svelte';
 	import Window from '#lib/components/Window.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Dialog from '#lib/components/Dialog.svelte';
@@ -24,6 +26,7 @@
 	import Kbd from '#lib/components/Kbd.svelte';
 	import ListRow from '#lib/components/ListRow.svelte';
 	import Progress from '#lib/components/Progress.svelte';
+	import Quote from '#lib/components/Quote.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
 	import Slider from '#lib/components/Slider.svelte';
@@ -66,6 +69,12 @@
 	let note = $state('');
 	let changelog = $state(true);
 	let volume = $state(64);
+	let tab = $state('specs');
+
+	const tabItems = [
+		{ value: 'specs', label: 'Specs' },
+		{ value: 'reviews', label: 'Reviews' }
+	];
 	let plan = $state('team');
 	let dialogOpen = $state(false);
 	let playing = $state(false);
@@ -249,6 +258,34 @@
 					<h3>Annotation</h3>
 					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
 					<Annotation arrow>one line, never two</Annotation>
+				</article>
+
+				<article class="card reveal">
+					<h3>Tabs</h3>
+					<p>One panel at a time. Arrow keys, Home and End move and select.</p>
+					<div class="tabs-demo">
+						<Tabs items={tabItems} bind:value={tab} label="Details">
+							{#if tab === 'specs'}
+								<p>Pill controls, one hue, no borders.</p>
+							{:else}
+								<p>No runtime dependencies; the platform does the work.</p>
+							{/if}
+						</Tabs>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Quote</h3>
+					<p>Pulled at heading scale, with the attribution in the handwritten face.</p>
+					<Quote cite="Dieter Rams">Less, but better.</Quote>
+				</article>
+
+				<article class="card reveal">
+					<h3>EmptyState</h3>
+					<p>What a list says when it has nothing: a title, a line, one action.</p>
+					<EmptyState title="No drafts" lead="Anything you save lands here first.">
+						<Button variant="text">Start a draft</Button>
+					</EmptyState>
 				</article>
 
 				<article class="card reveal">
@@ -576,6 +613,10 @@
 
 	.annotation-demo {
 		padding-left: clamp(80px, 9vw, 120px);
+	}
+
+	.tabs-demo {
+		margin-top: 24px;
 	}
 
 	.fieldset-demo,

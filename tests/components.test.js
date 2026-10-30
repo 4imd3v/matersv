@@ -11,12 +11,14 @@ import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
+import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
+import Quote from '../src/lib/components/Quote.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Skeleton from '../src/lib/components/Skeleton.svelte';
@@ -26,6 +28,7 @@ import Stat from '../src/lib/components/Stat.svelte';
 import Strike from '../src/lib/components/Strike.svelte';
 import Window from '../src/lib/components/Window.svelte';
 import Switch from '../src/lib/components/Switch.svelte';
+import Tabs from '../src/lib/components/Tabs.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
@@ -211,6 +214,74 @@ describe('Slider', () => {
 
 		await fireEvent.input(input, { target: { value: '70' } });
 		expect(input.value).toBe('70');
+	});
+});
+
+describe('Tabs', () => {
+	const items = [
+		{ value: 'specs', label: 'Specs' },
+		{ value: 'reviews', label: 'Reviews' }
+	];
+
+	it('selects the first tab and switches on click', async () => {
+		render(Tabs, { props: { items, label: 'Details', children: text('Panel') } });
+
+		const tabs = screen.getAllByRole('tab');
+		expect(tabs).toHaveLength(2);
+		expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+		expect(tabs[1].getAttribute('aria-selected')).toBe('false');
+
+		await fireEvent.click(tabs[1]);
+
+		expect(tabs[0].getAttribute('aria-selected')).toBe('false');
+		expect(tabs[1].getAttribute('aria-selected')).toBe('true');
+		expect(screen.getByRole('tabpanel').getAttribute('aria-labelledby')).toBe(tabs[1].id);
+	});
+
+	it('moves selection with the arrow keys and Home/End', async () => {
+		render(Tabs, { props: { items, label: 'Details', children: text('Panel') } });
+		const [first, second] = screen.getAllByRole('tab');
+
+		await fireEvent.keyDown(first, { key: 'ArrowRight' });
+		expect(second.getAttribute('aria-selected')).toBe('true');
+
+		await fireEvent.keyDown(second, { key: 'ArrowLeft' });
+		expect(first.getAttribute('aria-selected')).toBe('true');
+
+		await fireEvent.keyDown(first, { key: 'End' });
+		expect(second.getAttribute('aria-selected')).toBe('true');
+
+		await fireEvent.keyDown(second, { key: 'Home' });
+		expect(first.getAttribute('aria-selected')).toBe('true');
+	});
+
+	it('keeps one tab in the tab order', () => {
+		render(Tabs, { props: { items, label: 'Details', children: text('Panel') } });
+		const [first, second] = screen.getAllByRole('tab');
+
+		expect(first.getAttribute('tabindex')).toBe('0');
+		expect(second.getAttribute('tabindex')).toBe('-1');
+	});
+});
+
+describe('Quote', () => {
+	it('renders the quote and its attribution', () => {
+		render(Quote, { props: { cite: 'Dieter Rams', children: text('Less, but better.') } });
+
+		expect(screen.getByText('Less, but better.').closest('blockquote')).not.toBeNull();
+		expect(screen.getByText('Dieter Rams', { selector: 'figcaption' })).toBeTruthy();
+	});
+});
+
+describe('EmptyState', () => {
+	it('renders the title, lead and action', () => {
+		render(EmptyState, {
+			props: { title: 'No drafts', lead: 'Save one first.', children: text('Start') }
+		});
+
+		expect(screen.getByText('No drafts')).toBeTruthy();
+		expect(screen.getByText('Save one first.')).toBeTruthy();
+		expect(screen.getByText('Start')).toBeTruthy();
 	});
 });
 
