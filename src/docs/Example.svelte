@@ -12,6 +12,7 @@
 		Cover,
 		Dialog,
 		Dots,
+		Fieldset,
 		IconButton,
 		Input,
 		Kbd,
@@ -22,7 +23,9 @@
 		SectionHeader,
 		SegmentedControl,
 		Select,
+		Skeleton,
 		Slider,
+		Spinner,
 		Stat,
 		Strike,
 		Switch,
@@ -84,7 +87,27 @@
 	<span>Stats</span>
 {/snippet}
 
-{#if slug === 'avatar'}
+{#if slug === 'fieldset'}
+	<div class="col">
+		<Fieldset legend="Notifications" hint="Applies to this device.">
+			<Checkbox label="Releases" />
+			<Checkbox label="Billing" />
+		</Fieldset>
+	</div>
+{:else if slug === 'spinner'}
+	<div class="row">
+		<Spinner size={18} label="Saving" />
+		<Spinner size={24} />
+		<Spinner size={36} label="Rendering" />
+	</div>
+{:else if slug === 'skeleton'}
+	<div class="col">
+		<Skeleton width="40px" height="40px" shape="circle" />
+		<Skeleton width="70%" height="20px" />
+		<Skeleton width="100%" height="14px" />
+		<Skeleton width="100%" height="88px" shape="card" />
+	</div>
+{:else if slug === 'avatar'}
 	<div class="row">
 		<Avatar name="Ada Lovelace" />
 		<Avatar name="Grace Hopper" size={64} />

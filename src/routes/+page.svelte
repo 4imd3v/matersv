@@ -13,6 +13,7 @@
 	import Pagination from '#lib/components/Pagination.svelte';
 	import Cover from '#lib/components/Cover.svelte';
 	import Dots from '#lib/components/Dots.svelte';
+	import Fieldset from '#lib/components/Fieldset.svelte';
 	import Stat from '#lib/components/Stat.svelte';
 	import Strike from '#lib/components/Strike.svelte';
 	import Window from '#lib/components/Window.svelte';
@@ -24,7 +25,9 @@
 	import ListRow from '#lib/components/ListRow.svelte';
 	import Progress from '#lib/components/Progress.svelte';
 	import Select from '#lib/components/Select.svelte';
+	import Skeleton from '#lib/components/Skeleton.svelte';
 	import Slider from '#lib/components/Slider.svelte';
+	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
@@ -246,6 +249,38 @@
 					<h3>Annotation</h3>
 					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
 					<Annotation arrow>one line, never two</Annotation>
+				</article>
+
+				<article class="card reveal">
+					<h3>Fieldset</h3>
+					<p>A real legend, so a set of controls is announced as one group.</p>
+					<div class="fieldset-demo">
+						<Fieldset legend="Notifications" hint="Applies to this device.">
+							<Checkbox label="Releases" />
+							<Checkbox label="Billing" />
+						</Fieldset>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Spinner</h3>
+					<p>Indeterminate busy. With reduced motion the arc holds still and the status remains.</p>
+					<div class="spinner-demo">
+						<Spinner size={18} label="Saving" />
+						<Spinner size={24} />
+						<Spinner size={36} label="Rendering" />
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Skeleton</h3>
+					<p>Placeholder blocks with a shimmer. Decorative, so screen readers skip them.</p>
+					<div class="skeleton-demo">
+						<Skeleton width="40px" height="40px" shape="circle" />
+						<Skeleton width="65%" height="18px" />
+						<Skeleton width="100%" height="12px" />
+						<Skeleton width="85%" height="12px" />
+					</div>
 				</article>
 
 				<article class="card reveal">
@@ -541,6 +576,24 @@
 
 	.annotation-demo {
 		padding-left: clamp(80px, 9vw, 120px);
+	}
+
+	.fieldset-demo,
+	.spinner-demo,
+	.skeleton-demo {
+		margin-top: 24px;
+	}
+
+	.spinner-demo {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.skeleton-demo {
+		display: grid;
+		justify-items: start;
+		gap: 10px;
 	}
 
 	.avatars-demo {

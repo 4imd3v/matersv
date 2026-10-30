@@ -52,6 +52,9 @@ import '#lib/matersv.css';
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
 | `Checkbox` | `label`, `hint`, `bind:checked`, `disabled`, `id` |
 | `Slider` | `label`, `bind:value`, `min`, `max`, `step`, `hint` |
+| `Fieldset` | `legend`, `hint`, snippet children |
+| `Spinner` | `size`, `label` |
+| `Skeleton` | `width`, `height`, `shape="pill\|card\|circle"` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |

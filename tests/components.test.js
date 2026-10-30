@@ -11,6 +11,7 @@ import Breadcrumbs from '../src/lib/components/Breadcrumbs.svelte';
 import Card from '../src/lib/components/Card.svelte';
 import Checkbox from '../src/lib/components/Checkbox.svelte';
 import Cover from '../src/lib/components/Cover.svelte';
+import Fieldset from '../src/lib/components/Fieldset.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
@@ -18,7 +19,9 @@ import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
 import Select from '../src/lib/components/Select.svelte';
+import Skeleton from '../src/lib/components/Skeleton.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
+import Spinner from '../src/lib/components/Spinner.svelte';
 import Stat from '../src/lib/components/Stat.svelte';
 import Strike from '../src/lib/components/Strike.svelte';
 import Window from '../src/lib/components/Window.svelte';
@@ -208,6 +211,38 @@ describe('Slider', () => {
 
 		await fireEvent.input(input, { target: { value: '70' } });
 		expect(input.value).toBe('70');
+	});
+});
+
+describe('Fieldset', () => {
+	it('names the group with its legend and describes it with the hint', () => {
+		render(Fieldset, {
+			props: { legend: 'Notifications', hint: 'This device.', children: text('Controls') }
+		});
+
+		const group = screen.getByRole('group', { name: 'Notifications' });
+		expect(group.getAttribute('aria-describedby')).toBe(screen.getByText('This device.').id);
+		expect(screen.getByText('Controls')).toBeTruthy();
+	});
+});
+
+describe('Spinner', () => {
+	it('exposes a status with the given label', () => {
+		render(Spinner, { props: { label: 'Saving' } });
+
+		expect(screen.getByRole('status', { name: 'Saving' })).toBeTruthy();
+	});
+});
+
+describe('Skeleton', () => {
+	it('stays out of the accessibility tree and takes the given size', () => {
+		const { container } = render(Skeleton, { props: { width: '60%', height: '20px' } });
+		const block = /** @type {HTMLElement} */ (container.querySelector('.skeleton'));
+
+		expect(block.getAttribute('aria-hidden')).toBe('true');
+		expect(block.style.width).toBe('60%');
+		expect(block.style.height).toBe('20px');
+		expect(block.className).toContain('skeleton--pill');
 	});
 });
 

@@ -238,6 +238,24 @@ export const components = [
 <p>17 of 20</p>`
 	},
 	{
+		slug: 'fieldset',
+		name: 'Fieldset',
+		lead: 'A group of controls with a real legend, so a set of checkboxes is announced as one group.',
+		props: [
+			{ name: 'legend', type: 'string', default: '—', description: 'Group name, rendered as the legend.' },
+			{ name: 'hint', type: 'string', default: '—', description: 'Group description, wired with aria-describedby.' },
+			{ name: 'children', type: 'Snippet', default: '—', description: 'The controls.' }
+		],
+		code: `<script>
+	import { Checkbox, Fieldset } from 'matersv';
+</script>
+
+<Fieldset legend="Notifications" hint="Applies to this device.">
+	<Checkbox label="Releases" />
+	<Checkbox label="Billing" />
+</Fieldset>`
+	},
+	{
 		slug: 'iconbutton',
 		name: 'IconButton',
 		lead: 'Circular 44px control for a single icon with an accessible label.',
@@ -437,6 +455,22 @@ export const components = [
 />`
 	},
 	{
+		slug: 'skeleton',
+		name: 'Skeleton',
+		lead: 'A placeholder block in the field surface with a shimmer. Decorative, so it stays out of the accessibility tree.',
+		props: [
+			{ name: 'width', type: 'string', default: "'100%'", description: 'Any CSS length.' },
+			{ name: 'height', type: 'string', default: "'1em'", description: 'Any CSS length.' },
+			{ name: 'shape', type: "'pill' | 'card' | 'circle'", default: "'pill'", description: 'Corner radius family.' }
+		],
+		code: `<script>
+	import { Skeleton } from 'matersv';
+</script>
+
+<Skeleton width="60%" height="20px" />
+<Skeleton width="40px" height="40px" shape="circle" />`
+	},
+	{
 		slug: 'slider',
 		name: 'Slider',
 		lead: 'Native range input with a pill track and a capsule thumb. Arrow keys, forms and AT come from the platform.',
@@ -470,6 +504,20 @@ export const components = [
 </script>
 
 <Stat value={98} suffix="%" label="Lighthouse, all four categories" />`
+	},
+	{
+		slug: 'spinner',
+		name: 'Spinner',
+		lead: 'An indeterminate busy state. It holds still with reduced motion and keeps its status role.',
+		props: [
+			{ name: 'size', type: 'number', default: '24', description: 'Diameter in px.' },
+			{ name: 'label', type: 'string', default: "'Loading'", description: 'Accessible status text.' }
+		],
+		code: `<script>
+	import { Spinner } from 'matersv';
+</script>
+
+<Spinner size={20} label="Saving" />`
 	},
 	{
 		slug: 'strike',
