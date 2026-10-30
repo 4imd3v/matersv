@@ -351,6 +351,30 @@ export const components = [
 <ListRow title="Archive" meta="Saved for later" href="/archive" />`
 	},
 	{
+		slug: 'menu',
+		name: 'Menu',
+		lead: 'A menu button on a native popover: top layer, light dismiss and Esc from the platform, arrows and Home/End from the component.',
+		props: [
+			{ name: 'items', type: 'MenuItem[]', default: '—', description: 'Each item is { value, label }.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Trigger text, and the menu name.' },
+			{ name: 'onselect', type: '(value: string) => void', default: '—', description: 'Called with the chosen value before the menu closes.' }
+		],
+		code: `<script>
+	import { Menu } from 'matersv';
+
+	let sort = $state('newest');
+</script>
+
+<Menu
+	label="Sort"
+	items={[
+		{ value: 'newest', label: 'Newest first' },
+		{ value: 'oldest', label: 'Oldest first' }
+	]}
+	onselect={(value) => (sort = value)}
+/>`
+	},
+	{
 		slug: 'notice',
 		name: 'Notice',
 		lead: 'Inline message on the field surface. Danger is an alert, everything else a polite status.',
@@ -417,6 +441,29 @@ export const components = [
 </script>
 
 <Quote cite="Dieter Rams">Less, but better.</Quote>`
+	},
+	{
+		slug: 'searchfield',
+		name: 'SearchField',
+		lead: 'A search pill: icon, input, a shortcut hint while empty and a clear button once there is a value.',
+		props: [
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name. Visually hidden.' },
+			{ name: 'value', type: 'string', default: "''", description: 'Current query. Supports bind:value.' },
+			{ name: 'placeholder', type: 'string', default: '—', description: 'Placeholder text.' },
+			{ name: 'id', type: 'string', default: 'generated', description: 'Input id.' },
+			{ name: 'shortcut', type: 'Snippet', default: '—', description: 'Hint shown while the field is empty, usually Kbd.' }
+		],
+		code: `<script>
+	import { Kbd, SearchField } from 'matersv';
+
+	let query = $state('');
+</script>
+
+<SearchField label="Search the docs" bind:value={query} placeholder="Search">
+	{#snippet shortcut()}
+		<Kbd>⌘</Kbd><Kbd>K</Kbd>
+	{/snippet}
+</SearchField>`
 	},
 	{
 		slug: 'sectionheader',
@@ -652,6 +699,24 @@ export const components = [
 </script>
 
 <Textarea label="Note" bind:value={note} hint="Shown on the invoice." />`
+	},
+	{
+		slug: 'toast',
+		name: 'Toast',
+		lead: 'One status pill at the bottom of the viewport. It announces politely and closes itself unless duration is 0.',
+		props: [
+			{ name: 'message', type: 'string', default: '—', description: 'Announced text.' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Visibility. Supports bind:open.' },
+			{ name: 'duration', type: 'number', default: '4000', description: 'Auto-dismiss delay in ms. 0 keeps it open.' }
+		],
+		code: `<script>
+	import { Toast } from 'matersv';
+
+	let saved = $state(false);
+</script>
+
+<button onclick={() => (saved = true)}>Save</button>
+<Toast bind:open={saved} message="Layout saved" />`
 	},
 	{
 		slug: 'tooltip',

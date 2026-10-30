@@ -18,10 +18,12 @@
 		Input,
 		Kbd,
 		ListRow,
+		Menu,
 		Notice,
 		Pagination,
 		Progress,
 		Quote,
+		SearchField,
 		SectionHeader,
 		SegmentedControl,
 		Select,
@@ -34,6 +36,7 @@
 		Table,
 		Tabs,
 		Textarea,
+		Toast,
 		Tooltip,
 		Window,
 		Wordmark,
@@ -50,6 +53,15 @@
 	let changelog = $state(true);
 	let volume = $state(64);
 	let tab = $state('specs');
+	let sort = $state('newest');
+	let query = $state('');
+	let toastOpen = $state(false);
+
+	const sortItems = [
+		{ value: 'newest', label: 'Newest first' },
+		{ value: 'oldest', label: 'Oldest first' },
+		{ value: 'title', label: 'Title A–Z' }
+	];
 
 	const tabItems = [
 		{ value: 'specs', label: 'Specs' },
@@ -85,6 +97,10 @@
 		<circle cx="380" cy="380" r="220" fill="currentColor" opacity=".18" />
 		<circle cx="380" cy="380" r="120" fill="currentColor" opacity=".3" />
 	</svg>
+{/snippet}
+
+{#snippet keys()}
+	<Kbd>⌘</Kbd><Kbd>K</Kbd>
 {/snippet}
 
 {#snippet chevron()}
@@ -332,6 +348,25 @@
 	<div class="row">
 		<ThemeToggle />
 		<span>Click to switch the theme</span>
+	</div>
+{:else if slug === 'menu'}
+	<div class="row">
+		<Menu label="Sort" items={sortItems} onselect={(value) => (sort = value)} />
+		<span class="muted">Sorted by {sort}</span>
+	</div>
+{:else if slug === 'searchfield'}
+	<div class="col">
+		<SearchField
+			label="Search the docs"
+			bind:value={query}
+			placeholder="Search components"
+			shortcut={keys}
+		/>
+	</div>
+{:else if slug === 'toast'}
+	<div class="row">
+		<Button onclick={() => (toastOpen = true)}>Save layout</Button>
+		<Toast bind:open={toastOpen} message="Layout saved to this device" />
 	</div>
 {:else if slug === 'table'}
 	<div class="wide-col">

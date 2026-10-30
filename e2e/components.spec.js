@@ -49,6 +49,31 @@ test('tabs move and select with the arrow keys', async ({ page }) => {
 	await expect(tabs.nth(0)).toHaveAttribute('aria-selected', 'true');
 });
 
+test('menu opens, moves with the arrow keys and closes on Escape', async ({ page }) => {
+	await page.goto('/components/menu');
+
+	const trigger = page.getByRole('button', { name: 'Sort' });
+	const menu = page.getByRole('menu', { name: 'Sort' });
+
+	await trigger.click();
+	await expect(menu).toBeVisible();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+
+	const items = menu.getByRole('menuitem');
+	await items.first().focus();
+	await page.keyboard.press('ArrowDown');
+	await expect(items.nth(1)).toBeFocused();
+
+	await page.keyboard.press('Escape');
+	await expect(menu).toBeHidden();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+	await trigger.click();
+	await items.nth(2).click();
+	await expect(menu).toBeHidden();
+	await expect(page.getByText('Sorted by title')).toBeVisible();
+});
+
 test('slider steps with the arrow keys', async ({ page }) => {
 	await page.goto('/components/slider');
 

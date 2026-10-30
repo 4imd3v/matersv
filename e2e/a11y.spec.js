@@ -16,7 +16,15 @@ async function expectNoViolations(page) {
 	).toEqual([]);
 }
 
-for (const path of ['/', '/components', '/components/button', '/components/dialog']) {
+for (const path of [
+	'/',
+	'/components',
+	'/components/button',
+	'/components/dialog',
+	'/components/menu',
+	'/components/searchfield',
+	'/components/toast'
+]) {
 	test(`no accessibility violations on ${path}`, async ({ page }) => {
 		await page.goto(path);
 		await expectNoViolations(page);

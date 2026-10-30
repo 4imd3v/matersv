@@ -15,11 +15,13 @@ import EmptyState from '../src/lib/components/EmptyState.svelte';
 import Fieldset from '../src/lib/components/Fieldset.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
+import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import Pagination from '../src/lib/components/Pagination.svelte';
 import Progress from '../src/lib/components/Progress.svelte';
 import Quote from '../src/lib/components/Quote.svelte';
 import SegmentedControl from '../src/lib/components/SegmentedControl.svelte';
+import SearchField from '../src/lib/components/SearchField.svelte';
 import Select from '../src/lib/components/Select.svelte';
 import Skeleton from '../src/lib/components/Skeleton.svelte';
 import Slider from '../src/lib/components/Slider.svelte';
@@ -33,6 +35,7 @@ import Tabs from '../src/lib/components/Tabs.svelte';
 import Tooltip from '../src/lib/components/Tooltip.svelte';
 import Wordmark from '../src/lib/components/Wordmark.svelte';
 import Textarea from '../src/lib/components/Textarea.svelte';
+import Toast from '../src/lib/components/Toast.svelte';
 import { applyTheme } from '../src/lib/theme.svelte.js';
 
 /** @param {string} value */
@@ -459,6 +462,65 @@ describe('AccordionItem', () => {
 
 		expect(screen.getByText('Question').closest('summary')).not.toBeNull();
 		expect(screen.getByText('Answer')).toBeTruthy();
+	});
+});
+
+describe('Menu', () => {
+	it('exposes a menu button and reports the chosen value', async () => {
+		const onselect = vi.fn();
+		render(Menu, {
+			props: {
+				label: 'Sort',
+				items: [
+					{ value: 'newest', label: 'Newest first' },
+					{ value: 'oldest', label: 'Oldest first' }
+				],
+				onselect
+			}
+		});
+
+		const trigger = screen.getByRole('button', { name: 'Sort' });
+		expect(trigger.getAttribute('aria-haspopup')).toBe('menu');
+		expect(trigger.getAttribute('aria-expanded')).toBe('false');
+		// jsdom hides a closed popover, so the items are only reachable as hidden.
+		expect(screen.getAllByRole('menuitem', { hidden: true })).toHaveLength(2);
+
+		await fireEvent.click(screen.getByRole('menuitem', { name: 'Oldest first', hidden: true }));
+		expect(onselect).toHaveBeenCalledWith('oldest');
+	});
+});
+
+describe('SearchField', () => {
+	it('is a named search box with a clear button once it has a value', async () => {
+		const { rerender } = render(SearchField, {
+			props: { label: 'Search the docs', value: '' }
+		});
+
+		const input = /** @type {HTMLInputElement} */ (
+			screen.getByRole('searchbox', { name: 'Search the docs' })
+		);
+		expect(input.value).toBe('');
+		expect(screen.queryByRole('button', { name: 'Clear search' })).toBeNull();
+
+		await rerender({ label: 'Search the docs', value: 'tabs' });
+		expect(input.value).toBe('tabs');
+
+		await fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+		expect(input.value).toBe('');
+	});
+});
+
+describe('Toast', () => {
+	it('stays in the DOM as a live region and closes itself', async () => {
+		vi.useFakeTimers();
+		render(Toast, { props: { message: 'Layout saved', open: true, duration: 3000 } });
+
+		const region = screen.getByRole('status');
+		expect(region.textContent).toContain('Layout saved');
+
+		await vi.advanceTimersByTimeAsync(3000);
+		expect(region.textContent).toBe('');
+		vi.useRealTimers();
 	});
 });
 

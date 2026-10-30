@@ -28,13 +28,16 @@
 	import Input from '#lib/components/Input.svelte';
 	import Kbd from '#lib/components/Kbd.svelte';
 	import ListRow from '#lib/components/ListRow.svelte';
+	import Menu from '#lib/components/Menu.svelte';
 	import Progress from '#lib/components/Progress.svelte';
 	import Quote from '#lib/components/Quote.svelte';
+	import SearchField from '#lib/components/SearchField.svelte';
 	import Select from '#lib/components/Select.svelte';
 	import Skeleton from '#lib/components/Skeleton.svelte';
 	import Slider from '#lib/components/Slider.svelte';
 	import Spinner from '#lib/components/Spinner.svelte';
 	import Textarea from '#lib/components/Textarea.svelte';
+	import Toast from '#lib/components/Toast.svelte';
 	import Switch from '#lib/components/Switch.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
 	import { setHue } from '#lib/hue.svelte.js';
@@ -46,6 +49,12 @@
 	];
 
 	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
+
+	const sortItems = [
+		{ value: 'newest', label: 'Newest first' },
+		{ value: 'oldest', label: 'Oldest first' },
+		{ value: 'title', label: 'Title A–Z' }
+	];
 
 	const plans = [
 		{ value: 'solo', label: 'Solo' },
@@ -84,6 +93,9 @@
 	let lyrics = $state(true);
 	let audioOnly = $state(false);
 	let layout = $state('comfortable');
+	let sort = $state('newest');
+	let query = $state('');
+	let toastOpen = $state(false);
 
 	// Demo of the hue engine: two numbers on <html> reskin every token.
 	$effect(() => {
@@ -117,6 +129,10 @@
 		<circle cx="380" cy="380" r="220" fill="currentColor" opacity=".18" />
 		<circle cx="380" cy="380" r="120" fill="currentColor" opacity=".3" />
 	</svg>
+{/snippet}
+
+{#snippet keys()}
+	<Kbd>⌘</Kbd><Kbd>K</Kbd>
 {/snippet}
 
 {#snippet chevron()}
@@ -489,6 +505,37 @@
 					</div>
 				</article>
 
+				<article class="card reveal">
+					<h3>Menu</h3>
+					<p>A native popover in the top layer. Esc, light dismiss and the arrows all work.</p>
+					<div class="row">
+						<Menu label="Sort" items={sortItems} onselect={(value) => (sort = value)} />
+						<span>Sorted by {sort}</span>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Search field</h3>
+					<p>The pill is the control, so the focus ring wraps the whole field. Clear appears with a value.</p>
+					<div class="search-demo">
+						<SearchField
+							label="Search the docs"
+							bind:value={query}
+							placeholder="Search components"
+							shortcut={keys}
+						/>
+					</div>
+				</article>
+
+				<article class="card reveal">
+					<h3>Toast</h3>
+					<p>One polite status pill at the bottom. It closes itself after four seconds.</p>
+					<div class="row">
+						<Button onclick={() => (toastOpen = true)}>Save layout</Button>
+						<Toast bind:open={toastOpen} message="Layout saved to this device" />
+					</div>
+				</article>
+
 				<article class="card reveal wide">
 					<h3>Table</h3>
 					<p>Quiet rows and tabular numerals. You keep the semantics; the surface does the separation.</p>
@@ -761,6 +808,10 @@
 		padding-block: 72px 96px;
 		background: var(--color-bg-soft);
 		font-size: 14px;
+	}
+
+	.search-demo {
+		margin-top: 24px;
 	}
 
 	.table-demo {

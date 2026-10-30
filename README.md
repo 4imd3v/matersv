@@ -56,13 +56,16 @@ import '#lib/matersv.css';
 | `Spinner` | `size`, `label` |
 | `Skeleton` | `width`, `height`, `shape="pill\|card\|circle"` |
 | `Notice` | `tone="info\|danger"`, `title`, snippet children |
+| `Toast` | `message`, `bind:open`, `duration` (ms, 0 keeps it open) |
 | `Textarea` | `label`, `hint`, `error`, `rows`, `bind:value`, `id`, native attributes |
 | `Select` | `label`, `items: { value, label }[]`, `bind:value`, `hint`, `error`, `id` |
+| `SearchField` | `label`, `bind:value`, `placeholder`, `id`, `shortcut` snippet |
 | `Switch` | `bind:checked`, `label`, `onchange` |
 | `SegmentedControl` | `items: { value, label }[]`, `label`, `bind:value`, `name` |
 | `Badge` | `tone="field\|accent"` |
 | `Breadcrumbs` | `items: { href, label }[]`, `label` |
 | `Pagination` | `items: { href, label }[]`, `current`, `label` |
+| `Menu` | `items: { value, label }[]`, `label`, `onselect` |
 | `Table` | `caption`, snippet children (you write `th scope`) |
 | `Tabs` | `items: { value, label }[]`, `bind:value`, `label`, snippet children |
 | `Tooltip` | `text`, snippet children (the trigger) |
@@ -88,6 +91,9 @@ import '#lib/matersv.css';
 | `Wordmark` | `text` |
 
 Also exported: `theme`, `applyTheme`, `initTheme`, `hue`, `setHue`.
+
+`Menu` is a native `popover` in the top layer: Esc, light dismiss and the
+backdrop come from the platform, arrows and Home/End from the component.
 
 A `Button` with `href` renders an `<a>`; adding `disabled` renders a disabled
 `<button>` instead, so it cannot be clicked or tabbed to.
