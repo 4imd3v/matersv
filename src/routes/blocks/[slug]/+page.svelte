@@ -1,6 +1,5 @@
 <script>
-	import Blocks from '../../../docs/blocks/Blocks.svelte';
-	import Code from '../../../docs/Code.svelte';
+	import Detail from '../../../docs/blocks/Detail.svelte';
 
 	let { data } = $props();
 	const block = $derived(data.block);
@@ -20,21 +19,10 @@
 			<p class="lead">{block.lead}</p>
 		</header>
 
-		<section id="preview">
-			<h2>Preview</h2>
-			<div class="frame">
-				<Blocks slug={block.slug} />
-			</div>
-		</section>
-
-		<section id="code">
-			<h2>Code</h2>
-			<p class="hint">
-				One section and one style block. It only uses classes from
-				<code>matersv.css</code>, so it works on its own.
-			</p>
-			<Code code={block.source} />
-		</section>
+		<!-- Remounts on a new block, so the variant selection starts over. -->
+		{#key block.slug}
+			<Detail {block} />
+		{/key}
 
 		<nav class="pager" aria-label="Blocks">
 			{#if data.prev}
@@ -94,39 +82,11 @@
 
 	.lead {
 		margin-top: 20px;
-		max-width: 52ch;
+		max-width: 56ch;
 		color: var(--color-muted);
 		font-size: var(--text-lead);
 		line-height: 1.4;
 		text-wrap: pretty;
-	}
-
-	section {
-		margin-top: clamp(40px, 5vw, 64px);
-	}
-
-	h2 {
-		margin-bottom: 16px;
-		font-size: var(--text-h3);
-		font-weight: 600;
-		line-height: 1.1;
-		letter-spacing: -0.03em;
-	}
-
-	.hint {
-		margin-bottom: 16px;
-		max-width: 56ch;
-		color: var(--color-muted);
-		text-wrap: pretty;
-	}
-
-	.frame {
-		/* Blocks keep their real rhythm, tightened here so the preview reads as one screen. */
-		--gap: clamp(48px, 5vw, 88px);
-		overflow: hidden;
-		border-radius: var(--radius-card);
-		background: var(--color-bg);
-		box-shadow: var(--shadow-capsule);
 	}
 
 	.pager {

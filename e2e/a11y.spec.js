@@ -66,6 +66,34 @@ for (const path of [
 	});
 }
 
+const BLOCK_SLUGS = [
+	'hero',
+	'features',
+	'testimonials',
+	'pricing',
+	'faq',
+	'cta',
+	'footer',
+	'blog',
+	'dashboard',
+	'auth'
+];
+
+for (const slug of BLOCK_SLUGS) {
+	test(`no accessibility violations on any /blocks/${slug} variant`, async ({ page }) => {
+		await page.goto('/blocks/' + slug);
+
+		const labels = page.locator('.segmented label');
+		const count = await labels.count();
+
+		for (let i = 0; i < count; i += 1) {
+			await labels.nth(i).click();
+			await page.waitForTimeout(250);
+			await expectNoViolations(page);
+		}
+	});
+}
+
 test('open dialog has no accessibility violations', async ({ page }) => {
 	await page.goto('/components/dialog');
 	await page.getByRole('button', { name: 'Open dialog' }).click();

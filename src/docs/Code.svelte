@@ -2,7 +2,8 @@
 	let { code } = $props();
 </script>
 
-<pre><code>{code}</code></pre>
+<!-- svelte-ignore a11y_no_noninteractive_tabindex (a scrollable pre must be focusable) -->
+<pre tabindex="0"><code>{code}</code></pre>
 
 <style>
 	pre {

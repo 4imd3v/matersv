@@ -1,5 +1,7 @@
 <script>
 	import { blocks } from '../../docs/blocks/registry.js';
+
+	const variants = blocks.reduce((total, block) => total + block.variants.length, 0);
 </script>
 
 <svelte:head>
@@ -13,7 +15,7 @@
 <main class="page" id="main">
 	<div class="wrap">
 		<header class="intro">
-			<p class="count">{blocks.length} blocks</p>
+			<p class="count">{blocks.length} blocks, {variants} variants</p>
 			<h1>Sections, not screenshots.</h1>
 			<p class="lead">
 				Each block is a real page section, composed from the library and the global
@@ -29,6 +31,12 @@
 						<p class="kind">{block.category}</p>
 						<h2>{block.name}</h2>
 						<p>{block.lead}</p>
+						<p class="variants">
+							{#each block.variants as variant, i (variant.id)}
+								{#if i > 0}<span aria-hidden="true">·</span>{/if}
+								<span>{variant.label}</span>
+							{/each}
+						</p>
 						<span class="more">Preview and code</span>
 					</a>
 				</li>
@@ -124,6 +132,20 @@
 	}
 
 	.item:hover p {
+		color: inherit;
+		opacity: 0.8;
+	}
+
+	.variants {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 8px;
+		margin-top: 2px;
+		color: var(--color-muted);
+		font-size: 14px;
+	}
+
+	.item:hover .variants {
 		color: inherit;
 		opacity: 0.8;
 	}

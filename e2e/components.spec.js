@@ -166,6 +166,19 @@ test('blocks index opens a block preview and its code', async ({ page }) => {
 	await expect(page.locator('#code pre')).toContainText('matersv');
 });
 
+test('a block switches variant, preview and code together', async ({ page }) => {
+	await page.goto('/blocks/features');
+
+	const frame = page.locator('#preview > .frame');
+	await expect(frame).toContainText('Nothing to install twice');
+
+	await page.locator('.segmented label').filter({ hasText: 'Bento' }).click();
+
+	await expect(frame).toContainText('Four surfaces, endless layouts');
+	await expect(page.locator('#code pre')).toContainText('.demo-card');
+	await expect(page.locator('#code pre')).not.toContainText('Nothing to install twice');
+});
+
 test('home nav links to the docs index', async ({ page }) => {
 	await page.goto('/');
 

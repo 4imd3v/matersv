@@ -30,7 +30,9 @@
 			{status === 'Copied to clipboard' ? 'Copied' : 'Copy'}
 		</button>
 	</div>
-	<pre><code>{code}</code></pre>
+	<!-- Scrolls horizontally, so it has to be reachable from the keyboard. -->
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<pre tabindex="0"><code>{code}</code></pre>
 	<p class="sr-only" role="status" aria-live="polite">{status}</p>
 </div>
 

@@ -42,7 +42,8 @@ import '#lib/matersv.css';
 - `/` — the gallery and hue demo
 - `/components` — one page per component with a live example, usage snippet and
   props table (prerendered)
-- `/blocks` — copy-paste page sections with a live preview and their source
+- `/blocks` — copy-paste page sections, 2–3 variants each, with a live preview
+  and the matching source
 
 ## Blocks
 
@@ -51,21 +52,23 @@ Blocks are page sections, not components, so they are demo data: they live in
 scoped style block that only uses the global classes (`.wrap`, `.section`,
 `.card`, `.reveal`) and the library components, so it works after a copy-paste.
 
-| Block | What it shows |
+| Block | Variants |
 | --- | --- |
-| Hero | Field band, display type, one action, handwritten note |
-| Features | Section header, three numbered cards, a wide card with FeatureList |
-| Testimonials | Three quote cards with bylines |
-| Pricing | Three plans, the middle on `field`, exclusions struck out |
-| FAQ | Question header and contact card beside an accordion |
-| Call to action | Night band, one primary and one quiet action |
-| Footer | Brand blurb, three NavList columns, legal row, wordmark |
-| Journal | Featured article, post cards, pagination |
-| Dashboard | App rail, KPI cards, invoice table, meters |
-| Sign in | Form card beside a quote and feature list |
+| Hero | Centered (field band, handwritten note), Split (copy plus a Window mock) |
+| Features | Cards (numbered, one wide), Rows (sticky header, numbered list), Bento (7/5 grid) |
+| Testimonials | Cards (three, with bylines), Spotlight (one quote at display size) |
+| Pricing | Plans (three cards), Compare (one table, tinted column) |
+| FAQ | Accordion (native details, contact card), Grid (six static answers) |
+| Call to action | Night band (centred), Split (field band, actions right) |
+| Footer | Full (columns plus wordmark), Compact (one row), Newsletter (signup form) |
+| Journal | Featured (figure plus cards), List (rows with date and tag) |
+| Dashboard | Overview (KPIs plus table), Settings (fieldsets, switches, save row) |
+| Sign in | Split (form plus proof panel), Centered (one card) |
 
-The code on each block page is the block's own source (`?raw` import) with the
+A block page switches between its variants; the preview and the code change
+together, and the code is that variant's own source (`?raw` import) with the
 `#lib` import rewritten to `matersv`, so it cannot drift from the preview.
+Every variant is covered by the axe run.
 
 ## Components
 

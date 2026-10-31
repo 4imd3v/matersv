@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import * as lib from '../src/lib/index.js';
@@ -27,15 +27,25 @@ describe('docs registry', () => {
 });
 
 describe('blocks registry', () => {
-	it('has unique slugs, a lead, and a source that can be copy-pasted', () => {
+	it('has unique slugs, more than one variant each, and copy-pasteable sources', () => {
 		const slugs = blocks.map((block) => block.slug);
 		expect(new Set(slugs).size).toBe(slugs.length);
 
 		for (const block of blocks) {
 			expect(block.lead.length).toBeGreaterThan(10);
-			expect(block.source.length).toBeGreaterThan(200);
-			// The preview imports from #lib; the shown code must import the package.
-			expect(block.source).not.toContain('#lib');
+			expect(block.variants.length).toBeGreaterThan(1);
+
+			const ids = block.variants.map((variant) => variant.id);
+			expect(new Set(ids).size).toBe(ids.length);
+
+			for (const variant of block.variants) {
+				expect(variant.label.length).toBeGreaterThan(2);
+				expect(variant.lead.length).toBeGreaterThan(10);
+				expect(variant.source.length).toBeGreaterThan(200);
+				expect(existsSync(variant.file), variant.file).toBe(true);
+				// The preview imports from #lib; the shown code must import the package.
+				expect(variant.source).not.toContain('#lib');
+			}
 		}
 	});
 });
@@ -69,10 +79,7 @@ const DEMOS = [
 	},
 	{ file: 'src/routes/+page.svelte', hosts: ['src/routes/+page.svelte'] },
 	// Blocks are rendered on their own docs page, so links must resolve there.
-	...blocks.map((block) => ({
-		file: 'src/docs/blocks/' + block.slug[0].toUpperCase() + block.slug.slice(1) + '.svelte',
-		hosts: []
-	}))
+	...blocks.flatMap((block) => block.variants.map((variant) => ({ file: variant.file, hosts: [] })))
 ];
 
 describe('demo links', () => {
