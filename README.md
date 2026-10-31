@@ -42,12 +42,38 @@ import '#lib/matersv.css';
 - `/` — the gallery and hue demo
 - `/components` — one page per component with a live example, usage snippet and
   props table (prerendered)
+- `/blocks` — copy-paste page sections with a live preview and their source
+
+## Blocks
+
+Blocks are page sections, not components, so they are demo data: they live in
+`src/docs/blocks/` and are never packaged. Each one is plain markup plus a
+scoped style block that only uses the global classes (`.wrap`, `.section`,
+`.card`, `.reveal`) and the library components, so it works after a copy-paste.
+
+| Block | What it shows |
+| --- | --- |
+| Hero | Field band, display type, one action, handwritten note |
+| Features | Section header, three numbered cards, a wide card with FeatureList |
+| Testimonials | Three quote cards with bylines |
+| Pricing | Three plans, the middle on `field`, exclusions struck out |
+| FAQ | Question header and contact card beside an accordion |
+| Call to action | Night band, one primary and one quiet action |
+| Footer | Brand blurb, three NavList columns, legal row, wordmark |
+| Journal | Featured article, post cards, pagination |
+| Dashboard | App rail, KPI cards, invoice table, meters |
+| Sign in | Form card beside a quote and feature list |
+
+The code on each block page is the block's own source (`?raw` import) with the
+`#lib` import rewritten to `matersv`, so it cannot drift from the preview.
 
 ## Components
 
+See `/blocks` for whole sections built from these.
+
 | Component | API |
 | --- | --- |
-| `Button` | `href`, `variant="primary\|text"`, `size="md\|lg"`, `disabled`, `type` |
+| `Button` | `href`, `variant="primary\|ghost\|text"`, `size="md\|lg"`, `disabled`, `type` |
 | `Byline` | `name`, `src`, `href`, `meta`, `size` |
 | `IconButton` | `label`, `pressed`, `type`, native attributes |
 | `Input` | `label`, `hint`, `error`, `type`, `bind:value`, `id`, native attributes |
@@ -89,8 +115,10 @@ import '#lib/matersv.css';
 | `Steps` | `items: { label, hint? }[]`, `current`, `label` |
 | `Timeline` | `items: { date, title, body? }[]`, `label` |
 | `Strike` | `items: string[]` |
+| `FeatureList` | `items: string[]`, `label` |
 | `Kbd` | snippet children |
 | `ListRow` | `title`, `meta`, `href`, `current`, `lead` / `trailing` snippets |
+| `NavList` | `items: { href, label, meta?, current? }[]`, `label` |
 | `Popover` | `label`, `bind:open`, `role="dialog\|region"`, `trigger` / `children` snippets |
 | `Sidenote` | snippet children |
 | `SkipLink` | `href`, `label` |
@@ -202,7 +230,9 @@ content immediately. `prefers-reduced-motion` disables all of it.
 src/
 	app.html                      # pre-paint theme script, color-scheme, theme-color
 	docs/                         # docs only: registry, live examples, code + props blocks
+	docs/blocks/                  # the copy-paste blocks and their registry
 	routes/components/            # /components and /components/[slug]
+	routes/blocks/                # /blocks and /blocks/[slug]
 	lib/
 		matersv.css                 # tokens + base + .wrap/.section/.card/.reveal
 		index.js                    # library entry

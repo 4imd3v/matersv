@@ -4,6 +4,7 @@
 
 	const here = $derived(page.url.pathname);
 	const inDocs = $derived(here === '/components' || here.startsWith('/components/'));
+	const inBlocks = $derived(here === '/blocks' || here.startsWith('/blocks/'));
 </script>
 
 <header class="head">
@@ -11,9 +12,12 @@
 		<a class="capsule brand" href="/">Mater<span class="sr-only"> home</span></a>
 
 		<nav class="capsule links" aria-label="Documentation">
-			<a href="/" aria-current={here === '/' ? 'true' : undefined}>Home</a>
+			<a class="home" href="/" aria-current={here === '/' ? 'true' : undefined}>Home</a>
 			<a href="/components" aria-current={inDocs ? 'true' : undefined}>Components</a>
-			<a href="https://github.com/4imd3v/matersv" target="_blank" rel="noreferrer">GitHub</a>
+			<a href="/blocks" aria-current={inBlocks ? 'true' : undefined}>Blocks</a>
+			<a class="ext" href="https://github.com/4imd3v/matersv" target="_blank" rel="noreferrer"
+				>GitHub</a
+			>
 		</nav>
 
 		<div class="capsule tools">
@@ -31,6 +35,7 @@
 		display: flex;
 		align-items: center;
 		gap: 16px;
+		min-width: 0;
 	}
 
 	.capsule {
@@ -50,11 +55,19 @@
 		text-decoration: none;
 	}
 
+	/* The four links must scroll inside the capsule, never widen the page. */
 	.links {
 		display: flex;
 		gap: 2px;
+		min-width: 0;
+		overflow-x: auto;
 		padding: 4px;
 		margin-inline: auto;
+		scrollbar-width: none;
+	}
+
+	.links::-webkit-scrollbar {
+		display: none;
 	}
 
 	.links a {
@@ -90,6 +103,14 @@
 	.tools :global(.icon-btn) {
 		width: 38px;
 		height: 38px;
+	}
+
+	/* Below this four links clip mid-word. The brand is already the way home. */
+	@media (max-width: 560px) {
+		.links a.home,
+		.links a.ext {
+			display: none;
+		}
 	}
 
 	@media (max-width: 640px) {

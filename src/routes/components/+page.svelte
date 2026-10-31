@@ -17,7 +17,7 @@
 			<h1>Primitives for wide, quiet pages.</h1>
 			<p class="lead">
 				Pure Svelte 5 and CSS. Each page has a live example, the usage snippet and the
-				full prop list.
+				full prop list. For whole sections, see the <a href="/blocks">blocks</a>.
 			</p>
 		</header>
 
@@ -66,6 +66,11 @@
 		line-height: 1.4;
 		color: var(--color-muted);
 		text-wrap: pretty;
+	}
+
+	.lead a {
+		color: var(--color-ink);
+		font-weight: 600;
 	}
 
 	.grid {

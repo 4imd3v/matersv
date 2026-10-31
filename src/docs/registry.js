@@ -137,7 +137,7 @@ export const components = [
 		lead: 'Pill action. Renders a link with href, or a disabled button when disabled.',
 		props: [
 			{ name: 'href', type: 'string', default: '—', description: 'Renders an anchor instead of a button.' },
-			{ name: 'variant', type: "'primary' | 'text'", default: "'primary'", description: 'Filled or underlined text.' },
+			{ name: 'variant', type: "'primary' | 'ghost' | 'text'", default: "'primary'", description: 'Filled, a quiet field pill, or underlined text.' },
 			{ name: 'size', type: "'md' | 'lg'", default: "'md'", description: '42px or 58px tall.' },
 			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the action; a disabled href becomes a button.' },
 			{ name: 'type', type: "'button' | 'submit' | 'reset'", default: "'button'", description: 'Native button type.' },
@@ -149,6 +149,7 @@ export const components = [
 
 <Button>Download</Button>
 <Button href="/docs" size="lg">Read the docs</Button>
+<Button variant="ghost">Compare plans</Button>
 <Button variant="text">Cancel</Button>`
 	},
 	{
@@ -361,6 +362,24 @@ export const components = [
 </EmptyState>`
 	},
 	{
+		slug: 'featurelist',
+		name: 'FeatureList',
+		lead: 'A checked list of capabilities. Use it for plan features and short benefit lists; the check is decorative, the text carries the meaning.',
+		props: [
+			{ name: 'items', type: 'string[]', default: '—', description: 'One line per feature.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Accessible name for the list.' },
+			{ name: 'class', type: 'string', default: "''", description: 'Extra classes.' }
+		],
+		code: `<script>
+	import { FeatureList } from 'matersv';
+</script>
+
+<FeatureList
+	label="Team includes"
+	items={['Unlimited pages', 'One hue per project', 'No runtime dependencies']}
+/>`
+	},
+	{
 		slug: 'fieldset',
 		name: 'Fieldset',
 		lead: 'A group of controls with a real legend, so a set of checkboxes is announced as one group.',
@@ -547,6 +566,28 @@ export const components = [
 		{ value: 'oldest', label: 'Oldest first' }
 	]}
 	onselect={(value) => (sort = value)}
+/>`
+	},
+	{
+		slug: 'navlist',
+		name: 'NavList',
+		lead: 'A vertical list of links with a current pill. Built for app sidebars and footer columns; no icons, no dropdowns.',
+		props: [
+			{ name: 'items', type: '{ href, label, meta?, current? }[]', default: '—', description: 'Links. Mark one with current: true.' },
+			{ name: 'label', type: 'string', default: '—', description: 'Visible heading and accessible name.' },
+			{ name: 'class', type: 'string', default: "''", description: 'Extra classes.' }
+		],
+		code: `<script>
+	import { NavList } from 'matersv';
+</script>
+
+<NavList
+	label="Workspace"
+	items={[
+		{ href: '/overview', label: 'Overview', current: true },
+		{ href: '/invoices', label: 'Invoices', meta: '12' },
+		{ href: '/settings', label: 'Settings' }
+	]}
 />`
 	},
 	{

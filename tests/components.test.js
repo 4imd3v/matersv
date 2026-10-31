@@ -22,7 +22,9 @@ import Fieldset from '../src/lib/components/Fieldset.svelte';
 import FileDrop from '../src/lib/components/FileDrop.svelte';
 import FileInput from '../src/lib/components/FileInput.svelte';
 import Dots from '../src/lib/components/Dots.svelte';
+import FeatureList from '../src/lib/components/FeatureList.svelte';
 import ListRow from '../src/lib/components/ListRow.svelte';
+import NavList from '../src/lib/components/NavList.svelte';
 import Menu from '../src/lib/components/Menu.svelte';
 import Notice from '../src/lib/components/Notice.svelte';
 import NumberInput from '../src/lib/components/NumberInput.svelte';
@@ -170,6 +172,41 @@ describe('ListRow', () => {
 
 		expect(screen.queryByRole('link')).toBeNull();
 		expect(screen.getByText('Archive')).toBeTruthy();
+	});
+});
+
+describe('NavList', () => {
+	it('marks the current link and names the landmark with its heading', () => {
+		render(NavList, {
+			props: {
+				label: 'Workspace',
+				items: [
+					{ href: '/overview', label: 'Overview', current: true },
+					{ href: '/invoices', label: 'Invoices', meta: '12' }
+				]
+			}
+		});
+
+		const nav = screen.getByRole('navigation', { name: 'Workspace' });
+		expect(nav).toBeTruthy();
+
+		const links = screen.getAllByRole('link');
+		expect(links).toHaveLength(2);
+		expect(links[0].getAttribute('aria-current')).toBe('page');
+		expect(links[1].getAttribute('aria-current')).toBeNull();
+		expect(screen.getByText('12')).toBeTruthy();
+	});
+});
+
+describe('FeatureList', () => {
+	it('renders one item per feature with a decorative check', () => {
+		const { container } = render(FeatureList, {
+			props: { label: 'Includes', items: ['Pages', 'Blocks'] }
+		});
+
+		expect(screen.getAllByRole('listitem')).toHaveLength(2);
+		expect(screen.getByRole('list', { name: 'Includes' })).toBeTruthy();
+		expect(container.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true');
 	});
 });
 

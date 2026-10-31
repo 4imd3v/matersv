@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import * as lib from '../src/lib/index.js';
+import { blocks } from '../src/docs/blocks/registry.js';
 import { components } from '../src/docs/registry.js';
 
 const exportedComponents = Object.keys(lib)
@@ -21,6 +22,20 @@ describe('docs registry', () => {
 			expect(component.lead.length).toBeGreaterThan(10);
 			expect(component.code.length).toBeGreaterThan(20);
 			expect(Array.isArray(component.props)).toBe(true);
+		}
+	});
+});
+
+describe('blocks registry', () => {
+	it('has unique slugs, a lead, and a source that can be copy-pasted', () => {
+		const slugs = blocks.map((block) => block.slug);
+		expect(new Set(slugs).size).toBe(slugs.length);
+
+		for (const block of blocks) {
+			expect(block.lead.length).toBeGreaterThan(10);
+			expect(block.source.length).toBeGreaterThan(200);
+			// The preview imports from #lib; the shown code must import the package.
+			expect(block.source).not.toContain('#lib');
 		}
 	});
 });
@@ -52,19 +67,26 @@ const DEMOS = [
 		file: 'src/docs/Example.svelte',
 		hosts: ['src/docs/Example.svelte', 'src/routes/components/[slug]/+page.svelte']
 	},
-	{ file: 'src/routes/+page.svelte', hosts: ['src/routes/+page.svelte'] }
+	{ file: 'src/routes/+page.svelte', hosts: ['src/routes/+page.svelte'] },
+	// Blocks are rendered on their own docs page, so links must resolve there.
+	...blocks.map((block) => ({
+		file: 'src/docs/blocks/' + block.slug[0].toUpperCase() + block.slug.slice(1) + '.svelte',
+		hosts: []
+	}))
 ];
 
 describe('demo links', () => {
 	for (const { file, hosts } of DEMOS) {
 		it(file + ' only links to anchors and routes that exist', () => {
 			const ids = new Set(
-				hosts.flatMap((host) =>
+				[...hosts, file].flatMap((host) =>
 					[...read(host).matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
 				)
 			);
 
-			for (const [, href] of read(file).matchAll(/href="([^"]+)"/g)) {
+			// Matches both href="..." and the href: '...' used in demo data arrays,
+			// which also end up as real anchors after rendering.
+			for (const [, href] of read(file).matchAll(/href[=:]\s*["']([^"']+)["']/g)) {
 				if (href.startsWith('http')) continue;
 
 				if (href.startsWith('#')) {

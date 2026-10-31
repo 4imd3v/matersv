@@ -69,6 +69,7 @@
 	const nav = [
 		{ href: '#components', label: 'Components' },
 		{ href: '#night', label: 'Night' },
+		{ href: '/blocks', label: 'Blocks' },
 		{ href: '/components', label: 'Docs' }
 	];
 
@@ -245,6 +246,7 @@
 					<div class="row">
 						<Button>Primary</Button>
 						<Button size="lg">Large</Button>
+						<Button variant="ghost">Secondary</Button>
 						<Button href="#night" disabled>Disabled link</Button>
 						<Button variant="text">Text action</Button>
 					</div>

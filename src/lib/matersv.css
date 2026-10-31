@@ -192,14 +192,15 @@
 		transition: background-color var(--dur-surface) ease;
 	}
 
-	.card h3 {
+	/* Direct children only: a component nested in a card keeps its own type. */
+	.card > h3 {
 		font-size: var(--text-h3);
 		line-height: 1.08;
 		letter-spacing: -0.03em;
 		text-wrap: balance;
 	}
 
-	.card p {
+	.card > p {
 		margin-top: 12px;
 		max-width: 34ch;
 		color: var(--color-muted);
@@ -258,6 +259,22 @@
 			width: calc(100% - 32px);
 		}
 	}
+}
+
+/* Buttons on the always-dark band use the night accent, like the nav does.
+   Unlayered and three classes deep so it wins over the component's own rules. */
+.section--night .btn.btn--primary {
+	background: var(--color-night-accent);
+	color: var(--color-night);
+}
+
+.section--night .btn.btn--ghost {
+	background: var(--color-night-field);
+	color: var(--color-night-ink);
+}
+
+.section--night .btn.btn--ghost:hover {
+	background: color-mix(in oklab, var(--color-night-field) 82%, var(--color-night-accent));
 }
 
 /* Scroll-driven reveal. Enhances to an entrance animation where supported;

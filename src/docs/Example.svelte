@@ -18,6 +18,7 @@
 		Dialog,
 		Dots,
 		EmptyState,
+		FeatureList,
 		Fieldset,
 		Figure,
 		FileDrop,
@@ -27,6 +28,7 @@
 		Kbd,
 		ListRow,
 		Menu,
+		NavList,
 		Notice,
 		NumberInput,
 		Pager,
@@ -217,6 +219,24 @@
 			<Checkbox label="Billing" />
 		</Fieldset>
 	</div>
+{:else if slug === 'featurelist'}
+	<div class="col">
+		<FeatureList
+			label="Team includes"
+			items={['Unlimited pages', 'One hue per project', 'No runtime dependencies']}
+		/>
+	</div>
+{:else if slug === 'navlist'}
+	<div class="col">
+		<NavList
+			label="Workspace"
+			items={[
+				{ href: '/components/navlist', label: 'Overview', current: true },
+				{ href: '/components/navlist', label: 'Invoices', meta: '12' },
+				{ href: '/components/navlist', label: 'Settings' }
+			]}
+		/>
+	</div>
 {:else if slug === 'spinner'}
 	<div class="row">
 		<Spinner size={18} label="Saving" />
@@ -273,6 +293,7 @@
 	<div class="row">
 		<Button>Primary</Button>
 		<Button size="lg">Large</Button>
+		<Button variant="ghost">Secondary</Button>
 		<Button variant="text">Text action</Button>
 		<Button href="#usage" disabled>Disabled link</Button>
 	</div>

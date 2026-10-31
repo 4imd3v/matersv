@@ -18,6 +18,17 @@ async function expectNoViolations(page) {
 
 for (const path of [
 	'/',
+	'/blocks',
+	'/blocks/auth',
+	'/blocks/blog',
+	'/blocks/cta',
+	'/blocks/dashboard',
+	'/blocks/faq',
+	'/blocks/features',
+	'/blocks/footer',
+	'/blocks/hero',
+	'/blocks/pricing',
+	'/blocks/testimonials',
 	'/components',
 	'/components/avatargroup',
 	'/components/button',

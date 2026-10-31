@@ -2,7 +2,7 @@
 	/**
 	 * @typedef {object} ButtonProps
 	 * @property {string} [href]
-	 * @property {'primary' | 'text'} [variant]
+	 * @property {'primary' | 'ghost' | 'text'} [variant]
 	 * @property {'md' | 'lg'} [size]
 	 * @property {'button' | 'submit' | 'reset'} [type]
 	 * @property {boolean} [disabled]
@@ -13,7 +13,7 @@
 	/** @type {ButtonProps & Record<string, any>} */
 	let {
 		href = undefined,
-		variant = /** @type {'primary' | 'text'} */ ('primary'),
+		variant = /** @type {'primary' | 'ghost' | 'text'} */ ('primary'),
 		size = /** @type {'md' | 'lg'} */ ('md'),
 		type = /** @type {'button' | 'submit' | 'reset'} */ ('button'),
 		disabled = false,
@@ -75,6 +75,17 @@
 		height: 58px;
 		padding-inline: 30px;
 		font-size: 18px;
+	}
+
+	/* Quiet pill for the second action in a pair. Sits on any card surface. */
+	.btn--ghost {
+		background: var(--color-field);
+		color: var(--color-field-ink);
+	}
+
+	/* Deepen with accent, so the hover gains chroma instead of going grey. */
+	.btn--ghost:hover {
+		background: color-mix(in oklab, var(--color-field) 80%, var(--color-accent));
 	}
 
 	.btn--text {

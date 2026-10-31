@@ -156,6 +156,16 @@ test('checkbox toggles from the keyboard', async ({ page }) => {
 	await expect(box).toBeChecked();
 });
 
+test('blocks index opens a block preview and its code', async ({ page }) => {
+	await page.goto('/blocks');
+
+	await page.locator('a[href="/blocks/hero"]').click();
+	await expect(page).toHaveURL(/\/blocks\/hero$/);
+
+	await expect(page.getByRole('heading', { level: 1, name: 'Hero' })).toBeVisible();
+	await expect(page.locator('#code pre')).toContainText('matersv');
+});
+
 test('home nav links to the docs index', async ({ page }) => {
 	await page.goto('/');
 
