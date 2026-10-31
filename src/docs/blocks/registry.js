@@ -2,10 +2,16 @@
 // library, not components: they stay out of src/lib so they are never packaged.
 // Each source is imported raw, so the code shown on the page is the code that
 // runs; only the import path is rewritten to what a user would write.
+import articleSource from './Article.svelte?raw';
+import articleTocSource from './ArticleToc.svelte?raw';
 import authSource from './Auth.svelte?raw';
 import authCenteredSource from './AuthCentered.svelte?raw';
 import blogSource from './Blog.svelte?raw';
 import blogListSource from './BlogList.svelte?raw';
+import changelogSource from './Changelog.svelte?raw';
+import changelogCardsSource from './ChangelogCards.svelte?raw';
+import contactSource from './Contact.svelte?raw';
+import contactCenteredSource from './ContactCentered.svelte?raw';
 import ctaSource from './Cta.svelte?raw';
 import ctaSplitSource from './CtaSplit.svelte?raw';
 import dashboardSource from './Dashboard.svelte?raw';
@@ -22,6 +28,10 @@ import heroSource from './Hero.svelte?raw';
 import heroSplitSource from './HeroSplit.svelte?raw';
 import pricingSource from './Pricing.svelte?raw';
 import pricingCompareSource from './PricingCompare.svelte?raw';
+import statsSource from './Stats.svelte?raw';
+import statsCompareSource from './StatsCompare.svelte?raw';
+import teamSource from './Team.svelte?raw';
+import teamFounderSource from './TeamFounder.svelte?raw';
 import testimonialsSource from './Testimonials.svelte?raw';
 import testimonialsSpotlightSource from './TestimonialsSpotlight.svelte?raw';
 
@@ -96,6 +106,44 @@ export const blocks = [
 		]
 	},
 	{
+		slug: 'stats',
+		name: 'Stats',
+		category: 'Marketing',
+		lead: 'Numbers as proof: a dark figures band, or a two-sided comparison with one dot per unit.',
+		variants: [
+			variant(
+				'figures',
+				'Figures',
+				'Four Stat components on the night band, with a line on how they were counted.',
+				'Stats.svelte',
+				statsSource
+			),
+			variant(
+				'compare',
+				'Compare',
+				'Two cards, one per stack, with Dots counting sixteen units of 32 KB.',
+				'StatsCompare.svelte',
+				statsCompareSource
+			)
+		]
+	},
+	{
+		slug: 'team',
+		name: 'Team',
+		category: 'Marketing',
+		lead: 'People pages: a plain portrait grid, or a founder card beside the rest of the room.',
+		variants: [
+			variant('grid', 'Grid', 'Six people in three columns: avatar, name, focus.', 'Team.svelte', teamSource),
+			variant(
+				'founder',
+				'Founder',
+				'One large portrait and bio, then five compact rows and a line about the size of the team.',
+				'TeamFounder.svelte',
+				teamFounderSource
+			)
+		]
+	},
+	{
 		slug: 'testimonials',
 		name: 'Testimonials',
 		category: 'Marketing',
@@ -162,6 +210,28 @@ export const blocks = [
 		]
 	},
 	{
+		slug: 'contact',
+		name: 'Contact',
+		category: 'Marketing',
+		lead: 'A form with the studio details beside it, or a short centred form on a coloured band.',
+		variants: [
+			variant(
+				'split',
+				'Split',
+				'Name, email, topic, message and consent in a card, with email, address and hours on the left.',
+				'Contact.svelte',
+				contactSource
+			),
+			variant(
+				'centered',
+				'Centered',
+				'Email and message only, on the field surface, with three details underneath.',
+				'ContactCentered.svelte',
+				contactCenteredSource
+			)
+		]
+	},
+	{
 		slug: 'cta',
 		name: 'Call to action',
 		category: 'Marketing',
@@ -209,6 +279,50 @@ export const blocks = [
 				'Brand and inline links on the left, a one-field signup on the right, legal underneath.',
 				'FooterNewsletter.svelte',
 				footerNewsletterSource
+			)
+		]
+	},
+	{
+		slug: 'article',
+		name: 'Article',
+		category: 'Site',
+		lead: 'Long-form reading: a single column, or the same article with its contents pinned in a rail.',
+		variants: [
+			variant(
+				'reading',
+				'Reading',
+				'Tag list, title, byline, a token-drawn figure, then Prose with a Sidenote and a Pager.',
+				'Article.svelte',
+				articleSource
+			),
+			variant(
+				'toc',
+				'With contents',
+				'The same body in two columns, a sticky Toc and a short-version card.',
+				'ArticleToc.svelte',
+				articleTocSource
+			)
+		]
+	},
+	{
+		slug: 'changelog',
+		name: 'Changelog',
+		category: 'Site',
+		lead: 'Release history as a timeline, or as version cards with typed changes.',
+		variants: [
+			variant(
+				'timeline',
+				'Timeline',
+				'The Timeline component beside a sticky header.',
+				'Changelog.svelte',
+				changelogSource
+			),
+			variant(
+				'cards',
+				'Cards',
+				'One card per version, every change tagged with a StatusDot.',
+				'ChangelogCards.svelte',
+				changelogCardsSource
 			)
 		]
 	},

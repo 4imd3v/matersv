@@ -49,7 +49,7 @@
 
 			<FeatureList
 				label="Every account includes"
-				items={['All 63 components', 'Every block', 'No telemetry, ever']}
+				items={['All 68 components', 'Every block', 'No telemetry, ever']}
 			/>
 		</aside>
 	</div>

@@ -1,8 +1,14 @@
 <script>
+	import Article from './Article.svelte';
+	import ArticleToc from './ArticleToc.svelte';
 	import Auth from './Auth.svelte';
 	import AuthCentered from './AuthCentered.svelte';
 	import Blog from './Blog.svelte';
 	import BlogList from './BlogList.svelte';
+	import Changelog from './Changelog.svelte';
+	import ChangelogCards from './ChangelogCards.svelte';
+	import Contact from './Contact.svelte';
+	import ContactCentered from './ContactCentered.svelte';
 	import Cta from './Cta.svelte';
 	import CtaSplit from './CtaSplit.svelte';
 	import Dashboard from './Dashboard.svelte';
@@ -19,15 +25,25 @@
 	import HeroSplit from './HeroSplit.svelte';
 	import Pricing from './Pricing.svelte';
 	import PricingCompare from './PricingCompare.svelte';
+	import Stats from './Stats.svelte';
+	import StatsCompare from './StatsCompare.svelte';
+	import Team from './Team.svelte';
+	import TeamFounder from './TeamFounder.svelte';
 	import Testimonials from './Testimonials.svelte';
 	import TestimonialsSpotlight from './TestimonialsSpotlight.svelte';
 
 	/** @type {Record<string, import('svelte').Component>} */
 	const map = {
+		'article/reading': Article,
+		'article/toc': ArticleToc,
 		'auth/split': Auth,
 		'auth/centered': AuthCentered,
 		'blog/featured': Blog,
 		'blog/list': BlogList,
+		'changelog/timeline': Changelog,
+		'changelog/cards': ChangelogCards,
+		'contact/split': Contact,
+		'contact/centered': ContactCentered,
 		'cta/night': Cta,
 		'cta/split': CtaSplit,
 		'dashboard/overview': Dashboard,
@@ -44,6 +60,10 @@
 		'hero/split': HeroSplit,
 		'pricing/plans': Pricing,
 		'pricing/compare': PricingCompare,
+		'stats/figures': Stats,
+		'stats/compare': StatsCompare,
+		'team/grid': Team,
+		'team/founder': TeamFounder,
 		'testimonials/cards': Testimonials,
 		'testimonials/spotlight': TestimonialsSpotlight
 	};

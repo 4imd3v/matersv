@@ -69,11 +69,16 @@ for (const path of [
 const BLOCK_SLUGS = [
 	'hero',
 	'features',
+	'stats',
+	'team',
 	'testimonials',
 	'pricing',
 	'faq',
+	'contact',
 	'cta',
 	'footer',
+	'article',
+	'changelog',
 	'blog',
 	'dashboard',
 	'auth'

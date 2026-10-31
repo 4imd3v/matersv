@@ -56,12 +56,17 @@ scoped style block that only uses the global classes (`.wrap`, `.section`,
 | --- | --- |
 | Hero | Centered (field band, handwritten note), Split (copy plus a Window mock) |
 | Features | Cards (numbered, one wide), Rows (sticky header, numbered list), Bento (7/5 grid) |
+| Stats | Figures (four Stat on the night band), Compare (two stacks, one dot per 32 KB) |
+| Team | Grid (six portraits), Founder (large portrait plus rows) |
 | Testimonials | Cards (three, with bylines), Spotlight (one quote at display size) |
 | Pricing | Plans (three cards), Compare (one table, tinted column) |
 | FAQ | Accordion (native details, contact card), Grid (six static answers) |
+| Contact | Split (form plus studio details), Centered (short form on the field band) |
 | Call to action | Night band (centred), Split (field band, actions right) |
 | Footer | Full (columns plus wordmark), Compact (one row), Newsletter (signup form) |
 | Journal | Featured (figure plus cards), List (rows with date and tag) |
+| Article | Reading (single column, Sidenote), With contents (sticky Toc) |
+| Changelog | Timeline, Cards (typed changes with StatusDot) |
 | Dashboard | Overview (KPIs plus table), Settings (fieldsets, switches, save row) |
 | Sign in | Split (form plus proof panel), Centered (one card) |
 

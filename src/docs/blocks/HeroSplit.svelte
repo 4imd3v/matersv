@@ -49,7 +49,7 @@
 
 				<ul class="pane-rows">
 					<li><span>Pages</span><span>12</span></li>
-					<li><span>Components</span><span>63</span></li>
+					<li><span>Components</span><span>68</span></li>
 				</ul>
 			</Window>
 		</div>

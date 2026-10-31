@@ -9,7 +9,7 @@
 
 	const rows = [
 		{ label: 'Projects', cells: ['3', 'Unlimited', 'Unlimited'] },
-		{ label: 'Components', cells: ['All 63', 'All 63', 'All 63'] },
+		{ label: 'Components', cells: ['All 68', 'All 68', 'All 68'] },
 		{ label: 'Blocks, copy and paste', cells: [false, true, true] },
 		{ label: 'Hue presets per brand', cells: [false, true, true] },
 		{ label: 'White-label tokens', cells: [false, false, true] },

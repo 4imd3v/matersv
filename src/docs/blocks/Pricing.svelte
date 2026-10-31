@@ -7,7 +7,7 @@
 			price: '$0',
 			note: 'For one page, one hue, no build step.',
 			cta: 'Start free',
-			features: ['Three projects', 'All 63 components', 'Community support']
+			features: ['Three projects', 'All 68 components', 'Community support']
 		},
 		{
 			name: 'Studio',
