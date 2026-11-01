@@ -1,8 +1,7 @@
 <script>
 	import { untrack } from 'svelte';
-	import { SegmentedControl } from '#lib/index.js';
+	import { CodeBlock, SegmentedControl } from '#lib/index.js';
 	import Blocks from './Blocks.svelte';
-	import Code from '../Code.svelte';
 
 	/**
 	 * @typedef {object} BlockVariant
@@ -50,7 +49,7 @@
 		One section and one style block, the {current.label.toLowerCase()} variant. It only uses
 		classes from <code>matersv.css</code>, so it works on its own.
 	</p>
-	<Code code={current.source} />
+	<CodeBlock code={current.source} />
 </section>
 
 <style>

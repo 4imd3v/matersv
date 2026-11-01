@@ -1,5 +1,5 @@
 <script>
-	import Code from '../../../docs/Code.svelte';
+	import { CodeBlock } from '#lib/index.js';
 	import Example from '../../../docs/Example.svelte';
 	import PropsTable from '../../../docs/PropsTable.svelte';
 	import { components } from '../../../docs/registry.js';
@@ -45,7 +45,7 @@
 
 			<section id="usage">
 				<h2>Usage</h2>
-				<Code code={component.code} />
+				<CodeBlock code={component.code} />
 			</section>
 
 			<section id="props">
