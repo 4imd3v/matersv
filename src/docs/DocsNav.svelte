@@ -9,7 +9,7 @@
 
 <header class="head">
 	<div class="wrap row">
-		<a class="capsule brand" href="/">Mater<span class="sr-only"> home</span></a>
+		<a class="capsule brand" href="/">MaterSV<span class="sr-only"> home</span></a>
 
 		<nav class="capsule links" aria-label="Documentation">
 			<a class="home" href="/" aria-current={here === '/' ? 'true' : undefined}>Home</a>

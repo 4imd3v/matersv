@@ -13,7 +13,7 @@
 <footer class="footer">
 	<div class="wrap top">
 		<div class="brand">
-			<p class="name">Mater</p>
+			<p class="name">MaterSV</p>
 			<p class="blurb">
 				A Svelte 5 and pure CSS design system for wide, quiet pages. One hue, four surfaces,
 				capsule chrome.

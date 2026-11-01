@@ -1,5 +1,5 @@
 <script>
-	import { Button, Dialog, Input, SectionHeader, Tabs, Timeline, Window } from '#lib/index.js';
+	import { Annotation, Button, Dialog, Input, SectionHeader, Tabs, Timeline } from '#lib/index.js';
 	import CapsuleNav from '#lib/components/CapsuleNav.svelte';
 	import SegmentedControl from '#lib/components/SegmentedControl.svelte';
 	import Dots from '#lib/components/Dots.svelte';
@@ -7,6 +7,8 @@
 	import Strike from '#lib/components/Strike.svelte';
 	import Wordmark from '#lib/components/Wordmark.svelte';
 	import { components } from '../docs/registry.js';
+	// The demo states its own version; read it from the manifest so a release bump shows up here.
+	import { version } from '../../package.json';
 	import { setHue } from '#lib/hue.svelte.js';
 
 	const nav = [
@@ -17,6 +19,13 @@
 	];
 
 	const drawbacks = ['Chromium inside', 'Ads', 'Telemetry'];
+
+	const footerLinks = [
+		{ href: '/components', label: 'Components', external: false },
+		{ href: '/blocks', label: 'Blocks', external: false },
+		{ href: 'https://github.com/4imd3v/matersv', label: 'GitHub', external: true },
+		{ href: 'https://svelte.dev/docs/svelte', label: 'Svelte docs', external: true }
+	];
 
 	const presets = [
 		{ label: 'Blue', h: 225, c: 0.1 },
@@ -49,22 +58,16 @@
 </script>
 
 <svelte:head>
-	<title>Mater — Svelte 5 design system</title>
+	<title>MaterSV — Svelte 5 design system</title>
 	<meta
 		name="description"
 		content="A pure CSS + Svelte 5 design system: one hue, four surfaces, capsule chrome."
 	/>
 </svelte:head>
 
-<CapsuleNav brand="Mater" items={nav}>
+<CapsuleNav brand="MaterSV" items={nav}>
 	<Button href="#components">Browse</Button>
 </CapsuleNav>
-
-{#snippet windowRail()}
-	<span>Home</span>
-	<span>Search</span>
-	<span>Stats</span>
-{/snippet}
 
 <main id="main">
 	<section id="top" class="section section--field hero">
@@ -155,15 +158,10 @@
 					</Dialog>
 				</article>
 
-				<article class="card reveal wide">
-					<h3>Window</h3>
-					<p>Frame, rail and pane. The chrome dots stay monochrome so the page keeps one hue.</p>
-					<div class="window-demo">
-						<Window rail={windowRail}>
-							<h3>Product tour</h3>
-							<p>The mockup is real UI, never a screenshot.</p>
-						</Window>
-					</div>
+				<article class="card reveal annotation-demo">
+					<h3>Annotation</h3>
+					<p>A handwritten note, rotated off the grid. The arrow is decoration.</p>
+					<Annotation arrow>one line, never two</Annotation>
 				</article>
 			</div>
 
@@ -196,12 +194,36 @@
 </main>
 
 <footer class="footer">
-	<div class="wrap footer__inner">
-		<p>Built with Svelte 5 and modern CSS. Tokens and rules from <code>DESIGN.md</code>.</p>
-		<p class="muted">One hue · four surfaces · capsule chrome</p>
+	<div class="wrap">
+		<div class="top">
+			<div class="brand">
+				<p class="name">MaterSV</p>
+				<p class="blurb">
+					A Svelte 5 and pure CSS design system for wide, quiet pages. One hue, four
+					surfaces, capsule chrome.
+				</p>
+				<p class="meta">MIT licensed · v{version}</p>
+			</div>
+
+			<nav class="links" aria-label="Footer">
+				{#each footerLinks as link (link.label)}
+					<a
+						href={link.href}
+						target={link.external ? '_blank' : undefined}
+						rel={link.external ? 'noreferrer' : undefined}>{link.label}</a
+					>
+				{/each}
+			</nav>
+		</div>
+
+		<div class="legal">
+			<p>© {new Date().getFullYear()} MaterSV</p>
+			<p>Built with Svelte 5. No cookies, no analytics.</p>
+		</div>
 	</div>
-	<div class="wrap footer__mark">
-		<Wordmark text="Mater" />
+
+	<div class="mark">
+		<Wordmark text="MaterSV" />
 	</div>
 </footer>
 
@@ -269,14 +291,6 @@
 		margin-top: 24px;
 	}
 
-	.row span {
-		font-size: 15px;
-	}
-
-	code {
-		font-size: 0.9em;
-	}
-
 	.dialog-actions {
 		display: flex;
 		align-items: center;
@@ -286,8 +300,7 @@
 	}
 
 	.tabs-demo,
-	.timeline-demo,
-	.window-demo {
+	.timeline-demo {
 		margin-top: 24px;
 	}
 
@@ -295,8 +308,9 @@
 		max-width: 420px;
 	}
 
-	.wide {
-		grid-column: 1 / -1;
+	/* The arrow hangs 60px to the left of the note, so the note steps across. */
+	.annotation-demo :global(.annotation) {
+		margin-left: 60px;
 	}
 
 	.night h2 {
@@ -331,15 +345,72 @@
 	}
 
 	.footer {
-		padding-block: 72px 96px;
+		overflow: hidden;
+		padding-top: clamp(56px, 7vw, 88px);
 		background: var(--color-bg-soft);
 		font-size: 14px;
 	}
 
-	.footer__inner {
+	.top {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: start;
+		justify-content: space-between;
+		gap: 32px 56px;
+	}
+
+	.brand {
+		display: grid;
+		gap: 10px;
+		max-width: 44ch;
+	}
+
+	.name {
+		font-size: 22px;
+		font-weight: 600;
+		letter-spacing: -0.03em;
+	}
+
+	.blurb {
+		color: var(--color-muted);
+		text-wrap: pretty;
+	}
+
+	.meta {
+		color: var(--color-muted);
+		font-size: 14px;
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+	}
+
+	.links a {
+		color: var(--color-muted);
+		font-weight: 600;
+		text-decoration: none;
+		transition: color var(--dur-control) ease;
+	}
+
+	.links a:hover {
+		color: var(--color-ink);
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	.legal {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		gap: 16px 32px;
+		gap: 8px 24px;
+		margin-top: clamp(32px, 4vw, 48px);
+		color: var(--color-muted);
+	}
+
+	.mark {
+		margin-top: clamp(24px, 4vw, 48px);
+		margin-bottom: clamp(-40px, -3vw, -16px);
 	}
 </style>

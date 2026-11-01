@@ -13,7 +13,8 @@ editorial website UI. The same repo is also the demo app that documents it.
   package. Dev dependencies are for build, test and packaging only.
 - The visual language is derived from <https://meiro.elianiva.com>. Only
   `README.md` and `DESIGN.md` may name it; keep it out of `src/` and UI copy.
-- Branding: MaterSV. The demo nav uses "Mater".
+- Branding: MaterSV everywhere in UI copy, including the demo nav and the wordmark.
+  Never abbreviate it to "Mater" (it reads as a different product).
 
 ## Stack and commands
 

@@ -179,7 +179,7 @@ export const components = [
 		lead: 'Floating capsule header with a scroll spy and automatic night-band contrast.',
 		preview: false,
 		props: [
-			{ name: 'brand', type: 'string', default: "'Mater'", description: 'Brand text in the left capsule.' },
+			{ name: 'brand', type: 'string', default: "'MaterSV'", description: 'Brand text in the left capsule.' },
 			{ name: 'items', type: '{ href, label }[]', default: '[]', description: 'Hash links get the scroll spy; route links still render.' },
 			{ name: 'children', type: 'Snippet', default: '—', description: 'Extra actions, rendered before ThemeToggle.' }
 		],
@@ -188,7 +188,7 @@ export const components = [
 </script>
 
 <CapsuleNav
-	brand="Mater"
+	brand="MaterSV"
 	items={[
 		{ href: '#components', label: 'Components' },
 		{ href: '/components', label: 'Docs' }
@@ -1290,7 +1290,7 @@ export const components = [
 	import { Wordmark } from 'matersv';
 </script>
 
-<Wordmark text="Mater" />`
+<Wordmark text="MaterSV" />`
 	},
 	{
 		slug: 'themetoggle',

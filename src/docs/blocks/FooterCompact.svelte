@@ -9,7 +9,7 @@
 
 <footer class="footer">
 	<div class="wrap row">
-		<a class="brand" href="/">Mater</a>
+		<a class="brand" href="/">MaterSV</a>
 
 		<nav class="links" aria-label="Footer">
 			{#each links as link (link.label)}

@@ -33,12 +33,12 @@
 	<div class="wrap">
 		<div class="top">
 			<div class="brand">
-				<p class="name">Mater</p>
+				<p class="name">MaterSV</p>
 				<p class="blurb">
 					A Svelte 5 and pure CSS design system for wide, quiet pages. One hue, four
 					surfaces, capsule chrome.
 				</p>
-				<p class="license">MIT licensed · v0.3.0</p>
+				<p class="license">MIT licensed · no runtime dependencies</p>
 			</div>
 
 			{#each columns as column (column.label)}
@@ -53,7 +53,7 @@
 	</div>
 
 	<div class="mark">
-		<Wordmark text="Mater" />
+		<Wordmark text="MaterSV" />
 	</div>
 </footer>
 

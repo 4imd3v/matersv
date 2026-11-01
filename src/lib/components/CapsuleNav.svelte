@@ -15,7 +15,7 @@
 	 */
 
 	/** @type {CapsuleNavProps} */
-	let { brand = 'Mater', items = [], children = undefined } = $props();
+	let { brand = 'MaterSV', items = [], children = undefined } = $props();
 
 	let active = $state('');
 

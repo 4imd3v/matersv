@@ -9,7 +9,7 @@
 <section class="section section--field">
 	<div class="wrap center">
 		<div class="card panel">
-			<p class="eyebrow">Mater</p>
+			<p class="eyebrow">MaterSV</p>
 			<h1>Welcome back</h1>
 			<p class="lead">Sign in to pick up the page where you left it.</p>
 

@@ -254,7 +254,7 @@
 	<div class="row">
 		<Avatar name="Ada Lovelace" />
 		<Avatar name="Grace Hopper" size={64} />
-		<Avatar name="Mater" size={32} />
+		<Avatar name="MaterSV" size={32} />
 		<span class="muted">Initials when there is no portrait</span>
 	</div>
 {:else if slug === 'pagination'}
@@ -693,7 +693,7 @@
 	</div>
 {:else if slug === 'wordmark'}
 	<div class="mark-demo">
-		<Wordmark text="Mater" />
+		<Wordmark text="MaterSV" />
 	</div>
 {:else if slug === 'capsulenav'}
 	<p class="note">

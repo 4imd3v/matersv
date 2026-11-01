@@ -9,7 +9,7 @@
 <section class="section">
 	<div class="wrap split">
 		<div class="card form">
-			<p class="brand">Mater</p>
+			<p class="brand">MaterSV</p>
 			<h1>Welcome back</h1>
 			<p class="lead">Sign in to pick up the page where you left it.</p>
 
