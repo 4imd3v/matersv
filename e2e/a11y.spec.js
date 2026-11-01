@@ -4,9 +4,13 @@ import { expect, test } from '@playwright/test';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
 async function expectNoViolations(page) {
-	// .mark is the decorative footer wordmark: aria-hidden brand text, which WCAG
-	// 1.4.3 exempts as a logotype. It is faded on purpose.
-	const results = await new AxeBuilder({ page }).withTags(TAGS).exclude('.mark').analyze();
+	// .mark is the decorative footer wordmark and .watermark the 404 numeral: both are
+	// aria-hidden decoration that WCAG 1.4.3 exempts, faded on purpose.
+	const results = await new AxeBuilder({ page })
+		.withTags(TAGS)
+		.exclude('.mark')
+		.exclude('.watermark')
+		.analyze();
 
 	expect(
 		results.violations.map((violation) => ({
@@ -69,6 +73,7 @@ for (const path of [
 const BLOCK_SLUGS = [
 	'hero',
 	'features',
+	'logos',
 	'stats',
 	'team',
 	'testimonials',
@@ -80,6 +85,10 @@ const BLOCK_SLUGS = [
 	'article',
 	'changelog',
 	'blog',
+	'careers',
+	'not-found',
+	'search',
+	'checkout',
 	'dashboard',
 	'auth'
 ];

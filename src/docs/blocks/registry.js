@@ -8,8 +8,12 @@ import authSource from './Auth.svelte?raw';
 import authCenteredSource from './AuthCentered.svelte?raw';
 import blogSource from './Blog.svelte?raw';
 import blogListSource from './BlogList.svelte?raw';
+import careersSource from './Careers.svelte?raw';
+import careersApplySource from './CareersApply.svelte?raw';
 import changelogSource from './Changelog.svelte?raw';
 import changelogCardsSource from './ChangelogCards.svelte?raw';
+import checkoutSource from './Checkout.svelte?raw';
+import checkoutCartSource from './CheckoutCart.svelte?raw';
 import contactSource from './Contact.svelte?raw';
 import contactCenteredSource from './ContactCentered.svelte?raw';
 import ctaSource from './Cta.svelte?raw';
@@ -25,9 +29,15 @@ import footerSource from './Footer.svelte?raw';
 import footerCompactSource from './FooterCompact.svelte?raw';
 import footerNewsletterSource from './FooterNewsletter.svelte?raw';
 import heroSource from './Hero.svelte?raw';
+import logosSource from './Logos.svelte?raw';
+import logosStatementSource from './LogosStatement.svelte?raw';
+import notFoundSource from './NotFound.svelte?raw';
+import notFoundSearchSource from './NotFoundSearch.svelte?raw';
 import heroSplitSource from './HeroSplit.svelte?raw';
 import pricingSource from './Pricing.svelte?raw';
 import pricingCompareSource from './PricingCompare.svelte?raw';
+import searchSource from './Search.svelte?raw';
+import searchEmptySource from './SearchEmpty.svelte?raw';
 import statsSource from './Stats.svelte?raw';
 import statsCompareSource from './StatsCompare.svelte?raw';
 import teamSource from './Team.svelte?raw';
@@ -102,6 +112,28 @@ export const blocks = [
 				'An asymmetric grid: swatches, chrome samples, a checked list and a code block.',
 				'FeaturesBento.svelte',
 				featuresBentoSource
+			)
+		]
+	},
+	{
+		slug: 'logos',
+		name: 'Logos',
+		category: 'Marketing',
+		lead: 'Social proof without the logo files: a one-line strip, or a quote beside a wall of names.',
+		variants: [
+			variant(
+				'row',
+				'Row',
+				'A quiet band with five text marks and one line above them.',
+				'Logos.svelte',
+				logosSource
+			),
+			variant(
+				'statement',
+				'Statement',
+				'A Quote on the field surface beside six names in two columns.',
+				'LogosStatement.svelte',
+				logosStatementSource
 			)
 		]
 	},
@@ -345,6 +377,94 @@ export const blocks = [
 				'Date, title, one line of argument and a tag, in rows that lift on hover.',
 				'BlogList.svelte',
 				blogListSource
+			)
+		]
+	},
+	{
+		slug: 'careers',
+		name: 'Careers',
+		category: 'Site',
+		lead: 'A job list with the details inline, or a single role with its application form.',
+		variants: [
+			variant(
+				'roles',
+				'Roles',
+				'Four rows with team, location and contract, and one quiet closing line.',
+				'Careers.svelte',
+				careersSource
+			),
+			variant(
+				'apply',
+				'Apply',
+				'A role description with facts and a checked list, beside a four-field form with a CV upload.',
+				'CareersApply.svelte',
+				careersApplySource
+			)
+		]
+	},
+	{
+		slug: 'not-found',
+		name: 'Not found',
+		category: 'Site',
+		lead: 'The 404 page: a watermark number and three ways back, or a search card instead.',
+		variants: [
+			variant(
+				'centered',
+				'Centered',
+				'A 404 watermark, one heading, two actions and three popular links.',
+				'NotFound.svelte',
+				notFoundSource
+			),
+			variant(
+				'search',
+				'With search',
+				'Copy on the left, a search card with three suggested routes on the right.',
+				'NotFoundSearch.svelte',
+				notFoundSearchSource
+			)
+		]
+	},
+	{
+		slug: 'search',
+		name: 'Search',
+		category: 'Application',
+		lead: 'Results with tabs and a filter popover, or the empty state that follows a miss.',
+		variants: [
+			variant(
+				'results',
+				'Results',
+				'Search field, tabs that really filter, a filter popover, result rows and pagination.',
+				'Search.svelte',
+				searchSource
+			),
+			variant(
+				'empty',
+				'Empty',
+				'An EmptyState with the query in the title, an icon, one action and popular searches.',
+				'SearchEmpty.svelte',
+				searchEmptySource
+			)
+		]
+	},
+	{
+		slug: 'checkout',
+		name: 'Checkout',
+		category: 'Application',
+		lead: 'Two ways to sell the same licence: a stepped form with a sticky summary, or a cart.',
+		variants: [
+			variant(
+				'steps',
+				'Steps',
+				'Steps, billing details, seats, delivery radios and a summary that follows the scroll.',
+				'Checkout.svelte',
+				checkoutSource
+			),
+			variant(
+				'cart',
+				'Cart',
+				'A line-item table, a promo field, totals and one notice.',
+				'CheckoutCart.svelte',
+				checkoutCartSource
 			)
 		]
 	},
