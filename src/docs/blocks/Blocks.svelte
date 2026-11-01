@@ -1,4 +1,6 @@
 <script>
+	import AccountProfile from './AccountProfile.svelte';
+	import AccountSecurity from './AccountSecurity.svelte';
 	import Article from './Article.svelte';
 	import ArticleToc from './ArticleToc.svelte';
 	import Auth from './Auth.svelte';
@@ -25,12 +27,22 @@
 	import Footer from './Footer.svelte';
 	import FooterCompact from './FooterCompact.svelte';
 	import FooterNewsletter from './FooterNewsletter.svelte';
+	import EventsLanding from './EventsLanding.svelte';
+	import EventsList from './EventsList.svelte';
 	import Hero from './Hero.svelte';
+	import IntegrationsFeatured from './IntegrationsFeatured.svelte';
+	import IntegrationsGrid from './IntegrationsGrid.svelte';
 	import HeroSplit from './HeroSplit.svelte';
 	import Logos from './Logos.svelte';
 	import LogosStatement from './LogosStatement.svelte';
 	import NotFound from './NotFound.svelte';
 	import NotFoundSearch from './NotFoundSearch.svelte';
+	import OnboardingChecklist from './OnboardingChecklist.svelte';
+	import OnboardingSteps from './OnboardingSteps.svelte';
+	import OrderConfirmation from './OrderConfirmation.svelte';
+	import OrderReceipt from './OrderReceipt.svelte';
+	import PressAssets from './PressAssets.svelte';
+	import PressSpec from './PressSpec.svelte';
 	import Pricing from './Pricing.svelte';
 	import PricingCompare from './PricingCompare.svelte';
 	import Search from './Search.svelte';
@@ -44,6 +56,8 @@
 
 	/** @type {Record<string, import('svelte').Component>} */
 	const map = {
+		'account/profile': AccountProfile,
+		'account/security': AccountSecurity,
 		'article/reading': Article,
 		'article/toc': ArticleToc,
 		'auth/split': Auth,
@@ -59,6 +73,10 @@
 		'checkout/cart': CheckoutCart,
 		'contact/centered': ContactCentered,
 		'cta/night': Cta,
+		'events/landing': EventsLanding,
+		'events/list': EventsList,
+		'integrations/grid': IntegrationsGrid,
+		'integrations/featured': IntegrationsFeatured,
 		'cta/split': CtaSplit,
 		'dashboard/overview': Dashboard,
 		'dashboard/settings': DashboardSettings,
@@ -76,6 +94,12 @@
 		'logos/statement': LogosStatement,
 		'not-found/centered': NotFound,
 		'not-found/search': NotFoundSearch,
+		'onboarding/steps': OnboardingSteps,
+		'onboarding/checklist': OnboardingChecklist,
+		'order/confirmation': OrderConfirmation,
+		'order/receipt': OrderReceipt,
+		'press/assets': PressAssets,
+		'press/spec': PressSpec,
 		'pricing/plans': Pricing,
 		'pricing/compare': PricingCompare,
 		'search/results': Search,

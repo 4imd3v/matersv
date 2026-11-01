@@ -3,7 +3,7 @@
 
 	const figures = [
 		{ value: 68, label: 'Components, no runtime dependency' },
-		{ value: 42, label: 'Page layouts across twenty blocks' },
+		{ value: 52, label: 'Page layouts across twenty-six blocks' },
 		{ value: 4, label: 'Surfaces, one hue' },
 		{ value: 0, label: 'Cookies, web fonts or telemetry' }
 	];

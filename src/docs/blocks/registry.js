@@ -2,6 +2,8 @@
 // library, not components: they stay out of src/lib so they are never packaged.
 // Each source is imported raw, so the code shown on the page is the code that
 // runs; only the import path is rewritten to what a user would write.
+import accountProfileSource from './AccountProfile.svelte?raw';
+import accountSecuritySource from './AccountSecurity.svelte?raw';
 import articleSource from './Article.svelte?raw';
 import articleTocSource from './ArticleToc.svelte?raw';
 import authSource from './Auth.svelte?raw';
@@ -28,12 +30,22 @@ import featuresRowsSource from './FeaturesRows.svelte?raw';
 import footerSource from './Footer.svelte?raw';
 import footerCompactSource from './FooterCompact.svelte?raw';
 import footerNewsletterSource from './FooterNewsletter.svelte?raw';
+import eventsLandingSource from './EventsLanding.svelte?raw';
+import eventsListSource from './EventsList.svelte?raw';
 import heroSource from './Hero.svelte?raw';
+import integrationsFeaturedSource from './IntegrationsFeatured.svelte?raw';
+import integrationsGridSource from './IntegrationsGrid.svelte?raw';
 import logosSource from './Logos.svelte?raw';
 import logosStatementSource from './LogosStatement.svelte?raw';
 import notFoundSource from './NotFound.svelte?raw';
+import onboardingChecklistSource from './OnboardingChecklist.svelte?raw';
+import onboardingStepsSource from './OnboardingSteps.svelte?raw';
+import orderConfirmationSource from './OrderConfirmation.svelte?raw';
+import orderReceiptSource from './OrderReceipt.svelte?raw';
 import notFoundSearchSource from './NotFoundSearch.svelte?raw';
 import heroSplitSource from './HeroSplit.svelte?raw';
+import pressAssetsSource from './PressAssets.svelte?raw';
+import pressSpecSource from './PressSpec.svelte?raw';
 import pricingSource from './Pricing.svelte?raw';
 import pricingCompareSource from './PricingCompare.svelte?raw';
 import searchSource from './Search.svelte?raw';
@@ -286,6 +298,50 @@ export const blocks = [
 		]
 	},
 	{
+		slug: 'integrations',
+		name: 'Integrations',
+		category: 'Marketing',
+		lead: 'A filterable wall of connections, or one that gets the full page.',
+		variants: [
+			variant(
+				'grid',
+				'Grid',
+				'A search field and tabs that really filter, over six monogram cards with a status badge.',
+				'IntegrationsGrid.svelte',
+				integrationsGridSource
+			),
+			variant(
+				'featured',
+				'Featured',
+				'One integration with what it reads and what it costs, beside a sortable list of the rest.',
+				'IntegrationsFeatured.svelte',
+				integrationsFeaturedSource
+			)
+		]
+	},
+	{
+		slug: 'events',
+		name: 'Events',
+		category: 'Marketing',
+		lead: 'A session with a date block and a register form, or the list of everything coming up.',
+		variants: [
+			variant(
+				'landing',
+				'Landing',
+				'A date tile, the speakers, and a four-field form that confirms with a Toast.',
+				'EventsLanding.svelte',
+				eventsLandingSource
+			),
+			variant(
+				'list',
+				'List',
+				'Three rows with a date tile, a tooltip on the timezone and one action per row.',
+				'EventsList.svelte',
+				eventsListSource
+			)
+		]
+	},
+	{
 		slug: 'footer',
 		name: 'Footer',
 		category: 'Site',
@@ -403,6 +459,28 @@ export const blocks = [
 		]
 	},
 	{
+		slug: 'press',
+		name: 'Press kit',
+		category: 'Site',
+		lead: 'The mark, the files and the rules, or the token table behind the palette.',
+		variants: [
+			variant(
+				'assets',
+				'Assets',
+				'The wordmark at full width, an app icon in a Cover, and three rules in a checked list.',
+				'PressAssets.svelte',
+				pressAssetsSource
+			),
+			variant(
+				'spec',
+				'Spec',
+				'Five surfaces derived from two numbers, the two lines to change, and what not to do.',
+				'PressSpec.svelte',
+				pressSpecSource
+			)
+		]
+	},
+	{
 		slug: 'not-found',
 		name: 'Not found',
 		category: 'Site',
@@ -509,6 +587,72 @@ export const blocks = [
 				'One card on the field surface, nothing beside it but a line of small print.',
 				'AuthCentered.svelte',
 				authCenteredSource
+			)
+		]
+	},
+	{
+		slug: 'onboarding',
+		name: 'Onboarding',
+		category: 'Application',
+		lead: 'The first five minutes: a stepped form, or the checklist that survives the first sign-in.',
+		variants: [
+			variant(
+				'steps',
+				'Steps',
+				'A sticky Steps rail beside the second step of three, in a card, with one skip action.',
+				'OnboardingSteps.svelte',
+				onboardingStepsSource
+			),
+			variant(
+				'checklist',
+				'Checklist',
+				'On the field band: a live Progress meter, four checkboxes and a Window preview.',
+				'OnboardingChecklist.svelte',
+				onboardingChecklistSource
+			)
+		]
+	},
+	{
+		slug: 'account',
+		name: 'Account',
+		category: 'Application',
+		lead: 'The profile behind a Sheet, or the security page with the dialog nobody wants to open.',
+		variants: [
+			variant(
+				'profile',
+				'Profile',
+				'A breadcrumb, an avatar card, a preferences form, and a Sheet with a FileDrop for the photo.',
+				'AccountProfile.svelte',
+				accountProfileSource
+			),
+			variant(
+				'security',
+				'Security',
+				'Password, two-factor switches, a session table and a Dialog that needs the name typed.',
+				'AccountSecurity.svelte',
+				accountSecuritySource
+			)
+		]
+	},
+	{
+		slug: 'order',
+		name: 'Order confirmation',
+		category: 'Application',
+		lead: 'The end of the checkout: a confirmation that closes the loop, or the receipt itself.',
+		variants: [
+			variant(
+				'confirmation',
+				'Confirmation',
+				'A tick, a completed Steps list, the total on the field surface and a receipt Toast.',
+				'OrderConfirmation.svelte',
+				orderConfirmationSource
+			),
+			variant(
+				'receipt',
+				'Receipt',
+				'A printable receipt: billed-to facts, a line-item Table, totals and two follow-ups.',
+				'OrderReceipt.svelte',
+				orderReceiptSource
 			)
 		]
 	}

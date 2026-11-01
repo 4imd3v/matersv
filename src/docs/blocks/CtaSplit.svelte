@@ -7,7 +7,7 @@
 		<div class="copy">
 			<h2>Copy a section.<br />Keep the hue.</h2>
 			<p class="lead">
-				Twenty blocks and forty-two layouts. Take the one you need, delete the rest, keep
+				Twenty-six blocks and fifty-two layouts. Take the one you need, delete the rest, keep
 				the two tokens that make it yours.
 			</p>
 		</div>

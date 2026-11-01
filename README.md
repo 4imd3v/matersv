@@ -64,16 +64,22 @@ scoped style block that only uses the global classes (`.wrap`, `.section`,
 | FAQ | Accordion (native details, contact card), Grid (six static answers) |
 | Contact | Split (form plus studio details), Centered (short form on the field band) |
 | Call to action | Night band (centred), Split (field band, actions right) |
+| Integrations | Grid (search plus tabs, filterable), Featured (one integration, sortable list) |
+| Events | Landing (date tile, speakers, register form), List (date tiles, timezone tooltip) |
 | Footer | Full (columns plus wordmark), Compact (one row), Newsletter (signup form) |
 | Journal | Featured (figure plus cards), List (rows with date and tag) |
 | Article | Reading (single column, Sidenote), With contents (sticky Toc) |
 | Changelog | Timeline, Cards (typed changes with StatusDot) |
 | Careers | Roles (job rows), Apply (role description plus CV upload) |
+| Press kit | Assets (wordmark, app icon, rules), Spec (token table, reskin code, strikes) |
 | Not found | Centered (404 watermark), With search (search card) |
 | Search | Results (tabs, filter popover, pagination), Empty (EmptyState) |
 | Checkout | Steps (sticky summary), Cart (line-item table) |
 | Dashboard | Overview (KPIs plus table), Settings (fieldsets, switches, save row) |
 | Sign in | Split (form plus proof panel), Centered (one card) |
+| Onboarding | Steps (side rail, one form), Checklist (progress, tasks, Window preview) |
+| Account | Profile (avatar card, Sheet with FileDrop), Security (password, sessions, Dialog) |
+| Order confirmation | Confirmation (completed Steps, totals, Toast), Receipt (line items plus totals) |
 
 Each variant is its own `.svelte` file. A block page switches between them; the
 preview and the code change together, and the code is that variant's own source

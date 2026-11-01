@@ -81,16 +81,22 @@ const BLOCK_SLUGS = [
 	'faq',
 	'contact',
 	'cta',
+	'integrations',
+	'events',
 	'footer',
 	'article',
 	'changelog',
 	'blog',
 	'careers',
+	'press',
 	'not-found',
 	'search',
 	'checkout',
 	'dashboard',
-	'auth'
+	'auth',
+	'onboarding',
+	'account',
+	'order'
 ];
 
 for (const slug of BLOCK_SLUGS) {
