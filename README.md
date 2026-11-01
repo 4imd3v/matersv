@@ -37,7 +37,7 @@ import '#lib/matersv.css';
 
 ## Docs
 
-`pnpm dev` serves two surfaces:
+`pnpm dev` serves three surfaces:
 
 - `/` — the gallery and hue demo
 - `/components` — one page per component with a live example, usage snippet and
@@ -75,10 +75,13 @@ scoped style block that only uses the global classes (`.wrap`, `.section`,
 | Dashboard | Overview (KPIs plus table), Settings (fieldsets, switches, save row) |
 | Sign in | Split (form plus proof panel), Centered (one card) |
 
-A block page switches between its variants; the preview and the code change
-together, and the code is that variant's own source (`?raw` import) with the
-`#lib` import rewritten to `matersv`, so it cannot drift from the preview.
-Every variant is covered by the axe run.
+Each variant is its own `.svelte` file. A block page switches between them; the
+preview and the code change together, and the code is that variant's own source
+(`?raw` import) with the `#lib` import rewritten to `matersv`, so it cannot
+drift from the preview. `pnpm test` checks the block registry (unique slugs and
+ids, at least two variants each, an existing file per variant, no `#lib` left in
+the shown code) and that every `href` in a block points at a real route. Every
+variant is covered by the axe run.
 
 ## Components
 
@@ -191,8 +194,12 @@ pnpm test:e2e:quick               # Chromium only (local)
 pnpm test:e2e                     # all three browsers (CI)
 ```
 
-The e2e suite runs Chromium, Firefox and WebKit, checks WCAG 2.1 A/AA with axe
-on the docs pages, and covers the dialog, accordion, theme toggle and docs nav.
+The e2e suite runs Chromium, Firefox and WebKit and checks WCAG 2.1 A/AA with
+axe on `/`, `/components`, a set of component pages, every block variant (the
+switcher is driven and each variant scanned), the open dialog and the dark home
+page. The interaction specs cover the dialog,
+accordion, menu, popover, sheet, combobox, carousel, slider, checkbox, tabs,
+theme toggle, docs nav and the block switcher.
 CI installs the browsers with `playwright install --with-deps`; on Linux,
 WebKit also needs those host libraries locally (`playwright install-deps`).
 
@@ -228,6 +235,11 @@ npm publish --access public
   insets and coloured bands, `night` once per page.
 - `--color-danger` is the one fixed hue, reserved for errors.
 - No `border: 1px`. Separation comes from surface changes and `--shadow-capsule`.
+- Inside `.section--night`, primary and ghost buttons switch to the night tokens
+  (`--color-night-accent`, `--color-night-field`), like the nav chrome.
+- `.card` styles its direct children only (`.card > h3`, `.card > p`), so a
+  component nested in a card keeps its own type and colour. A block that wants a
+  muted paragraph inside a card sets it itself.
 - `CapsuleNav` sets `data-over-dark` on `<html>` while the capsules sit over a
   `.section--night`, switching chrome to the night tokens.
 

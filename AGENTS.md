@@ -65,8 +65,11 @@ src/lib/
 src/routes/+page.svelte  # demo gallery
 src/routes/components/   # /components index and /components/[slug] docs pages
 src/docs/                # docs registry, live examples, code + props blocks
+src/docs/blocks/         # one .svelte per block variant, registry.js, Blocks + Detail
+src/routes/blocks/       # /blocks index and /blocks/[slug] with the variant switcher
 tests/components.test.js # vitest, kept outside src/lib so it is not packaged
-e2e/                     # Playwright + axe; docs, dialog, accordion, theme
+tests/docs.test.js       # registry, block registry and demo-link guards
+e2e/                     # Playwright + axe: a11y pages, every block variant, interaction
 playwright.config.js
 src/app.html             # pre-paint theme script
 .github/workflows/ci.yml # check, test, package, publint, build
@@ -76,7 +79,9 @@ src/app.html             # pre-paint theme script
 
 1. Create `src/lib/components/Name.svelte` with a `<style>` block.
 2. Export it from `src/lib/index.js` (alphabetical).
-3. Add a demo card to `src/routes/+page.svelte` using the global `.card` class.
+3. Add a demo card to `src/routes/+page.svelte` when the component belongs to a
+   family the gallery already covers (the gallery is curated, not exhaustive).
+   The `/components` page is the required documentation either way.
 4. Add an entry to `src/docs/registry.js` (slug, lead, props, code) and a live
    case in `src/docs/Example.svelte`. `tests/docs.test.js` fails if an exported
    component has no registry entry.
@@ -94,10 +99,41 @@ Component API conventions:
   published `.d.ts` is generated from it, so keep names, unions and defaults in
   sync when the API changes.
 - Use `$bindable()` for two-way state (`bind:checked`, `bind:value`, `bind:open`).
+- A variant that changes the surface (e.g. `Button` `ghost`) keeps the primary's
+  height, padding and type scale, so actions can be swapped without moving the
+  layout. A second action in a pair is `ghost`, never a second accent.
 - Tiny SVG icons are inline with `stroke="currentColor"` or `fill="currentColor"`.
   No icon dependency.
 - Prefer native semantics first: `<button>`, radiogroup, `<details>`, `<dialog>`.
   Do not re-implement ARIA behavior the platform already provides.
+
+## Adding or changing a block
+
+Blocks are page sections, not components: they live in `src/docs/blocks/` and are
+never packaged. A block is a `.svelte` file per variant, registered in
+`src/docs/blocks/registry.js` and mapped in `Blocks.svelte`.
+
+1. Create `src/docs/blocks/Name.svelte`: one `<section class="section">` (plus
+   `section--field` or `section--night` when it is a band), a scoped `<style>`,
+   the global classes (`.wrap`, `.section`, `.card`, `.reveal`) and library
+   components. It must still work after copy-paste, in both themes, at 390px and
+   1440px.
+2. Import it with `?raw` and add a `variant(id, label, lead, file, source)` entry
+   to that block's `variants` in `registry.js`. Every block keeps at least two
+   distinct layouts (not recolours) with unique ids.
+3. Add `'slug/id': Name` to the map in `src/docs/blocks/Blocks.svelte`.
+4. Add the slug to `BLOCK_SLUGS` in `e2e/a11y.spec.js`; the loop drives the
+   switcher and scans every variant.
+5. Add a row to the Blocks table in `README.md`.
+6. Derive numbers from the repo instead of hardcoding them: components from
+   `src/lib/index.js`, blocks and variants from the registry. Demo copy that
+   states counts has gone stale twice.
+7. Run the verification list below, including the block browser check.
+
+`tests/docs.test.js` enforces the rest: unique slugs and ids, at least two
+variants per block, an existing `file` per variant, a source with no `#lib` left
+in it (the shown code must import `matersv`), and every `href` in a block
+pointing at a real route or an id in the same file.
 
 ## Styling rules
 
@@ -109,6 +145,15 @@ Component API conventions:
   - `night`: one dark interruption per page, always dark in both themes.
 - No `border: 1px`. Separation comes from surface changes and
   `--shadow-capsule`.
+- `.card` type rules are direct-child only (`.card > h3`, `.card > p`), so a
+  component nested in a card keeps its own type and colour. Blocks that want a
+  muted paragraph inside a card set it themselves.
+- Inside `.section--night`, primary and ghost buttons use the night tokens
+  (`.section--night .btn.btn--primary`, unlayered and three classes deep so it
+  wins over the component styles), matching the nav chrome.
+- Faded text has contrast floors: about 0.8 opacity for small text on `field`
+  or `bg-soft`, and about 0.65 for large text (20px+) on `bg-soft`. Below that
+  axe fails 1.4.3.
 - Shape: cards 28px, pills 999px, circles 50%. Controls are pills or circles.
 - Type: display `clamp(40px,6.4vw,96px)` / .92 / -.055em / 600; body 18px / 1.55.
   `text-wrap: balance` on headings, `pretty` on paragraphs. No uppercase labels.
@@ -132,6 +177,13 @@ Component API conventions:
   `--color-night-accent`.
 - Do not remove the visible nav on mobile (it was a bug once). Keep the
   existing target sizes: 44px icon buttons, 42px nav/buttons.
+- Scrollable regions are keyboard reachable: `CodeBlock` and the docs code block
+  put `tabindex="0"` on the `<pre>` (with `svelte-ignore
+  a11y_no_noninteractive_tabindex`), because axe flags
+  `scrollable-region-focusable` otherwise.
+- Decorative text that cannot meet contrast (the footer `Wordmark`, the 404
+  numeral) stays `aria-hidden` and is excluded in `e2e/a11y.spec.js` with the
+  WCAG 1.4.3 reason written next to the exclusion. Never exclude real content.
 
 ## Verification (definition of done)
 
@@ -153,7 +205,9 @@ libraries from `playwright install --with-deps`. Then check the demo in a browse
 - light and dark theme, 1440px and ~500px wide
 - keyboard focus, Esc on Dialog, Accordion open/close
 - the night section: capsules flip to `data-over-dark`
-- no horizontal overflow
+- every block variant: the switcher changes the preview and the code together
+- no horizontal overflow; check `window.scrollX` stays 0, not just the visual,
+  since `overflow-x: hidden` on `body` can hide a real 134px pan
 
 ## Packaging
 
@@ -193,9 +247,27 @@ libraries from `playwright install --with-deps`. Then check the demo in a browse
   `pnpm build` with `prerender_missing_id` / `prerender_http_error`. `tests/docs.test.js`
   checks them, so fix the link, not the test.
 - `pnpm build` (static demo) and `pnpm package` (library) are different. Run both.
-- Playwright covers Chromium and Firefox locally and WebKit in CI. Axe checks
-  `/`, `/components`, `/components/button`, `/components/dialog`, the open
-  dialog and the dark home page.
+- Playwright runs Chromium and Firefox locally and WebKit in CI. The axe list
+  covers `/`, `/components`, the component pages with interactive state, every
+  block variant (driven through the switcher), the open dialog and the dark home
+  page. Add a path there when you add a docs page, and a slug to `BLOCK_SLUGS`
+  when you add a block.
+- The demo-link guard reads `href="..."` and `href: '...'` in block sources and
+  treats any non-`http` href as a route, so a `mailto:` link fails the test.
+  Render an address as text instead.
+- A block whose root is a CSS grid turns every direct child into a cell; a stray
+  action row lands in the second column. Wrap groups in one column `<div>`.
+- A `width: 100%` child (e.g. `SearchField`) inside a grid card widens the column
+  and bleeds past the padding; set `grid-template-columns: minmax(0, 1fr)` on
+  the card.
+- An absolutely positioned `.sr-only` inside a horizontally scrolled table
+  escapes the scroller and lets the whole page pan; give the cells
+  `position: relative`.
+- Ids inside a block must not collide with the docs page (`#main`, `#preview`,
+  `#code`); article headings use an `article-` prefix.
+- `Stat` counts up when it enters the viewport, so a screenshot taken right after
+  scrolling shows mid-count values (4 renders as 0). Wait for the animation or
+  read the DOM instead.
 - The open-dialog axe scan waits for the entrance animation to finish; otherwise
   a mid-transition opacity shows up as a false color-contrast failure.
 - Scroll-driven reveals and details/dialog animations degrade gracefully where
