@@ -106,7 +106,7 @@
 		color: var(--color-field-ink);
 		font: 600 15px/1 var(--font-sans);
 		cursor: pointer;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.trigger:hover {
@@ -129,7 +129,7 @@
 		opacity: 0;
 		translate: 0 -6px;
 		transition:
-			opacity var(--dur-control) ease,
+			opacity var(--dur-control) var(--ease-effects),
 			translate var(--dur-control) var(--ease-glide),
 			display var(--dur-control) allow-discrete,
 			overlay var(--dur-control) allow-discrete;

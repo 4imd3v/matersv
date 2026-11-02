@@ -50,8 +50,8 @@
 		text-decoration: none;
 		font-variant-numeric: tabular-nums;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	a.page:hover {

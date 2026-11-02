@@ -44,7 +44,7 @@
 		color: var(--color-muted);
 		cursor: pointer;
 		transition:
-			background-color var(--dur-surface) ease,
+			background-color var(--dur-surface) var(--ease-effects),
 			padding var(--dur-control) var(--ease-glide);
 	}
 
@@ -62,8 +62,8 @@
 		background: var(--color-muted);
 		fill: var(--color-muted);
 		transition:
-			background-color var(--dur-surface) ease,
-			fill var(--dur-surface) ease;
+			background-color var(--dur-surface) var(--ease-effects),
+			fill var(--dur-surface) var(--ease-effects);
 	}
 
 	.switch[aria-checked='true'] svg {

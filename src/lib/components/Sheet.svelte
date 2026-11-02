@@ -62,7 +62,7 @@
 		opacity: 0;
 		translate: var(--sheet-off);
 		transition:
-			opacity var(--dur-control) ease,
+			opacity var(--dur-control) var(--ease-effects),
 			translate 0.3s var(--ease-glide),
 			display 0.3s allow-discrete,
 			overlay 0.3s allow-discrete;
@@ -96,7 +96,7 @@
 		background: oklch(0 0 0 / 0.45);
 		opacity: 0;
 		transition:
-			opacity 0.3s ease,
+			opacity 0.3s var(--ease-effects),
 			display 0.3s allow-discrete,
 			overlay 0.3s allow-discrete;
 	}
@@ -149,8 +149,8 @@
 		color: inherit;
 		cursor: pointer;
 		transition:
-			background-color var(--dur-control) ease,
-			scale var(--dur-tap) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			scale var(--dur-tap) var(--ease-spatial-fast);
 	}
 
 	.close:hover {

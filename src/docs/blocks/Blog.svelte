@@ -137,7 +137,7 @@
 	/* The title carries the whole card, so it is the link. */
 	h3 a {
 		text-decoration: none;
-		transition: text-decoration-color var(--dur-control) ease;
+		transition: text-decoration-color var(--dur-control) var(--ease-effects);
 	}
 
 	h3 a:hover {

@@ -79,7 +79,7 @@
 		border-radius: 20px;
 		color: inherit;
 		text-decoration: none;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.role:hover {

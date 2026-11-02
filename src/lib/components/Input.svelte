@@ -68,8 +68,8 @@
 		color: var(--color-field-ink);
 		font: 400 16px/1 var(--font-sans);
 		transition:
-			background-color var(--dur-control) ease,
-			box-shadow var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			box-shadow var(--dur-control) var(--ease-effects);
 	}
 
 	input::placeholder {

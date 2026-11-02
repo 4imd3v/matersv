@@ -28,7 +28,7 @@
 		border-radius: 26px;
 		background: var(--color-bg-soft);
 		color: var(--color-ink);
-		transition: background-color var(--dur-surface) ease;
+		transition: background-color var(--dur-surface) var(--ease-effects);
 	}
 
 	.window--solo {
@@ -67,7 +67,7 @@
 		padding: 26px 28px 28px;
 		border-radius: 22px;
 		background: var(--color-bg);
-		transition: background-color var(--dur-surface) ease;
+		transition: background-color var(--dur-surface) var(--ease-effects);
 	}
 
 	@media (max-width: 1024px) {

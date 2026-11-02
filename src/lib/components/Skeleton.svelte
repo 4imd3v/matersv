@@ -56,7 +56,7 @@
 				transparent
 			);
 			translate: -100% 0;
-			animation: shimmer 1.6s var(--ease-glide) infinite;
+			animation: shimmer 1.6s linear infinite;
 		}
 	}
 

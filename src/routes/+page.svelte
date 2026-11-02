@@ -391,7 +391,7 @@
 		color: var(--color-muted);
 		font-weight: 600;
 		text-decoration: none;
-		transition: color var(--dur-control) ease;
+		transition: color var(--dur-control) var(--ease-effects);
 	}
 
 	.links a:hover {

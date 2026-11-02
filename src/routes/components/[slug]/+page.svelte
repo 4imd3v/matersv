@@ -120,8 +120,8 @@
 		font-size: 14px;
 		text-decoration: none;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	.sidebar nav a:hover {

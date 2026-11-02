@@ -87,7 +87,7 @@
 		gap: 10px;
 		text-decoration: none;
 		transition:
-			background-color var(--dur-surface) ease,
+			background-color var(--dur-surface) var(--ease-effects),
 			translate var(--dur-control) var(--ease-glide);
 	}
 

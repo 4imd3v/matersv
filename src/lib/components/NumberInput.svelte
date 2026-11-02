@@ -125,7 +125,7 @@
 		background: transparent;
 		color: inherit;
 		cursor: pointer;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	button:hover:not(:disabled) {

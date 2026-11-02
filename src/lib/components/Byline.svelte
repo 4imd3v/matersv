@@ -64,7 +64,7 @@
 		text-decoration-thickness: 2px;
 		text-underline-offset: 4px;
 		text-decoration-color: color-mix(in oklab, currentColor 30%, transparent);
-		transition: text-decoration-color var(--dur-control) ease;
+		transition: text-decoration-color var(--dur-control) var(--ease-effects);
 	}
 
 	a:hover {

@@ -64,8 +64,8 @@
 		color: var(--color-muted);
 		cursor: pointer;
 		transition:
-			background-color var(--dur-surface) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-surface) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	.segmented label:hover {

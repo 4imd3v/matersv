@@ -50,9 +50,9 @@
 		text-decoration: none;
 		transition:
 			translate var(--dur-control) var(--ease-glide),
-			scale var(--dur-tap) ease,
-			background-color var(--dur-surface) ease,
-			color var(--dur-surface) ease;
+			scale var(--dur-tap) var(--ease-spatial-fast),
+			background-color var(--dur-surface) var(--ease-effects),
+			color var(--dur-surface) var(--ease-effects);
 	}
 
 	.btn:hover {

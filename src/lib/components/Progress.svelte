@@ -60,7 +60,7 @@
 	progress::-webkit-progress-value {
 		border-radius: var(--radius-pill);
 		background: var(--color-accent);
-		transition: inline-size var(--dur-surface) var(--ease-glide);
+		transition: inline-size var(--dur-surface) var(--ease-effects);
 	}
 
 	progress::-moz-progress-bar {

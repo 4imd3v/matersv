@@ -40,8 +40,8 @@
 		font: 600 13px/1 var(--font-sans);
 		text-decoration: none;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	a:hover {

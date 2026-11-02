@@ -41,9 +41,9 @@
 		visibility: hidden;
 		translate: -50% 4px;
 		transition:
-			opacity var(--dur-control) ease,
-			translate var(--dur-control) ease,
-			visibility var(--dur-control) ease;
+			opacity var(--dur-control) var(--ease-effects),
+			translate var(--dur-control) var(--ease-effects),
+			visibility var(--dur-control) var(--ease-effects);
 	}
 
 	.tip:hover .bubble,

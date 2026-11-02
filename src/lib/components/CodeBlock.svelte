@@ -67,7 +67,7 @@
 		color: var(--color-field-ink);
 		font: 600 13px/1 var(--font-sans);
 		cursor: pointer;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	button:hover {

@@ -36,9 +36,9 @@
 		color: inherit;
 		cursor: pointer;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease,
-			scale var(--dur-tap) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects),
+			scale var(--dur-tap) var(--ease-spatial-fast);
 	}
 
 	.icon-btn :global(svg) {

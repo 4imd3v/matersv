@@ -97,8 +97,8 @@
 		font: 600 15px/1 var(--font-sans);
 		cursor: pointer;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	button:hover {

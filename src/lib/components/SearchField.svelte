@@ -54,7 +54,7 @@
 		border-radius: var(--radius-pill);
 		background: var(--color-field);
 		color: var(--color-field-ink);
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.search:hover {

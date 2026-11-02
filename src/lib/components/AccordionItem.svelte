@@ -27,7 +27,7 @@
 	.item {
 		border-radius: 20px;
 		background: var(--color-bg-soft);
-		transition: background-color var(--dur-surface) ease;
+		transition: background-color var(--dur-surface) var(--ease-effects);
 	}
 
 	.item[open] {

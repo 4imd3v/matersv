@@ -42,7 +42,7 @@
 		background: var(--color-capsule);
 		border-radius: var(--radius-pill);
 		box-shadow: var(--shadow-capsule);
-		transition: background-color var(--dur-surface) ease;
+		transition: background-color var(--dur-surface) var(--ease-effects);
 	}
 
 	.brand {
@@ -81,8 +81,8 @@
 		font-weight: 600;
 		text-decoration: none;
 		transition:
-			background-color var(--dur-surface) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-surface) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	.links a:hover {

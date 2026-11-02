@@ -68,8 +68,8 @@
 		font: 400 16px/1.5 var(--font-sans);
 		resize: vertical;
 		transition:
-			background-color var(--dur-control) ease,
-			box-shadow var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			box-shadow var(--dur-control) var(--ease-effects);
 	}
 
 	textarea::placeholder {

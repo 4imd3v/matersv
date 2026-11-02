@@ -162,7 +162,7 @@
 		margin-inline: -14px;
 		padding: 14px;
 		border-radius: 18px;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.task:hover {

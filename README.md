@@ -251,6 +251,20 @@ npm publish --access public
 
 ## Motion
 
+Motion follows the M3 motion physics system, via Material's official spring to
+curve conversion for the web. Spatial properties (translate, scale, rotate,
+size) use an expressive spatial curve and may overshoot. Color and opacity use
+an effects curve and never do.
+
+| Token | Value |
+| --- | --- |
+| `--ease-spatial` | `cubic-bezier(0.38, 1.21, 0.22, 1)` — expressive default spatial |
+| `--ease-spatial-fast` | `cubic-bezier(0.42, 1.67, 0.21, 0.9)` — expressive fast spatial |
+| `--ease-effects` | `cubic-bezier(0.34, 0.8, 0.34, 1)` — expressive default effects |
+| `--dur-tap` … `--dur-tab` | `150ms`, `200ms`, `400ms`, `550ms` |
+
+`--ease-glide` is kept as a legacy alias of `--ease-spatial`.
+
 `.reveal` uses scroll-driven animations (`animation-timeline: view()`) where
 supported, so no IntersectionObserver ships. Browsers without support show the
 content immediately. `prefers-reduced-motion` disables all of it.

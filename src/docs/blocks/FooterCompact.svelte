@@ -52,7 +52,7 @@
 		color: var(--color-muted);
 		font-size: 15px;
 		text-decoration: none;
-		transition: color var(--dur-control) ease;
+		transition: color var(--dur-control) var(--ease-effects);
 	}
 
 	.links a:hover {

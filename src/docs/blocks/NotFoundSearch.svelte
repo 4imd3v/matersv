@@ -109,7 +109,7 @@
 		font-size: 15px;
 		font-weight: 600;
 		text-decoration: none;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.suggest a:hover {

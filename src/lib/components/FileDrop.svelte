@@ -83,7 +83,7 @@
 		color: var(--color-field-ink);
 		text-align: center;
 		cursor: pointer;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.drop:hover,

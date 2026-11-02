@@ -165,7 +165,7 @@
 		background: var(--color-field);
 		color: var(--color-field-ink);
 		font: 400 16px/1 var(--font-sans);
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	input::placeholder {
@@ -218,8 +218,8 @@
 		text-align: left;
 		cursor: pointer;
 		transition:
-			background-color var(--dur-control) ease,
-			color var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			color var(--dur-control) var(--ease-effects);
 	}
 
 	[role='option'][data-active='true'] {

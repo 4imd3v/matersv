@@ -52,9 +52,9 @@
 		translate: -50% 12px;
 		visibility: hidden;
 		transition:
-			opacity var(--dur-control) ease,
+			opacity var(--dur-control) var(--ease-effects),
 			translate var(--dur-control) var(--ease-glide),
-			visibility var(--dur-control) ease;
+			visibility var(--dur-control) var(--ease-effects);
 	}
 
 	.toast[data-open='true'] {

@@ -92,7 +92,7 @@
 		margin-inline: -20px;
 		padding: clamp(20px, 2.4vw, 28px) 20px;
 		border-radius: 24px;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.row:hover {

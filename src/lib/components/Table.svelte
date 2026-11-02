@@ -58,7 +58,7 @@
 	}
 
 	:global(tbody tr) {
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	:global(tbody tr:hover) {

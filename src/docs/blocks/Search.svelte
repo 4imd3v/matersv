@@ -164,7 +164,7 @@
 		margin-inline: -16px;
 		padding: 18px 16px;
 		border-radius: 20px;
-		transition: background-color var(--dur-control) ease;
+		transition: background-color var(--dur-control) var(--ease-effects);
 	}
 
 	.result:hover {

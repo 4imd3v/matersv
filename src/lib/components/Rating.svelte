@@ -78,7 +78,7 @@
 		width: 28px;
 		height: 28px;
 		fill: var(--color-field);
-		transition: fill var(--dur-control) ease;
+		transition: fill var(--dur-control) var(--ease-effects);
 	}
 
 	label:hover .star {
