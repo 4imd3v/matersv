@@ -87,8 +87,8 @@
 		appearance: none;
 		cursor: pointer;
 		transition:
-			background-color var(--dur-control) ease,
-			box-shadow var(--dur-control) ease;
+			background-color var(--dur-control) var(--ease-effects),
+			box-shadow var(--dur-control) var(--ease-effects);
 	}
 
 	select:hover {
@@ -97,6 +97,55 @@
 
 	select[aria-invalid='true'] {
 		box-shadow: 0 0 0 2px var(--color-danger);
+	}
+
+	/* Customizable select (Chrome 135+, Safari 26+): give the popup the same
+	   surface, radius and shadow as Combobox and Menu. Other browsers keep the
+	   platform list, which CSS cannot reach. */
+	@supports (appearance: base-select) {
+		select,
+		select::picker(select) {
+			appearance: base-select;
+		}
+
+		/* base-select makes the select an inline-flex box; without this the
+		   selected label pins to the top of the pill instead of centring. */
+		select {
+			align-items: center;
+		}
+
+		select::picker-icon {
+			/* the native arrow would sit under our own chevron */
+			display: none;
+		}
+
+		select::picker(select) {
+			/* The UA tries the side with the most room first, which opens the list
+			   above the field on a tall page. Keep the flip, but only when it
+			   cannot fit below. */
+			position-try-order: normal;
+			margin-block-start: 8px;
+			padding: 6px;
+			border: 0;
+			border-radius: 22px;
+			background: var(--color-bg-soft);
+			box-shadow: var(--shadow-capsule);
+		}
+
+		select option {
+			padding: 10px 16px;
+			border-radius: 16px;
+			font: 500 15px/1.2 var(--font-sans);
+		}
+
+		select option:hover,
+		select option:focus-visible {
+			background: var(--color-field);
+		}
+
+		select option:checked {
+			font-weight: 600;
+		}
 	}
 
 	.chevron {

@@ -863,7 +863,8 @@ export const components = [
 	{
 		slug: 'select',
 		name: 'Select',
-		lead: 'Native select with the field pill shape and a chevron. The option list is the platform one.',
+		lead:
+			'Native select with the field pill shape and a chevron. Where the browser supports customizable selects, the option list takes the same rounded surface as Combobox; elsewhere it is the platform list.',
 		props: [
 			{ name: 'items', type: '{ value, label }[]', default: '—', description: 'Options in render order.' },
 			{ name: 'label', type: 'string', default: '—', description: 'Visible and accessible name.' },
