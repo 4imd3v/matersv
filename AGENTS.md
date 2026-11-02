@@ -158,9 +158,15 @@ pointing at a real route or an id in the same file.
 - Shape: cards 28px, pills 999px, circles 50%. Controls are pills or circles.
 - Type: display `clamp(40px,6.4vw,96px)` / .92 / -.055em / 600; body 18px / 1.55.
   `text-wrap: balance` on headings, `pretty` on paragraphs. No uppercase labels.
-- Motion: use the existing tokens (`--dur-*`, `--ease-glide`). Animate transform,
-  opacity, background-color, color and fill only. Respect
-  `prefers-reduced-motion` (the global reset disables transitions/animations).
+- Motion follows the M3 motion physics system, split by property. Movement
+  (`translate`, `scale`, `rotate`, size, padding) uses `--ease-spatial` or
+  `--ease-spatial-fast` and may overshoot; color, opacity, fill and decoration
+  use `--ease-effects` and must never overshoot. Durations are
+  `--dur-tap|control|surface|tab` (M3 short3, short4, medium4, long3).
+  `--ease-glide` is only a legacy alias of `--ease-spatial`; do not reach for
+  it in new code. Never pair a spatial curve with a value that must not
+  overshoot (a progress bar, a real count). Respect `prefers-reduced-motion`
+  (the global reset disables transitions/animations).
 - Modern CSS is welcome and already used: `@layer`, oklch, color-mix,
   `@starting-style`, `::details-content`, `overlay/display allow-discrete`,
   scroll-driven `.reveal`. Always keep a working no-animation fallback.
@@ -264,6 +270,11 @@ libraries from `playwright install --with-deps`. Then check the demo in a browse
 - An absolutely positioned `.sr-only` inside a horizontally scrolled table
   escapes the scroller and lets the whole page pan; give the cells
   `position: relative`.
+- `Select` opts into `appearance: base-select` under `@supports` to style the
+  popup. Two traps: base-select makes the select an inline-flex box, so the
+  selected label needs `align-items: center` or it clips to the top of the pill;
+  and the UA default `position-try-order: most-block-size` opens the list above
+  the field, so set `position-try-order: normal`.
 - Ids inside a block must not collide with the docs page (`#main`, `#preview`,
   `#code`); article headings use an `article-` prefix.
 - `Stat` counts up when it enters the viewport, so a screenshot taken right after
